@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/ENCODE-DCC/cdk-kubernetes.git
+    repoURL: https://github.com/ENCODE-DCC/cdk-kubernetes-cherry.git
     path: argoapps/apps
     targetRevision: HEAD
   destination:

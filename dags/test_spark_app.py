@@ -28,7 +28,7 @@ spark_app = {
     "mode": "cluster",
     "image": "public.ecr.aws/cherry-lab/cherry-lab:spark-3.5.4-s3",
     "imagePullPolicy": "IfNotPresent",
-    "mainApplicationFile": "https://raw.githubusercontent.com/ENCODE-DCC/cdk-kubernetes/refs/heads/main/spark/test-spark.py",
+    "mainApplicationFile": "https://raw.githubusercontent.com/ENCODE-DCC/cdk-kubernetes-cherry/refs/heads/main/spark/test-spark.py",
     "sparkVersion": "3.5.3",
     "driver": {
       "labels": {

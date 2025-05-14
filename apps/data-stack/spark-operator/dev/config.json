@@ -2,8 +2,8 @@
     "env": "dev",
     "chart": "spark-operator",
     "repoURL": "https://kubeflow.github.io/spark-operator",
-    "targetRevision": 2.1.0,
-    "valuesRepoURL": "https://github.com/IGVF-DACC/cdk-kubernetes",
+    "targetRevision": "2.1.0",
+    "valuesRepoURL": "https://github.com/ENCODE-DCC/cdk-kubernetes-cherry",
     "valuesFile": "apps/data-stack/spark-operator/values.yaml",
     "additionalResources": "apps/data-stack/spark-operator/additional_resources/dev/"
 }
