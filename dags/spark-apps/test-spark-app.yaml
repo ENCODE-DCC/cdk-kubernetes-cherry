@@ -9,7 +9,7 @@ spec:
   mode: cluster
   image: ojolanki/spark-s3:3.5.3-boto3 
   imagePullPolicy: IfNotPresent
-  mainApplicationFile: https://raw.githubusercontent.com/IGVF-DACC/cdk-kubernetes/refs/heads/main/spark/test-spark.py
+  mainApplicationFile: https://raw.githubusercontent.com/ENCODE-DCC/cdk-kubernetes/refs/heads/main/spark/test-spark.py
   sparkVersion: 3.5.3
   driver:
     labels: 
