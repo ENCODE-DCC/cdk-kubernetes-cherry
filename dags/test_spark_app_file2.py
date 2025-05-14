@@ -17,7 +17,6 @@ default_args = {
 with DAG(
     dag_id='test-spark-app-file',
     start_date=datetime(2025, 5, 1),
-    end_date=datetime(2025, 5, 5),
     default_args=default_args,
     description='A DAG to run Spark on Kubernetes',
     schedule_interval=timedelta(days=1),
