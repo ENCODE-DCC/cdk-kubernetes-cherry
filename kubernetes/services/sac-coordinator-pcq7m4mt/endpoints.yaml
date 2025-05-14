@@ -1,0 +1,21 @@
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2024-12-18T10:54:18Z"
+  creationTimestamp: "2024-12-16T17:33:11Z"
+  name: sac-coordinator-pcq7m4mt
+  namespace: default
+  resourceVersion: "5618841"
+  uid: c16fa6f3-13a1-4da2-bf20-58e917301eb3
+subsets:
+- addresses:
+  - ip: 10.0.104.202
+    nodeName: ip-10-0-114-234.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-crdn-pcq7m4mt-ae16ad
+      namespace: default
+      uid: 7d2d90df-04cb-4a09-a3ef-aa5aea0d4f14
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP

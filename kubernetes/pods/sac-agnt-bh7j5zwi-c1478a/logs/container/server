@@ -1,0 +1,178 @@
+2024-12-11T21:31:35.737060310Z 2024-12-11T21:31:35.729133Z [1-1] INFO [e52b0] {general} ArangoDB 3.12.3 [linux] 64bit, using jemalloc, build refs/tags/v3.12.3 a80fc5d849b, VPack 0.2.1, RocksDB 7.2.0, ICU 64.2, V8 12.1.165, OpenSSL 3.3.2 3 Sep 2024, build-id: 5af364826ef690377f52b0836c4a08d32ce0b085
+2024-12-11T21:31:35.737412226Z 2024-12-11T21:31:35.729133Z [1-1] INFO [e52b0] {general} ArangoDB 3.12.3 [linux] 64bit, using jemalloc, build refs/tags/v3.12.3 a80fc5d849b, VPack 0.2.1, RocksDB 7.2.0, ICU 64.2, V8 12.1.165, OpenSSL 3.3.2 3 Sep 2024, build-id: 5af364826ef690377f52b0836c4a08d32ce0b085
+2024-12-11T21:31:35.737670441Z 2024-12-11T21:31:35.729142Z [1-1] INFO [11111] {general} This executable uses the GNU C library (glibc), which is licensed under the GNU Lesser General Public License (LGPL), see https://www.gnu.org/copyleft/lesser.html and https://www.gnu.org/licenses/gpl.html
+2024-12-11T21:31:35.737775648Z 2024-12-11T21:31:35.729142Z [1-1] INFO [11111] {general} This executable uses the GNU C library (glibc), which is licensed under the GNU Lesser General Public License (LGPL), see https://www.gnu.org/copyleft/lesser.html and https://www.gnu.org/licenses/gpl.html
+2024-12-11T21:31:35.737845227Z 2024-12-11T21:31:35.729272Z [1-1] INFO [a1c60] {syscall} file-descriptors (nofiles) hard limit is 1048576, soft limit is 1048576
+2024-12-11T21:31:35.737899283Z 2024-12-11T21:31:35.729272Z [1-1] INFO [a1c60] {syscall} file-descriptors (nofiles) hard limit is 1048576, soft limit is 1048576
+2024-12-11T21:31:35.738113353Z 2024-12-11T21:31:35.729602Z [1-1] INFO [75ddc] {general} detected operating system: Linux version 5.10.228-219.884.amzn2.x86_64 (mockbuild@ip-10-0-35-25) (gcc10-gcc (GCC) 10.5.0 20230707 (Red Hat 10.5.0-1), GNU ld version 2.35.2-9.amzn2.0.1) #1 SMP Wed Oct 23 17:17:00 UTC 2024
+2024-12-11T21:31:35.738119677Z 2024-12-11T21:31:35.729625Z [1-1] INFO [25362] {memory} Available physical memory: 8012050432 bytes, available cores: 2
+2024-12-11T21:31:35.738122934Z 2024-12-11T21:31:35.733571Z [1-1] INFO [3bb7d] {cluster} Starting up with role AGENT
+2024-12-11T21:31:35.738132433Z 2024-12-11T21:31:35.729602Z [1-1] INFO [75ddc] {general} detected operating system: Linux version 5.10.228-219.884.amzn2.x86_64 (mockbuild@ip-10-0-35-25) (gcc10-gcc (GCC) 10.5.0 20230707 (Red Hat 10.5.0-1), GNU ld version 2.35.2-9.amzn2.0.1) #1 SMP Wed Oct 23 17:17:00 UTC 2024
+2024-12-11T21:31:35.738134395Z 2024-12-11T21:31:35.729625Z [1-1] INFO [25362] {memory} Available physical memory: 8012050432 bytes, available cores: 2
+2024-12-11T21:31:35.738136352Z 2024-12-11T21:31:35.733571Z [1-1] INFO [3bb7d] {cluster} Starting up with role AGENT
+2024-12-11T21:31:35.763286450Z 2024-12-11T21:31:35.755461Z [1-1] INFO [f6e0e] {aql} memory limit per AQL query automatically set to 4807230259 bytes. to modify this value, please adjust the startup option `--query.memory-limit`
+2024-12-11T21:31:35.763317590Z 2024-12-11T21:31:35.755461Z [1-1] INFO [f6e0e] {aql} memory limit per AQL query automatically set to 4807230259 bytes. to modify this value, please adjust the startup option `--query.memory-limit`
+2024-12-11T21:31:36.002577632Z 2024-12-11T21:31:35.978008Z [1-1] INFO [fe333] {engines} RocksDB recovery starting, scanning WAL starting from sequence number 0, latest sequence number: 5, active log files: 3, files in archive: 0
+2024-12-11T21:31:36.002787289Z 2024-12-11T21:31:35.978008Z [1-1] INFO [fe333] {engines} RocksDB recovery starting, scanning WAL starting from sequence number 0, latest sequence number: 5, active log files: 3, files in archive: 0
+2024-12-11T21:31:36.002890858Z 2024-12-11T21:31:35.978078Z [1-1] INFO [a4ec8] {engines} RocksDB recovery finished, WAL entries scanned: 6, recovery start sequence number: 0, latest WAL sequence number: 5, max tick value found in WAL: 1, last HLC value found in WAL: 0
+2024-12-11T21:31:36.002938613Z 2024-12-11T21:31:35.978078Z [1-1] INFO [a4ec8] {engines} RocksDB recovery finished, WAL entries scanned: 6, recovery start sequence number: 0, latest WAL sequence number: 5, max tick value found in WAL: 1, last HLC value found in WAL: 0
+2024-12-11T21:31:36.003024399Z 2024-12-11T21:31:36.002609Z [1-1] INFO [6ea38] {general} using endpoint 'http+tcp://[::]:8529' for non-encrypted requests
+2024-12-11T21:31:36.003081872Z 2024-12-11T21:31:36.002609Z [1-1] INFO [6ea38] {general} using endpoint 'http+tcp://[::]:8529' for non-encrypted requests
+2024-12-11T21:31:36.003140887Z 2024-12-11T21:31:36.002618Z [1-1] INFO [cf3f4] {general} ArangoDB (version 3.12.3 [linux]) is ready for business. Have fun!
+2024-12-11T21:31:36.003197364Z 2024-12-11T21:31:36.002618Z [1-1] INFO [cf3f4] {general} ArangoDB (version 3.12.3 [linux]) is ready for business. Have fun!
+2024-12-11T21:31:36.028404530Z 2024-12-11T21:31:36.011840Z [1-18] INFO [7b6f3] {agency} Entering gossip phase ...
+2024-12-11T21:31:36.028429733Z 2024-12-11T21:31:36.015979Z [1-6] INFO [95b8d] {agency} Adding AGNT-ampr1nzg(tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529) to agent pool
+2024-12-11T21:31:36.028434070Z 2024-12-11T21:31:36.017036Z [1-6] INFO [95b8d] {agency} Adding AGNT-piomvxzf(tcp://sac-agent-piomvxzf.sac-int.default.svc:8529) to agent pool
+2024-12-11T21:31:36.028404650Z 2024-12-11T21:31:36.011840Z [1-18] INFO [7b6f3] {agency} Entering gossip phase ...
+2024-12-11T21:31:36.028440447Z 2024-12-11T21:31:36.015979Z [1-6] INFO [95b8d] {agency} Adding AGNT-ampr1nzg(tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529) to agent pool
+2024-12-11T21:31:36.028442826Z 2024-12-11T21:31:36.017036Z [1-6] INFO [95b8d] {agency} Adding AGNT-piomvxzf(tcp://sac-agent-piomvxzf.sac-int.default.svc:8529) to agent pool
+2024-12-11T21:31:36.053451748Z 2024-12-11T21:31:36.028479Z [1-18] INFO [c1d8f] {agency} Activating agent.
+2024-12-11T21:31:36.053487212Z 2024-12-11T21:31:36.028479Z [1-18] INFO [c1d8f] {agency} Activating agent.
+2024-12-11T21:31:36.078529879Z 2024-12-11T21:31:36.062827Z [1-20] INFO [29175] {agency} Setting role to follower in term 0
+2024-12-11T21:31:36.078568960Z 2024-12-11T21:31:36.062827Z [1-20] INFO [29175] {agency} Setting role to follower in term 0
+2024-12-11T21:31:37.554608500Z 2024-12-11T21:31:37.474263Z [1-20] INFO [aefab] {agency} AGNT-bh7j5zwi: candidating in term 0
+2024-12-11T21:31:37.554729646Z 2024-12-11T21:31:37.474263Z [1-20] INFO [aefab] {agency} AGNT-bh7j5zwi: candidating in term 0
+2024-12-11T21:31:37.554802262Z 2024-12-11T21:31:37.474275Z [1-20] INFO [53541] {agency} AGNT-bh7j5zwi: changing term or votedFor, current role: Candidate term 1 votedFor: AGNT-bh7j5zwi
+2024-12-11T21:31:37.554852854Z 2024-12-11T21:31:37.474275Z [1-20] INFO [53541] {agency} AGNT-bh7j5zwi: changing term or votedFor, current role: Candidate term 1 votedFor: AGNT-bh7j5zwi
+2024-12-11T21:31:37.554923657Z 2024-12-11T21:31:37.486734Z [1-20] INFO [0d93b] {agency} AGNT-bh7j5zwi: leading in term 1
+2024-12-11T21:31:37.554970906Z 2024-12-11T21:31:37.486734Z [1-20] INFO [0d93b] {agency} AGNT-bh7j5zwi: leading in term 1
+2024-12-11T21:31:37.555024766Z 2024-12-11T21:31:37.487155Z [1-16] INFO [a66dc] {agency} AGNT-bh7j5zwi rebuilt key-value stores - serving.
+2024-12-11T21:31:37.555086881Z 2024-12-11T21:31:37.487155Z [1-16] INFO [a66dc] {agency} AGNT-bh7j5zwi rebuilt key-value stores - serving.
+2024-12-11T21:31:38.030631609Z 2024-12-11T21:31:38.017542Z [1-19] INFO [7928f] {supervision} Postponing supervision for now, waiting for incoming heartbeats: 0
+2024-12-11T21:31:38.030686564Z 2024-12-11T21:31:38.017542Z [1-19] INFO [7928f] {supervision} Postponing supervision for now, waiting for incoming heartbeats: 0
+2024-12-11T21:31:39.106373286Z 2024-12-11T21:31:39.012320Z [1-19] INFO [7928f] {supervision} Postponing supervision for now, waiting for incoming heartbeats: 1
+2024-12-11T21:31:39.106389450Z 2024-12-11T21:31:39.012320Z [1-19] INFO [7928f] {supervision} Postponing supervision for now, waiting for incoming heartbeats: 1
+2024-12-14T00:31:38.143835873Z 2024-12-14T00:31:38.111167Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10238 from PRMR-16kcg4i2
+2024-12-14T00:31:38.143888587Z 2024-12-14T00:31:38.111232Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10013 from PRMR-16kcg4i2
+2024-12-14T00:31:38.143893081Z 2024-12-14T00:31:38.111275Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10299 from PRMR-16kcg4i2
+2024-12-14T00:31:38.143841141Z 2024-12-14T00:31:38.111167Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10238 from PRMR-16kcg4i2
+2024-12-14T00:31:38.143902131Z 2024-12-14T00:31:38.111232Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10013 from PRMR-16kcg4i2
+2024-12-14T00:31:38.143905094Z 2024-12-14T00:31:38.111275Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10299 from PRMR-16kcg4i2
+2024-12-14T00:31:39.119636384Z 2024-12-14T00:31:39.109075Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10238 in collection 10230
+2024-12-14T00:31:39.119674581Z 2024-12-14T00:31:39.109136Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10013 in collection 10001
+2024-12-14T00:31:39.119679376Z 2024-12-14T00:31:39.109175Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10299 in collection 10291
+2024-12-14T00:31:39.119682162Z 2024-12-14T00:31:39.114551Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10299 from PRMR-16kcg4i2 to PRMR-yw9gj41y
+2024-12-14T00:31:39.119684260Z 2024-12-14T00:31:39.117443Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10013 from PRMR-16kcg4i2 to PRMR-yw9gj41y
+2024-12-14T00:31:39.119686394Z 2024-12-14T00:31:39.119371Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10238 from PRMR-16kcg4i2 to PRMR-t79dxjnh
+2024-12-14T00:31:39.119642802Z 2024-12-14T00:31:39.109075Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10238 in collection 10230
+2024-12-14T00:31:39.119691747Z 2024-12-14T00:31:39.109136Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10013 in collection 10001
+2024-12-14T00:31:39.119693826Z 2024-12-14T00:31:39.109175Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10299 in collection 10291
+2024-12-14T00:31:39.119695849Z 2024-12-14T00:31:39.114551Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10299 from PRMR-16kcg4i2 to PRMR-yw9gj41y
+2024-12-14T00:31:39.119697806Z 2024-12-14T00:31:39.117443Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10013 from PRMR-16kcg4i2 to PRMR-yw9gj41y
+2024-12-14T00:31:39.119699808Z 2024-12-14T00:31:39.119371Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10238 from PRMR-16kcg4i2 to PRMR-t79dxjnh
+2024-12-14T00:32:18.234216520Z 2024-12-14T00:32:18.168449Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10238 from PRMR-9ya2vtot
+2024-12-14T00:32:18.234279531Z 2024-12-14T00:32:18.168464Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10013 from PRMR-9ya2vtot
+2024-12-14T00:32:18.234285499Z 2024-12-14T00:32:18.168473Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10299 from PRMR-9ya2vtot
+2024-12-14T00:32:18.234229518Z 2024-12-14T00:32:18.168449Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10238 from PRMR-9ya2vtot
+2024-12-14T00:32:18.234293114Z 2024-12-14T00:32:18.168464Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10013 from PRMR-9ya2vtot
+2024-12-14T00:32:18.234296420Z 2024-12-14T00:32:18.168473Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10299 from PRMR-9ya2vtot
+2024-12-14T00:32:19.210010177Z 2024-12-14T00:32:19.166300Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10238 in collection 10230
+2024-12-14T00:32:19.210043750Z 2024-12-14T00:32:19.166362Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10013 in collection 10001
+2024-12-14T00:32:19.210066145Z 2024-12-14T00:32:19.166403Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10299 in collection 10291
+2024-12-14T00:32:19.210081280Z 2024-12-14T00:32:19.166300Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10238 in collection 10230
+2024-12-14T00:32:19.210085387Z 2024-12-14T00:32:19.166362Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10013 in collection 10001
+2024-12-14T00:32:19.210091660Z 2024-12-14T00:32:19.166403Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10299 in collection 10291
+2024-12-14T00:32:19.210101023Z 2024-12-14T00:32:19.169020Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10013 from PRMR-9ya2vtot to PRMR-16kcg4i2
+2024-12-14T00:32:19.210833887Z 2024-12-14T00:32:19.171117Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10299 from PRMR-9ya2vtot to PRMR-t79dxjnh
+2024-12-14T00:32:19.210849527Z 2024-12-14T00:32:19.173794Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10238 from PRMR-9ya2vtot to PRMR-7ockmhya
+2024-12-14T00:32:19.210862949Z 2024-12-14T00:32:19.169020Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10013 from PRMR-9ya2vtot to PRMR-16kcg4i2
+2024-12-14T00:32:19.210866447Z 2024-12-14T00:32:19.171117Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10299 from PRMR-9ya2vtot to PRMR-t79dxjnh
+2024-12-14T00:32:19.210869322Z 2024-12-14T00:32:19.173794Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10238 from PRMR-9ya2vtot to PRMR-7ockmhya
+2024-12-14T00:34:13.690479007Z 2024-12-14T00:34:13.632840Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10013 from PRMR-yw9gj41y
+2024-12-14T00:34:13.690533130Z 2024-12-14T00:34:13.632854Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10299 from PRMR-yw9gj41y
+2024-12-14T00:34:13.690496253Z 2024-12-14T00:34:13.632840Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10013 from PRMR-yw9gj41y
+2024-12-14T00:34:13.690544235Z 2024-12-14T00:34:13.632854Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10299 from PRMR-yw9gj41y
+2024-12-14T00:34:14.666926640Z 2024-12-14T00:34:14.630373Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10013 in collection 10001
+2024-12-14T00:34:14.666957082Z 2024-12-14T00:34:14.630422Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10299 in collection 10291
+2024-12-14T00:34:14.666963640Z 2024-12-14T00:34:14.632712Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10299 from PRMR-yw9gj41y to PRMR-9ya2vtot
+2024-12-14T00:34:14.666966834Z 2024-12-14T00:34:14.634547Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10013 from PRMR-yw9gj41y to PRMR-t79dxjnh
+2024-12-14T00:34:14.666944176Z 2024-12-14T00:34:14.630373Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10013 in collection 10001
+2024-12-14T00:34:14.666973915Z 2024-12-14T00:34:14.630422Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10299 in collection 10291
+2024-12-14T00:34:14.666976788Z 2024-12-14T00:34:14.632712Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10299 from PRMR-yw9gj41y to PRMR-9ya2vtot
+2024-12-14T00:34:14.666979705Z 2024-12-14T00:34:14.634547Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10013 from PRMR-yw9gj41y to PRMR-t79dxjnh
+2024-12-14T01:22:17.390558910Z 2024-12-14T01:22:17.323640Z [1-19] INFO [a55cd] {supervision} Short name for PRMR-wyxfqyi3 not yet available.  Skipping health check.
+2024-12-14T01:22:17.390579449Z 2024-12-14T01:22:17.323640Z [1-19] INFO [a55cd] {supervision} Short name for PRMR-wyxfqyi3 not yet available.  Skipping health check.
+2024-12-16T02:29:09.097344821Z 2024-12-16T02:29:09.056173Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10238 from PRMR-16kcg4i2
+2024-12-16T02:29:09.097402195Z 2024-12-16T02:29:09.056187Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10013 from PRMR-16kcg4i2
+2024-12-16T02:29:09.097362430Z 2024-12-16T02:29:09.056173Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10238 from PRMR-16kcg4i2
+2024-12-16T02:29:09.097412238Z 2024-12-16T02:29:09.056187Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10013 from PRMR-16kcg4i2
+2024-12-16T02:29:10.073024973Z 2024-12-16T02:29:10.053964Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10238 in collection 10230
+2024-12-16T02:29:10.073053237Z 2024-12-16T02:29:10.054025Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10013 in collection 10001
+2024-12-16T02:29:10.073110933Z 2024-12-16T02:29:10.056304Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10013 from PRMR-16kcg4i2 to PRMR-9ya2vtot
+2024-12-16T02:29:10.073086991Z 2024-12-16T02:29:10.053964Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10238 in collection 10230
+2024-12-16T02:29:10.073115373Z 2024-12-16T02:29:10.058492Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10238 from PRMR-16kcg4i2 to PRMR-9ya2vtot
+2024-12-16T02:29:10.073121840Z 2024-12-16T02:29:10.054025Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10013 in collection 10001
+2024-12-16T02:29:10.073126397Z 2024-12-16T02:29:10.056304Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10013 from PRMR-16kcg4i2 to PRMR-9ya2vtot
+2024-12-16T02:29:10.073129631Z 2024-12-16T02:29:10.058492Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10238 from PRMR-16kcg4i2 to PRMR-9ya2vtot
+2024-12-16T02:30:58.131392842Z 2024-12-16T02:30:58.128489Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10238 from PRMR-t79dxjnh
+2024-12-16T02:30:58.131440489Z 2024-12-16T02:30:58.128504Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10013 from PRMR-t79dxjnh
+2024-12-16T02:30:58.131444997Z 2024-12-16T02:30:58.128513Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10299 from PRMR-t79dxjnh
+2024-12-16T02:30:58.131419702Z 2024-12-16T02:30:58.128489Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10238 from PRMR-t79dxjnh
+2024-12-16T02:30:58.131452589Z 2024-12-16T02:30:58.128504Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10013 from PRMR-t79dxjnh
+2024-12-16T02:30:58.131455245Z 2024-12-16T02:30:58.128513Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10299 from PRMR-t79dxjnh
+2024-12-16T02:30:59.208430416Z 2024-12-16T02:30:59.125890Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10238 in collection 10230
+2024-12-16T02:30:59.208470666Z 2024-12-16T02:30:59.125952Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10013 in collection 10001
+2024-12-16T02:30:59.208475749Z 2024-12-16T02:30:59.125991Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10299 in collection 10291
+2024-12-16T02:30:59.208479529Z 2024-12-16T02:30:59.128645Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10299 from PRMR-t79dxjnh to PRMR-16kcg4i2
+2024-12-16T02:30:59.208482755Z 2024-12-16T02:30:59.131240Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10238 from PRMR-t79dxjnh to PRMR-16kcg4i2
+2024-12-16T02:30:59.208485663Z 2024-12-16T02:30:59.134091Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10013 from PRMR-t79dxjnh to PRMR-16kcg4i2
+2024-12-16T02:30:59.208502991Z 2024-12-16T02:30:59.125890Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10238 in collection 10230
+2024-12-16T02:30:59.208506400Z 2024-12-16T02:30:59.125952Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10013 in collection 10001
+2024-12-16T02:30:59.208520990Z 2024-12-16T02:30:59.125991Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10299 in collection 10291
+2024-12-16T02:30:59.208523957Z 2024-12-16T02:30:59.128645Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10299 from PRMR-t79dxjnh to PRMR-16kcg4i2
+2024-12-16T02:30:59.208526933Z 2024-12-16T02:30:59.131240Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10238 from PRMR-t79dxjnh to PRMR-16kcg4i2
+2024-12-16T02:30:59.208529618Z 2024-12-16T02:30:59.134091Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10013 from PRMR-t79dxjnh to PRMR-16kcg4i2
+2024-12-17T04:40:39.420478357Z 2024-12-17T04:40:39.409266Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10238 from PRMR-9ya2vtot
+2024-12-17T04:40:39.420527953Z 2024-12-17T04:40:39.409281Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10013 from PRMR-9ya2vtot
+2024-12-17T04:40:39.420533499Z 2024-12-17T04:40:39.409291Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10299 from PRMR-9ya2vtot
+2024-12-17T04:40:39.420551443Z 2024-12-17T04:40:39.409266Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10238 from PRMR-9ya2vtot
+2024-12-17T04:40:39.420554762Z 2024-12-17T04:40:39.409281Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10013 from PRMR-9ya2vtot
+2024-12-17T04:40:39.420557336Z 2024-12-17T04:40:39.409291Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10299 from PRMR-9ya2vtot
+2024-12-17T04:40:40.496256610Z 2024-12-17T04:40:40.406310Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10238 in collection 10230
+2024-12-17T04:40:40.496287364Z 2024-12-17T04:40:40.406369Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10013 in collection 10001
+2024-12-17T04:40:40.496291730Z 2024-12-17T04:40:40.406406Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10299 in collection 10291
+2024-12-17T04:40:40.496295358Z 2024-12-17T04:40:40.409982Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10238 from PRMR-9ya2vtot to PRMR-t79dxjnh
+2024-12-17T04:40:40.496298122Z 2024-12-17T04:40:40.412985Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10013 from PRMR-9ya2vtot to PRMR-t79dxjnh
+2024-12-17T04:40:40.496301259Z 2024-12-17T04:40:40.416112Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10299 from PRMR-9ya2vtot to PRMR-t79dxjnh
+2024-12-17T04:40:40.496320256Z 2024-12-17T04:40:40.406310Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10238 in collection 10230
+2024-12-17T04:40:40.496323984Z 2024-12-17T04:40:40.406369Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10013 in collection 10001
+2024-12-17T04:40:40.496326674Z 2024-12-17T04:40:40.406406Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10299 in collection 10291
+2024-12-17T04:40:40.496329549Z 2024-12-17T04:40:40.409982Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10238 from PRMR-9ya2vtot to PRMR-t79dxjnh
+2024-12-17T04:40:40.496332712Z 2024-12-17T04:40:40.412985Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10013 from PRMR-9ya2vtot to PRMR-t79dxjnh
+2024-12-17T04:40:40.496340239Z 2024-12-17T04:40:40.416112Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10299 from PRMR-9ya2vtot to PRMR-t79dxjnh
+2024-12-18T10:48:21.715554007Z 2024-12-18T10:48:21.667193Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10238 from PRMR-16kcg4i2
+2024-12-18T10:48:21.715617493Z 2024-12-18T10:48:21.667207Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10013 from PRMR-16kcg4i2
+2024-12-18T10:48:21.715623418Z 2024-12-18T10:48:21.667216Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10299 from PRMR-16kcg4i2
+2024-12-18T10:48:21.715563827Z 2024-12-18T10:48:21.667193Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10238 from PRMR-16kcg4i2
+2024-12-18T10:48:21.715638615Z 2024-12-18T10:48:21.667207Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10013 from PRMR-16kcg4i2
+2024-12-18T10:48:21.715644381Z 2024-12-18T10:48:21.667216Z [1-19] INFO [b0a34] {supervision} Create failedFollower for s10299 from PRMR-16kcg4i2
+2024-12-18T10:48:22.691264913Z 2024-12-18T10:48:22.663966Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10238 in collection 10230
+2024-12-18T10:48:22.691302794Z 2024-12-18T10:48:22.664044Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10013 in collection 10001
+2024-12-18T10:48:22.691307068Z 2024-12-18T10:48:22.664104Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10299 in collection 10291
+2024-12-18T10:48:22.691310659Z 2024-12-18T10:48:22.667352Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10299 from PRMR-16kcg4i2 to PRMR-9ya2vtot
+2024-12-18T10:48:22.691314073Z 2024-12-18T10:48:22.670284Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10013 from PRMR-16kcg4i2 to PRMR-9ya2vtot
+2024-12-18T10:48:22.691318018Z 2024-12-18T10:48:22.673398Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10238 from PRMR-16kcg4i2 to PRMR-9ya2vtot
+2024-12-18T10:48:22.691272061Z 2024-12-18T10:48:22.663966Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10238 in collection 10230
+2024-12-18T10:48:22.691325872Z 2024-12-18T10:48:22.664044Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10013 in collection 10001
+2024-12-18T10:48:22.691328604Z 2024-12-18T10:48:22.664104Z [1-19] INFO [8f72c] {supervision} Todo: AddFollower(s) to shard s10299 in collection 10291
+2024-12-18T10:48:22.691331675Z 2024-12-18T10:48:22.667352Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10299 from PRMR-16kcg4i2 to PRMR-9ya2vtot
+2024-12-18T10:48:22.691334441Z 2024-12-18T10:48:22.670284Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10013 from PRMR-16kcg4i2 to PRMR-9ya2vtot
+2024-12-18T10:48:22.691337453Z 2024-12-18T10:48:22.673398Z [1-19] INFO [80b9d] {supervision} Start failedFollower for s10238 from PRMR-16kcg4i2 to PRMR-9ya2vtot
+2024-12-18T10:50:11.286881325Z 2024-12-18T10:50:11.189963Z [1-19] INFO [46046] {supervision} Create failedLeader for s10238 from PRMR-t79dxjnh
+2024-12-18T10:50:11.286978296Z 2024-12-18T10:50:11.189982Z [1-19] INFO [46046] {supervision} Create failedLeader for s10013 from PRMR-t79dxjnh
+2024-12-18T10:50:11.286984248Z 2024-12-18T10:50:11.189996Z [1-19] INFO [46046] {supervision} Create failedLeader for s10299 from PRMR-t79dxjnh
+2024-12-18T10:50:11.286934314Z 2024-12-18T10:50:11.189963Z [1-19] INFO [46046] {supervision} Create failedLeader for s10238 from PRMR-t79dxjnh
+2024-12-18T10:50:11.286991908Z 2024-12-18T10:50:11.189982Z [1-19] INFO [46046] {supervision} Create failedLeader for s10013 from PRMR-t79dxjnh
+2024-12-18T10:50:11.286995017Z 2024-12-18T10:50:11.189996Z [1-19] INFO [46046] {supervision} Create failedLeader for s10299 from PRMR-t79dxjnh
+2024-12-18T10:50:12.262556321Z 2024-12-18T10:50:12.184030Z [1-19] INFO [0ced0] {supervision} Start failedLeader for s10299 from PRMR-t79dxjnh to PRMR-9ya2vtot
+2024-12-18T10:50:12.262586997Z 2024-12-18T10:50:12.187261Z [1-19] INFO [0ced0] {supervision} Start failedLeader for s10013 from PRMR-t79dxjnh to PRMR-9ya2vtot
+2024-12-18T10:50:12.262591890Z 2024-12-18T10:50:12.189835Z [1-19] INFO [0ced0] {supervision} Start failedLeader for s10238 from PRMR-t79dxjnh to PRMR-9ya2vtot
+2024-12-18T10:50:12.262595321Z 2024-12-18T10:50:12.201873Z [1-19] INFO [1ead6] {supervision} Finished failedLeader for s10299 from PRMR-t79dxjnh to PRMR-9ya2vtot
+2024-12-18T10:50:12.262598071Z 2024-12-18T10:50:12.212405Z [1-19] INFO [1ead6] {supervision} Finished failedLeader for s10013 from PRMR-t79dxjnh to PRMR-9ya2vtot
+2024-12-18T10:50:12.262609770Z 2024-12-18T10:50:12.215120Z [1-19] INFO [1ead6] {supervision} Finished failedLeader for s10238 from PRMR-t79dxjnh to PRMR-9ya2vtot
+2024-12-18T10:50:12.262628017Z 2024-12-18T10:50:12.184030Z [1-19] INFO [0ced0] {supervision} Start failedLeader for s10299 from PRMR-t79dxjnh to PRMR-9ya2vtot
+2024-12-18T10:50:12.262631589Z 2024-12-18T10:50:12.187261Z [1-19] INFO [0ced0] {supervision} Start failedLeader for s10013 from PRMR-t79dxjnh to PRMR-9ya2vtot
+2024-12-18T10:50:12.262634828Z 2024-12-18T10:50:12.189835Z [1-19] INFO [0ced0] {supervision} Start failedLeader for s10238 from PRMR-t79dxjnh to PRMR-9ya2vtot
+2024-12-18T10:50:12.262637548Z 2024-12-18T10:50:12.201873Z [1-19] INFO [1ead6] {supervision} Finished failedLeader for s10299 from PRMR-t79dxjnh to PRMR-9ya2vtot
+2024-12-18T10:50:12.262640347Z 2024-12-18T10:50:12.212405Z [1-19] INFO [1ead6] {supervision} Finished failedLeader for s10013 from PRMR-t79dxjnh to PRMR-9ya2vtot
+2024-12-18T10:50:12.262643216Z 2024-12-18T10:50:12.215120Z [1-19] INFO [1ead6] {supervision} Finished failedLeader for s10238 from PRMR-t79dxjnh to PRMR-9ya2vtot

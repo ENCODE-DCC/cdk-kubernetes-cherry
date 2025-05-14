@@ -1,0 +1,674 @@
+metadata:
+  creationTimestamp: "2024-12-11T21:31:08Z"
+  generation: 2
+  managedFields:
+  - apiVersion: database.arangodb.com/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:ownerReferences:
+          .: {}
+          k:{"uid":"c22fb4b7-de56-4736-bd16-4302643e053e"}: {}
+      f:spec:
+        .: {}
+        f:deploymentUID: {}
+        f:group: {}
+        f:id: {}
+        f:template:
+          .: {}
+          f:checksum: {}
+          f:podSpec:
+            .: {}
+            f:metadata:
+              .: {}
+              f:creationTimestamp: {}
+              f:finalizers: {}
+              f:labels:
+                .: {}
+                f:app: {}
+                f:arango_deployment: {}
+                f:deployment.arangodb.com/member: {}
+                f:role: {}
+              f:name: {}
+            f:spec:
+              .: {}
+              f:affinity:
+                .: {}
+                f:nodeAffinity:
+                  .: {}
+                  f:requiredDuringSchedulingIgnoredDuringExecution:
+                    .: {}
+                    f:nodeSelectorTerms: {}
+                f:podAntiAffinity:
+                  .: {}
+                  f:preferredDuringSchedulingIgnoredDuringExecution: {}
+              f:containers: {}
+              f:hostname: {}
+              f:initContainers: {}
+              f:restartPolicy: {}
+              f:subdomain: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+              f:volumes: {}
+          f:podSpecChecksum: {}
+    manager: arangodb_operator
+    operation: Update
+    time: "2024-12-11T21:31:12Z"
+  - apiVersion: database.arangodb.com/v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        .: {}
+        f:conditions: {}
+        f:lastUpdateTime: {}
+        f:message: {}
+        f:template:
+          .: {}
+          f:checksum: {}
+          f:podSpec:
+            .: {}
+            f:metadata:
+              .: {}
+              f:creationTimestamp: {}
+              f:finalizers: {}
+              f:labels:
+                .: {}
+                f:app: {}
+                f:arango_deployment: {}
+                f:deployment.arangodb.com/member: {}
+                f:role: {}
+              f:name: {}
+            f:spec:
+              .: {}
+              f:affinity:
+                .: {}
+                f:nodeAffinity:
+                  .: {}
+                  f:requiredDuringSchedulingIgnoredDuringExecution:
+                    .: {}
+                    f:nodeSelectorTerms: {}
+                f:podAntiAffinity:
+                  .: {}
+                  f:preferredDuringSchedulingIgnoredDuringExecution: {}
+              f:containers: {}
+              f:hostname: {}
+              f:initContainers: {}
+              f:restartPolicy: {}
+              f:subdomain: {}
+              f:terminationGracePeriodSeconds: {}
+              f:tolerations: {}
+              f:volumes: {}
+          f:podSpecChecksum: {}
+    manager: arangodb_operator
+    operation: Update
+    subresource: status
+    time: "2024-12-18T14:39:12Z"
+  name: sac-agent-bh7j5zwi
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoDeployment
+    name: sac
+    uid: c22fb4b7-de56-4736-bd16-4302643e053e
+  resourceVersion: "5688534"
+  uid: 61afba82-1781-42bb-b03e-2104bed1f624
+spec:
+  deploymentUID: c22fb4b7-de56-4736-bd16-4302643e053e
+  group: agent
+  id: AGNT-bh7j5zwi
+  template:
+    checksum: dd80ca5bcdab59f86903efa54ecb13ed96b9981f088bd19ba774b1c8bfc6ba7a
+    podSpec:
+      metadata:
+        creationTimestamp: null
+        finalizers:
+        - database.arangodb.com/graceful-shutdown
+        labels:
+          app: arangodb
+          arango_deployment: sac
+          deployment.arangodb.com/member: AGNT-bh7j5zwi
+          role: agent
+        name: sac-agnt-bh7j5zwi-c1478a
+      spec:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                  - amd64
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: arangodb
+                    arango_deployment: sac
+                    role: agent
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+        containers:
+        - command:
+          - /usr/sbin/arangod
+          - --agency.activate=true
+          - --agency.disaster-recovery-id=AGNT-bh7j5zwi
+          - --agency.endpoint=tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529
+          - --agency.endpoint=tcp://sac-agent-piomvxzf.sac-int.default.svc:8529
+          - --agency.my-address=tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529
+          - --agency.size=3
+          - --agency.supervision=true
+          - --database.directory=/data
+          - --foxx.queues=false
+          - --log.level=INFO
+          - --log.output=+
+          - --server.authentication=true
+          - --server.endpoint=tcp://[::]:8529
+          - --server.jwt-secret-keyfile=/secrets/cluster/jwt/token
+          - --server.statistics=false
+          - --server.storage-engine=rocksdb
+          env:
+          - name: MY_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: MY_POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: MY_NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: ARANGODB_OVERRIDE_SERVER_GROUP
+            value: agent
+          - name: ARANGODB_OVERRIDE_DEPLOYMENT_MODE
+            value: Cluster
+          - name: ARANGODB_OVERRIDE_VERSION
+            value: 3.12.3
+          - name: ARANGODB_OVERRIDE_ENTERPRISE
+            value: "false"
+          envFrom:
+          - configMapRef:
+              name: arangodb-operator-feature-config-map
+              optional: true
+          image: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+          imagePullPolicy: IfNotPresent
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                - /lifecycle/tools/arangodb_operator
+                - lifecycle
+                - preStop
+                - port
+          livenessProbe:
+            exec:
+              command:
+              - /lifecycle/tools/arangodb_operator
+              - lifecycle
+              - probe
+              - liveness
+              - --auth
+            failureThreshold: 10
+            initialDelaySeconds: 900
+            periodSeconds: 60
+            successThreshold: 1
+            timeoutSeconds: 2
+          name: server
+          ports:
+          - containerPort: 8529
+            name: server
+            protocol: TCP
+          resources: {}
+          securityContext:
+            capabilities:
+              drop:
+              - ALL
+          volumeMounts:
+          - mountPath: /data
+            name: arangod-data
+          - mountPath: /lifecycle/tools
+            name: lifecycle
+          - mountPath: /secrets/cluster/jwt
+            name: cluster-jwt
+        hostname: sac-agent-bh7j5zwi
+        initContainers:
+        - command:
+          - /usr/bin/arangodb_operator
+          - lifecycle
+          - copy
+          - --target
+          - /lifecycle/tools
+          image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+          imagePullPolicy: IfNotPresent
+          name: init-lifecycle
+          resources: {}
+          securityContext:
+            capabilities:
+              drop:
+              - ALL
+          volumeMounts:
+          - mountPath: /lifecycle/tools
+            name: lifecycle
+        - command:
+          - /usr/bin/arangodb_operator
+          - uuid
+          - --uuid-path
+          - /data/UUID
+          - --engine-path
+          - /data/ENGINE
+          - --uuid
+          - AGNT-bh7j5zwi
+          - --engine
+          - rocksdb
+          env:
+          - name: MY_POD_NAMESPACE
+            value: default
+          image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+          name: uuid
+          resources:
+            limits:
+              cpu: 100m
+              memory: 50Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          securityContext:
+            capabilities:
+              drop:
+              - ALL
+          volumeMounts:
+          - mountPath: /data
+            name: arangod-data
+        - command:
+          - /usr/sbin/arangod
+          - --agency.activate=true
+          - --agency.disaster-recovery-id=AGNT-bh7j5zwi
+          - --agency.endpoint=tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529
+          - --agency.endpoint=tcp://sac-agent-piomvxzf.sac-int.default.svc:8529
+          - --agency.my-address=tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529
+          - --agency.size=3
+          - --agency.supervision=true
+          - --database.directory=/data
+          - --foxx.queues=false
+          - --log.level=INFO
+          - --log.output=+
+          - --server.authentication=true
+          - --server.endpoint=tcp://[::]:8529
+          - --server.jwt-secret-keyfile=/secrets/cluster/jwt/token
+          - --server.statistics=false
+          - --server.storage-engine=rocksdb
+          - --database.check-version=true
+          env:
+          - name: MY_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: MY_POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: MY_NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: ARANGODB_OVERRIDE_SERVER_GROUP
+            value: agent
+          - name: ARANGODB_OVERRIDE_DEPLOYMENT_MODE
+            value: Cluster
+          - name: ARANGODB_OVERRIDE_VERSION
+            value: 3.12.3
+          - name: ARANGODB_OVERRIDE_ENTERPRISE
+            value: "false"
+          envFrom:
+          - configMapRef:
+              name: arangodb-operator-feature-config-map
+              optional: true
+          image: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+          imagePullPolicy: IfNotPresent
+          name: version-check
+          ports:
+          - containerPort: 8529
+            name: server
+            protocol: TCP
+          resources: {}
+          securityContext:
+            capabilities:
+              drop:
+              - ALL
+          volumeMounts:
+          - mountPath: /data
+            name: arangod-data
+          - mountPath: /lifecycle/tools
+            name: lifecycle
+          - mountPath: /secrets/cluster/jwt
+            name: cluster-jwt
+        restartPolicy: Never
+        subdomain: sac-int
+        terminationGracePeriodSeconds: 60
+        tolerations:
+        - effect: NoExecute
+          key: node.kubernetes.io/not-ready
+          operator: Exists
+        - effect: NoExecute
+          key: node.kubernetes.io/unreachable
+          operator: Exists
+        - effect: NoExecute
+          key: node.alpha.kubernetes.io/unreachable
+          operator: Exists
+        volumes:
+        - name: arangod-data
+          persistentVolumeClaim:
+            claimName: sac-agent-bh7j5zwi
+        - name: cluster-jwt
+          secret:
+            secretName: sac-jwt
+        - emptyDir: {}
+          name: lifecycle
+    podSpecChecksum: 211cea86953449bb8953c11b8957f9d2064101b44553cb5b193cf7cfcc015f59
+status:
+  conditions:
+  - lastTransitionTime: "2024-12-18T14:39:11Z"
+    lastUpdateTime: "2024-12-18T14:39:11Z"
+    reason: ArangoDB is reachable
+    status: "True"
+    type: Reachable
+  - lastTransitionTime: "2024-12-11T21:31:43Z"
+    lastUpdateTime: "2024-12-11T21:31:43Z"
+    reason: Pod Ready
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2024-12-11T21:31:43Z"
+    lastUpdateTime: "2024-12-11T21:31:43Z"
+    reason: Pod Serving
+    status: "True"
+    type: Serving
+  - lastTransitionTime: "2024-12-11T21:31:24Z"
+    lastUpdateTime: "2024-12-11T21:31:24Z"
+    message: Assigned to node ip-10-0-145-209.us-west-2.compute.internal
+    reason: Pod is scheduled
+    status: "True"
+    type: Scheduled
+  - lastTransitionTime: "2024-12-11T21:31:43Z"
+    lastUpdateTime: "2024-12-11T21:31:43Z"
+    reason: Core Pod Container started
+    status: "True"
+    type: Active
+  - lastTransitionTime: "2024-12-11T21:31:43Z"
+    lastUpdateTime: "2024-12-11T21:31:43Z"
+    reason: Pod Started
+    status: "True"
+    type: Started
+  lastUpdateTime: "2024-12-18T14:39:12Z"
+  message: Member is Ready
+  template:
+    checksum: dd80ca5bcdab59f86903efa54ecb13ed96b9981f088bd19ba774b1c8bfc6ba7a
+    podSpec:
+      metadata:
+        creationTimestamp: null
+        finalizers:
+        - database.arangodb.com/graceful-shutdown
+        labels:
+          app: arangodb
+          arango_deployment: sac
+          deployment.arangodb.com/member: AGNT-bh7j5zwi
+          role: agent
+        name: sac-agnt-bh7j5zwi-c1478a
+      spec:
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                  - amd64
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: arangodb
+                    arango_deployment: sac
+                    role: agent
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+        containers:
+        - command:
+          - /usr/sbin/arangod
+          - --agency.activate=true
+          - --agency.disaster-recovery-id=AGNT-bh7j5zwi
+          - --agency.endpoint=tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529
+          - --agency.endpoint=tcp://sac-agent-piomvxzf.sac-int.default.svc:8529
+          - --agency.my-address=tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529
+          - --agency.size=3
+          - --agency.supervision=true
+          - --database.directory=/data
+          - --foxx.queues=false
+          - --log.level=INFO
+          - --log.output=+
+          - --server.authentication=true
+          - --server.endpoint=tcp://[::]:8529
+          - --server.jwt-secret-keyfile=/secrets/cluster/jwt/token
+          - --server.statistics=false
+          - --server.storage-engine=rocksdb
+          env:
+          - name: MY_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: MY_POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: MY_NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: ARANGODB_OVERRIDE_SERVER_GROUP
+            value: agent
+          - name: ARANGODB_OVERRIDE_DEPLOYMENT_MODE
+            value: Cluster
+          - name: ARANGODB_OVERRIDE_VERSION
+            value: 3.12.3
+          - name: ARANGODB_OVERRIDE_ENTERPRISE
+            value: "false"
+          envFrom:
+          - configMapRef:
+              name: arangodb-operator-feature-config-map
+              optional: true
+          image: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+          imagePullPolicy: IfNotPresent
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                - /lifecycle/tools/arangodb_operator
+                - lifecycle
+                - preStop
+                - port
+          livenessProbe:
+            exec:
+              command:
+              - /lifecycle/tools/arangodb_operator
+              - lifecycle
+              - probe
+              - liveness
+              - --auth
+            failureThreshold: 10
+            initialDelaySeconds: 900
+            periodSeconds: 60
+            successThreshold: 1
+            timeoutSeconds: 2
+          name: server
+          ports:
+          - containerPort: 8529
+            name: server
+            protocol: TCP
+          resources: {}
+          securityContext:
+            capabilities:
+              drop:
+              - ALL
+          volumeMounts:
+          - mountPath: /data
+            name: arangod-data
+          - mountPath: /lifecycle/tools
+            name: lifecycle
+          - mountPath: /secrets/cluster/jwt
+            name: cluster-jwt
+        hostname: sac-agent-bh7j5zwi
+        initContainers:
+        - command:
+          - /usr/bin/arangodb_operator
+          - lifecycle
+          - copy
+          - --target
+          - /lifecycle/tools
+          image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+          imagePullPolicy: IfNotPresent
+          name: init-lifecycle
+          resources: {}
+          securityContext:
+            capabilities:
+              drop:
+              - ALL
+          volumeMounts:
+          - mountPath: /lifecycle/tools
+            name: lifecycle
+        - command:
+          - /usr/bin/arangodb_operator
+          - uuid
+          - --uuid-path
+          - /data/UUID
+          - --engine-path
+          - /data/ENGINE
+          - --uuid
+          - AGNT-bh7j5zwi
+          - --engine
+          - rocksdb
+          env:
+          - name: MY_POD_NAMESPACE
+            value: default
+          image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+          name: uuid
+          resources:
+            limits:
+              cpu: 100m
+              memory: 50Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          securityContext:
+            capabilities:
+              drop:
+              - ALL
+          volumeMounts:
+          - mountPath: /data
+            name: arangod-data
+        - command:
+          - /usr/sbin/arangod
+          - --agency.activate=true
+          - --agency.disaster-recovery-id=AGNT-bh7j5zwi
+          - --agency.endpoint=tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529
+          - --agency.endpoint=tcp://sac-agent-piomvxzf.sac-int.default.svc:8529
+          - --agency.my-address=tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529
+          - --agency.size=3
+          - --agency.supervision=true
+          - --database.directory=/data
+          - --foxx.queues=false
+          - --log.level=INFO
+          - --log.output=+
+          - --server.authentication=true
+          - --server.endpoint=tcp://[::]:8529
+          - --server.jwt-secret-keyfile=/secrets/cluster/jwt/token
+          - --server.statistics=false
+          - --server.storage-engine=rocksdb
+          - --database.check-version=true
+          env:
+          - name: MY_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: MY_POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: MY_NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: ARANGODB_OVERRIDE_SERVER_GROUP
+            value: agent
+          - name: ARANGODB_OVERRIDE_DEPLOYMENT_MODE
+            value: Cluster
+          - name: ARANGODB_OVERRIDE_VERSION
+            value: 3.12.3
+          - name: ARANGODB_OVERRIDE_ENTERPRISE
+            value: "false"
+          envFrom:
+          - configMapRef:
+              name: arangodb-operator-feature-config-map
+              optional: true
+          image: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+          imagePullPolicy: IfNotPresent
+          name: version-check
+          ports:
+          - containerPort: 8529
+            name: server
+            protocol: TCP
+          resources: {}
+          securityContext:
+            capabilities:
+              drop:
+              - ALL
+          volumeMounts:
+          - mountPath: /data
+            name: arangod-data
+          - mountPath: /lifecycle/tools
+            name: lifecycle
+          - mountPath: /secrets/cluster/jwt
+            name: cluster-jwt
+        restartPolicy: Never
+        subdomain: sac-int
+        terminationGracePeriodSeconds: 60
+        tolerations:
+        - effect: NoExecute
+          key: node.kubernetes.io/not-ready
+          operator: Exists
+        - effect: NoExecute
+          key: node.kubernetes.io/unreachable
+          operator: Exists
+        - effect: NoExecute
+          key: node.alpha.kubernetes.io/unreachable
+          operator: Exists
+        volumes:
+        - name: arangod-data
+          persistentVolumeClaim:
+            claimName: sac-agent-bh7j5zwi
+        - name: cluster-jwt
+          secret:
+            secretName: sac-jwt
+        - emptyDir: {}
+          name: lifecycle
+    podSpecChecksum: 211cea86953449bb8953c11b8957f9d2064101b44553cb5b193cf7cfcc015f59

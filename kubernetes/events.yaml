@@ -1,0 +1,159 @@
+count: 18
+eventTime: null
+firstTimestamp: "2024-12-18T12:12:43Z"
+involvedObject:
+  apiVersion: karpenter.sh/v1
+  kind: NodeClaim
+  name: nodepool-snbmv
+  resourceVersion: "5642963"
+  uid: 64f09fc1-2651-419b-87a1-7a5ff0908e65
+lastTimestamp: "2024-12-18T16:29:25Z"
+message: SpotToSpotConsolidation is disabled, can't replace a spot node with a spot
+  node
+metadata:
+  creationTimestamp: "2024-12-18T12:12:43Z"
+  name: nodepool-snbmv.1812445ae7b836ce
+  namespace: default
+  resourceVersion: "5721850"
+  uid: 93c2528b-f276-48da-93e8-aabe8d90ac12
+reason: Unconsolidatable
+reportingComponent: karpenter
+reportingInstance: ""
+source:
+  component: karpenter
+type: Normal
+
+---
+
+count: 24
+eventTime: null
+firstTimestamp: "2024-12-18T10:30:00Z"
+involvedObject:
+  apiVersion: karpenter.sh/v1
+  kind: NodeClaim
+  name: nodepool-wx9sl
+  resourceVersion: "5609666"
+  uid: 3f5b6d07-f6f7-4520-9584-58fba7c3124f
+lastTimestamp: "2024-12-18T16:29:25Z"
+message: SpotToSpotConsolidation is disabled, can't replace a spot node with a spot
+  node
+metadata:
+  creationTimestamp: "2024-12-18T10:30:00Z"
+  name: nodepool-wx9sl.18123ebfd6deb935
+  namespace: default
+  resourceVersion: "5721848"
+  uid: f06320de-47a9-4c71-bfe7-8420cafb6ded
+reason: Unconsolidatable
+reportingComponent: karpenter
+reportingInstance: ""
+source:
+  component: karpenter
+type: Normal
+
+---
+
+count: 22
+eventTime: null
+firstTimestamp: "2024-12-18T10:53:02Z"
+involvedObject:
+  apiVersion: karpenter.sh/v1
+  kind: NodeClaim
+  name: nodepool-xtcv4
+  resourceVersion: "5617094"
+  uid: cf0c24b0-7746-4758-b944-956011e0e88c
+lastTimestamp: "2024-12-18T16:19:24Z"
+message: SpotToSpotConsolidation is disabled, can't replace a spot node with a spot
+  node
+metadata:
+  creationTimestamp: "2024-12-18T10:53:02Z"
+  name: nodepool-xtcv4.18124001c7631d39
+  namespace: default
+  resourceVersion: "5718815"
+  uid: 3787bf01-3e8e-4230-b378-d5e070919d08
+reason: Unconsolidatable
+reportingComponent: karpenter
+reportingInstance: ""
+source:
+  component: karpenter
+type: Normal
+
+---
+
+count: 22
+eventTime: null
+firstTimestamp: "2024-12-18T10:53:02Z"
+involvedObject:
+  apiVersion: v1
+  kind: Node
+  name: ip-10-0-114-234.us-west-2.compute.internal
+  resourceVersion: "5617437"
+  uid: b982276c-53b9-4fa2-beac-5094c1eb2370
+lastTimestamp: "2024-12-18T16:19:24Z"
+message: SpotToSpotConsolidation is disabled, can't replace a spot node with a spot
+  node
+metadata:
+  creationTimestamp: "2024-12-18T10:53:02Z"
+  name: ip-10-0-114-234.us-west-2.compute.internal.18124001c762e1d6
+  namespace: default
+  resourceVersion: "5718814"
+  uid: 0d04c130-d468-4748-ade0-1b7f6d1b24ac
+reason: Unconsolidatable
+reportingComponent: karpenter
+reportingInstance: ""
+source:
+  component: karpenter
+type: Normal
+
+---
+
+count: 18
+eventTime: null
+firstTimestamp: "2024-12-18T12:12:43Z"
+involvedObject:
+  apiVersion: v1
+  kind: Node
+  name: ip-10-0-121-95.us-west-2.compute.internal
+  resourceVersion: "5643146"
+  uid: 6c592038-cc1b-415f-b61e-94a5d2c9b714
+lastTimestamp: "2024-12-18T16:29:25Z"
+message: SpotToSpotConsolidation is disabled, can't replace a spot node with a spot
+  node
+metadata:
+  creationTimestamp: "2024-12-18T12:12:43Z"
+  name: ip-10-0-121-95.us-west-2.compute.internal.1812445ae7b7f76e
+  namespace: default
+  resourceVersion: "5721849"
+  uid: b44fdbfe-29c3-4ed3-8e48-9d5c336fcc55
+reason: Unconsolidatable
+reportingComponent: karpenter
+reportingInstance: ""
+source:
+  component: karpenter
+type: Normal
+
+---
+
+count: 24
+eventTime: null
+firstTimestamp: "2024-12-18T10:30:00Z"
+involvedObject:
+  apiVersion: v1
+  kind: Node
+  name: ip-10-0-146-13.us-west-2.compute.internal
+  resourceVersion: "5609702"
+  uid: 9306fcdf-4d7e-4996-aaf8-789c05e5e534
+lastTimestamp: "2024-12-18T16:29:25Z"
+message: SpotToSpotConsolidation is disabled, can't replace a spot node with a spot
+  node
+metadata:
+  creationTimestamp: "2024-12-18T10:30:00Z"
+  name: ip-10-0-146-13.us-west-2.compute.internal.18123ebfd6de72d0
+  namespace: default
+  resourceVersion: "5721847"
+  uid: 1004bb29-1b22-45da-8911-7ab7159a7aad
+reason: Unconsolidatable
+reportingComponent: karpenter
+reportingInstance: ""
+source:
+  component: karpenter
+type: Normal

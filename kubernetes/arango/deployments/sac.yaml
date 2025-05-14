@@ -1,0 +1,998 @@
+apiVersion: database.arangodb.com/v1
+kind: ArangoDeployment
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"database.arangodb.com/v1","kind":"ArangoDeployment","metadata":{"annotations":{},"name":"sac","namespace":"default"},"spec":{"agents":{"volumeClaimTemplate":{"spec":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"50Gi"}},"storageClassName":"gp3"}}},"coordinators":{"count":6,"resources":{"limits":{"cpu":"1000m","memory":"512Mi"},"requests":{"cpu":"1000m","memory":"512Mi"}}},"dbservers":{"count":3,"resources":{"limits":{"cpu":"1000m","memory":"2Gi"},"requests":{"cpu":"1000m","memory":"2Gi"}},"volumeClaimTemplate":{"spec":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"100Gi"}},"storageClassName":"gp3"}}},"externalAccess":{"type":"NodePort"},"mode":"Cluster","tls":{"caSecretName":"None"}}}
+  creationTimestamp: "2024-12-11T21:30:56Z"
+  finalizers:
+  - database.arangodb.com/remove-child-finalizers
+  generation: 23156
+  name: sac
+  namespace: default
+  resourceVersion: "5722032"
+  uid: c22fb4b7-de56-4736-bd16-4302643e053e
+spec:
+  agents:
+    count: 3
+    resources: {}
+    volumeClaimTemplate:
+      metadata:
+        creationTimestamp: null
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 50Gi
+        storageClassName: gp3
+      status: {}
+  auth:
+    jwtSecretName: sac-jwt
+  bootstrap:
+    passwordSecretNames:
+      root: None
+  chaos:
+    interval: 60000000000
+    kill-pod-probability: 50
+  coordinators:
+    count: 6
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: "1"
+        memory: 512Mi
+  dbservers:
+    count: 3
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2Gi
+      requests:
+        cpu: "1"
+        memory: 2Gi
+    volumeClaimTemplate:
+      metadata:
+        creationTimestamp: null
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 100Gi
+        storageClassName: gp3
+      status: {}
+  environment: Development
+  externalAccess:
+    type: NodePort
+  image: arangodb/arangodb:latest
+  imagePullPolicy: IfNotPresent
+  license: {}
+  lifecycle:
+    resources: {}
+  metrics:
+    authentication:
+      jwtTokenSecretName: sac-exporter-jwt-token
+    enabled: false
+    resources: {}
+  mode: Cluster
+  rocksdb:
+    encryption: {}
+  single:
+    resources: {}
+    volumeClaimTemplate:
+      metadata:
+        creationTimestamp: null
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 8Gi
+        volumeMode: Filesystem
+      status: {}
+  storageEngine: RocksDB
+  sync:
+    auth:
+      clientCASecretName: sac-sync-client-auth-ca
+      jwtSecretName: sac-sync-jwt
+    externalAccess: {}
+    image: null
+    monitoring:
+      tokenSecretName: sac-sync-mt
+    tls:
+      caSecretName: sac-sync-ca
+      ttl: 2610h
+  syncmasters:
+    resources: {}
+  syncworkers:
+    resources: {}
+  tls:
+    caSecretName: None
+    ttl: 2610h
+status:
+  accepted-spec:
+    agents:
+      count: 3
+      resources: {}
+      volumeClaimTemplate:
+        metadata:
+          creationTimestamp: null
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 50Gi
+          storageClassName: gp3
+        status: {}
+    auth:
+      jwtSecretName: sac-jwt
+    bootstrap:
+      passwordSecretNames:
+        root: None
+    chaos:
+      interval: 60000000000
+      kill-pod-probability: 50
+    coordinators:
+      count: 6
+      resources:
+        limits:
+          cpu: "1"
+          memory: 512Mi
+        requests:
+          cpu: "1"
+          memory: 512Mi
+    dbservers:
+      count: 3
+      resources:
+        limits:
+          cpu: "1"
+          memory: 2Gi
+        requests:
+          cpu: "1"
+          memory: 2Gi
+      volumeClaimTemplate:
+        metadata:
+          creationTimestamp: null
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 100Gi
+          storageClassName: gp3
+        status: {}
+    environment: Development
+    externalAccess:
+      type: NodePort
+    image: arangodb/arangodb:latest
+    imagePullPolicy: IfNotPresent
+    license: {}
+    lifecycle:
+      resources: {}
+    metrics:
+      authentication:
+        jwtTokenSecretName: sac-exporter-jwt-token
+      enabled: false
+      resources: {}
+    mode: Cluster
+    rocksdb:
+      encryption: {}
+    single:
+      resources: {}
+      volumeClaimTemplate:
+        metadata:
+          creationTimestamp: null
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 8Gi
+          volumeMode: Filesystem
+        status: {}
+    storageEngine: RocksDB
+    sync:
+      auth:
+        clientCASecretName: sac-sync-client-auth-ca
+        jwtSecretName: sac-sync-jwt
+      externalAccess: {}
+      image: null
+      monitoring:
+        tokenSecretName: sac-sync-mt
+      tls:
+        caSecretName: sac-sync-ca
+        ttl: 2610h
+    syncmasters:
+      resources: {}
+    syncworkers:
+      resources: {}
+    tls:
+      caSecretName: None
+      ttl: 2610h
+  acceptedSpecVersion: f077536d2f83320f6bf69d57c69b58d6a2c67b4e2f86e17473ac218152cdf248
+  agency:
+    ids:
+    - AGNT-ampr1nzg
+    - AGNT-bh7j5zwi
+    - AGNT-piomvxzf
+    size: 3
+  agents: {}
+  appliedVersion: f077536d2f83320f6bf69d57c69b58d6a2c67b4e2f86e17473ac218152cdf248
+  arangodb-images:
+  - arangodb-version: 3.12.3
+    image: arangodb/arangodb:latest
+    image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+  backoff:
+    check: "2024-12-18T16:30:18Z"
+    license: "2024-12-18T16:30:32Z"
+    timezone: "2024-12-18T16:30:18Z"
+  conditions:
+  - hash: f4abcacae390a26a42e2492355b2b581621c7514321db15387bdf603eb2b0015
+    lastTransitionTime: "2024-12-14T02:22:03Z"
+    lastUpdateTime: "2024-12-14T02:22:03Z"
+    message: Spec Object accepted
+    reason: Spec Accepted
+    status: "True"
+    type: SpecAccepted
+  - lastTransitionTime: "2024-12-18T12:13:59Z"
+    lastUpdateTime: "2024-12-18T12:13:59Z"
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2024-12-11T21:31:44Z"
+    lastUpdateTime: "2024-12-11T21:31:44Z"
+    reason: ArangoDB is reachable
+    status: "True"
+    type: Reachable
+  - lastTransitionTime: "2024-12-11T21:31:49Z"
+    lastUpdateTime: "2024-12-11T21:31:49Z"
+    message: The bootstrap process has been completed successfully
+    reason: Bootstrap successful
+    status: "True"
+    type: BootstrapCompleted
+  - lastTransitionTime: "2024-12-11T21:31:49Z"
+    lastUpdateTime: "2024-12-11T21:31:49Z"
+    message: The bootstrap process has been completed successfully
+    reason: Bootstrap successful
+    status: "True"
+    type: BootstrapSucceded
+  - hash: f077536d2f83320f6bf69d57c69b58d6a2c67b4e2f86e17473ac218152cdf248
+    lastTransitionTime: "2024-12-18T14:39:12Z"
+    lastUpdateTime: "2024-12-18T14:39:12Z"
+    message: Spec is Up To Date
+    reason: Spec is Up To Date
+    status: "True"
+    type: UpToDate
+  - lastTransitionTime: "2024-12-11T21:31:50Z"
+    lastUpdateTime: "2024-12-11T21:31:50Z"
+    message: Spec is Propagated
+    reason: Spec is Propagated
+    status: "True"
+    type: SpecPropagated
+  coordinators: {}
+  current-image:
+    arangodb-version: 3.12.3
+    image: arangodb/arangodb:latest
+    image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+  dbservers: {}
+  hashes:
+    jwt:
+      active: sha256:2e6e572a97a708da09b64f7f30384327c4549c401dfc8ce929b9ce0c9bc8f3e8
+    rocksDBEncryption: {}
+    tls: {}
+  members:
+    agents:
+    - arango-version: 3.12.3
+      architecture: amd64
+      cid: c22fb4b7-de56-4736-bd16-4302643e053e
+      conditions:
+      - lastTransitionTime: "2024-12-13T05:59:39Z"
+        lastUpdateTime: "2024-12-13T05:59:39Z"
+        reason: ArangoDB is reachable
+        status: "True"
+        type: Reachable
+      - lastTransitionTime: "2024-12-11T21:31:33Z"
+        lastUpdateTime: "2024-12-11T21:31:33Z"
+        reason: Pod Ready
+        status: "True"
+        type: Ready
+      - lastTransitionTime: "2024-12-11T21:31:33Z"
+        lastUpdateTime: "2024-12-11T21:31:33Z"
+        reason: Pod Serving
+        status: "True"
+        type: Serving
+      - lastTransitionTime: "2024-12-11T21:31:24Z"
+        lastUpdateTime: "2024-12-11T21:31:24Z"
+        message: Assigned to node ip-10-0-105-207.us-west-2.compute.internal
+        reason: Pod is scheduled
+        status: "True"
+        type: Scheduled
+      - lastTransitionTime: "2024-12-11T21:31:33Z"
+        lastUpdateTime: "2024-12-11T21:31:33Z"
+        reason: Core Pod Container started
+        status: "True"
+        type: Active
+      - lastTransitionTime: "2024-12-11T21:31:33Z"
+        lastUpdateTime: "2024-12-11T21:31:33Z"
+        reason: Pod Started
+        status: "True"
+        type: Started
+      created-at: "2024-12-11T21:31:05Z"
+      id: AGNT-ampr1nzg
+      image:
+        arangodb-version: 3.12.3
+        image: arangodb/arangodb:latest
+        image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      initialized: true
+      persistentVolumeClaim:
+        name: sac-agent-ampr1nzg
+      persistentVolumeClaimName: sac-agent-ampr1nzg
+      phase: Created
+      pod:
+        name: sac-agnt-ampr1nzg-c1478a
+        specVersion: 1a2acbb1da9f3dd8f5079155c1de7d0ae2002a269cab75377f846fdc82aa316b
+        uid: acd2e077-eb05-4426-a2b3-142591699ce9
+      podName: sac-agnt-ampr1nzg-c1478a
+      podSpecVersion: 1a2acbb1da9f3dd8f5079155c1de7d0ae2002a269cab75377f846fdc82aa316b
+      podUID: acd2e077-eb05-4426-a2b3-142591699ce9
+      recent-terminations: null
+      rid: e28c4df2-0270-4881-b628-f1bfbf2ff744
+      uid: bf232dd4-236b-4c06-a2dd-7f7df421bf6a
+    - arango-version: 3.12.3
+      architecture: amd64
+      cid: c22fb4b7-de56-4736-bd16-4302643e053e
+      conditions:
+      - lastTransitionTime: "2024-12-18T14:39:11Z"
+        lastUpdateTime: "2024-12-18T14:39:11Z"
+        reason: ArangoDB is reachable
+        status: "True"
+        type: Reachable
+      - lastTransitionTime: "2024-12-11T21:31:43Z"
+        lastUpdateTime: "2024-12-11T21:31:43Z"
+        reason: Pod Ready
+        status: "True"
+        type: Ready
+      - lastTransitionTime: "2024-12-11T21:31:43Z"
+        lastUpdateTime: "2024-12-11T21:31:43Z"
+        reason: Pod Serving
+        status: "True"
+        type: Serving
+      - lastTransitionTime: "2024-12-11T21:31:24Z"
+        lastUpdateTime: "2024-12-11T21:31:24Z"
+        message: Assigned to node ip-10-0-145-209.us-west-2.compute.internal
+        reason: Pod is scheduled
+        status: "True"
+        type: Scheduled
+      - lastTransitionTime: "2024-12-11T21:31:43Z"
+        lastUpdateTime: "2024-12-11T21:31:43Z"
+        reason: Core Pod Container started
+        status: "True"
+        type: Active
+      - lastTransitionTime: "2024-12-11T21:31:43Z"
+        lastUpdateTime: "2024-12-11T21:31:43Z"
+        reason: Pod Started
+        status: "True"
+        type: Started
+      created-at: "2024-12-11T21:31:05Z"
+      id: AGNT-bh7j5zwi
+      image:
+        arangodb-version: 3.12.3
+        image: arangodb/arangodb:latest
+        image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      initialized: true
+      persistentVolumeClaim:
+        name: sac-agent-bh7j5zwi
+      persistentVolumeClaimName: sac-agent-bh7j5zwi
+      phase: Created
+      pod:
+        name: sac-agnt-bh7j5zwi-c1478a
+        specVersion: 211cea86953449bb8953c11b8957f9d2064101b44553cb5b193cf7cfcc015f59
+        uid: fc40f493-227b-4e4c-8e71-c6a8a5a2cb82
+      podName: sac-agnt-bh7j5zwi-c1478a
+      podSpecVersion: 211cea86953449bb8953c11b8957f9d2064101b44553cb5b193cf7cfcc015f59
+      podUID: fc40f493-227b-4e4c-8e71-c6a8a5a2cb82
+      recent-terminations: null
+      rid: d7c3dc39-73bf-44a2-a635-1e7b7f4610e6
+      uid: 5c7052db-76ee-4b1d-99f8-191f248f7b3c
+    - arango-version: 3.12.3
+      architecture: amd64
+      cid: c22fb4b7-de56-4736-bd16-4302643e053e
+      conditions:
+      - lastTransitionTime: "2024-12-11T21:31:31Z"
+        lastUpdateTime: "2024-12-11T21:31:31Z"
+        reason: ArangoDB is reachable
+        status: "True"
+        type: Reachable
+      - lastTransitionTime: "2024-12-11T21:31:32Z"
+        lastUpdateTime: "2024-12-11T21:31:32Z"
+        reason: Pod Ready
+        status: "True"
+        type: Ready
+      - lastTransitionTime: "2024-12-11T21:31:32Z"
+        lastUpdateTime: "2024-12-11T21:31:32Z"
+        reason: Pod Serving
+        status: "True"
+        type: Serving
+      - lastTransitionTime: "2024-12-11T21:31:23Z"
+        lastUpdateTime: "2024-12-11T21:31:23Z"
+        message: Assigned to node ip-10-0-105-207.us-west-2.compute.internal
+        reason: Pod is scheduled
+        status: "True"
+        type: Scheduled
+      - lastTransitionTime: "2024-12-11T21:31:31Z"
+        lastUpdateTime: "2024-12-11T21:31:31Z"
+        reason: Core Pod Container started
+        status: "True"
+        type: Active
+      - lastTransitionTime: "2024-12-11T21:31:32Z"
+        lastUpdateTime: "2024-12-11T21:31:32Z"
+        reason: Pod Started
+        status: "True"
+        type: Started
+      created-at: "2024-12-11T21:31:06Z"
+      id: AGNT-piomvxzf
+      image:
+        arangodb-version: 3.12.3
+        image: arangodb/arangodb:latest
+        image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      initialized: true
+      persistentVolumeClaim:
+        name: sac-agent-piomvxzf
+      persistentVolumeClaimName: sac-agent-piomvxzf
+      phase: Created
+      pod:
+        name: sac-agnt-piomvxzf-c1478a
+        specVersion: 3e7ae00832c2fc07ab7650e37beaf16f0df88dcf109ad12d1403430face60849
+        uid: 1be4d05b-1e98-4821-84a7-3729f6828279
+      podName: sac-agnt-piomvxzf-c1478a
+      podSpecVersion: 3e7ae00832c2fc07ab7650e37beaf16f0df88dcf109ad12d1403430face60849
+      podUID: 1be4d05b-1e98-4821-84a7-3729f6828279
+      recent-terminations: null
+      rid: f87083ad-acd4-4f9c-8bc3-eb28129591c0
+      uid: d2eec7b0-3baf-4760-b0b4-46e3659f1251
+    coordinators:
+    - arango-version: 3.12.3
+      architecture: amd64
+      cid: c22fb4b7-de56-4736-bd16-4302643e053e
+      conditions:
+      - lastTransitionTime: "2024-12-16T17:33:23Z"
+        lastUpdateTime: "2024-12-16T17:33:23Z"
+        status: "True"
+        type: MemberOfCluster
+      - lastTransitionTime: "2024-12-18T10:27:13Z"
+        lastUpdateTime: "2024-12-18T10:27:13Z"
+        reason: ArangoDB is reachable
+        status: "True"
+        type: Reachable
+      - lastTransitionTime: "2024-12-18T10:27:15Z"
+        lastUpdateTime: "2024-12-18T10:27:15Z"
+        reason: Pod Ready
+        status: "True"
+        type: Ready
+      - lastTransitionTime: "2024-12-18T10:27:15Z"
+        lastUpdateTime: "2024-12-18T10:27:15Z"
+        reason: Pod Serving
+        status: "True"
+        type: Serving
+      - lastTransitionTime: "2024-12-18T10:27:09Z"
+        lastUpdateTime: "2024-12-18T10:27:09Z"
+        message: Assigned to node ip-10-0-146-13.us-west-2.compute.internal
+        reason: Pod is scheduled
+        status: "True"
+        type: Scheduled
+      - lastTransitionTime: "2024-12-18T10:27:12Z"
+        lastUpdateTime: "2024-12-18T10:27:12Z"
+        reason: Core Pod Container started
+        status: "True"
+        type: Active
+      - lastTransitionTime: "2024-12-18T10:27:15Z"
+        lastUpdateTime: "2024-12-18T10:27:15Z"
+        reason: Pod Started
+        status: "True"
+        type: Started
+      created-at: "2024-12-16T17:33:10Z"
+      id: CRDN-8su19dug
+      image:
+        arangodb-version: 3.12.3
+        image: arangodb/arangodb:latest
+        image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      initialized: true
+      phase: Created
+      pod:
+        name: sac-crdn-8su19dug-ae16ad
+        specVersion: e0d21cead7783edb7d4553aeb3cab0242c5483b59f5a7c685fa35974a4b7f630
+        uid: b72af959-3e13-473a-8570-850e42e7cf76
+      podName: sac-crdn-8su19dug-ae16ad
+      podSpecVersion: e0d21cead7783edb7d4553aeb3cab0242c5483b59f5a7c685fa35974a4b7f630
+      podUID: b72af959-3e13-473a-8570-850e42e7cf76
+      recent-terminations: null
+      rid: 3bf70afe-6853-4f2f-a58a-0d55f71acaf2
+      uid: 39f13ad5-9327-48a0-8e9f-a1a6095a6dd9
+    - arango-version: 3.12.3
+      architecture: amd64
+      cid: c22fb4b7-de56-4736-bd16-4302643e053e
+      conditions:
+      - lastTransitionTime: "2024-12-16T17:39:56Z"
+        lastUpdateTime: "2024-12-16T17:39:56Z"
+        status: "True"
+        type: MemberOfCluster
+      - lastTransitionTime: "2024-12-18T10:31:00Z"
+        lastUpdateTime: "2024-12-18T10:31:00Z"
+        reason: ArangoDB is reachable
+        status: "True"
+        type: Reachable
+      - lastTransitionTime: "2024-12-18T10:31:23Z"
+        lastUpdateTime: "2024-12-18T10:31:23Z"
+        reason: Pod Ready
+        status: "True"
+        type: Ready
+      - lastTransitionTime: "2024-12-18T10:31:23Z"
+        lastUpdateTime: "2024-12-18T10:31:23Z"
+        reason: Pod Serving
+        status: "True"
+        type: Serving
+      - lastTransitionTime: "2024-12-18T10:30:56Z"
+        lastUpdateTime: "2024-12-18T10:30:56Z"
+        message: Assigned to node ip-10-0-146-13.us-west-2.compute.internal
+        reason: Pod is scheduled
+        status: "True"
+        type: Scheduled
+      - lastTransitionTime: "2024-12-18T10:30:59Z"
+        lastUpdateTime: "2024-12-18T10:30:59Z"
+        reason: Core Pod Container started
+        status: "True"
+        type: Active
+      - lastTransitionTime: "2024-12-18T10:31:23Z"
+        lastUpdateTime: "2024-12-18T10:31:23Z"
+        reason: Pod Started
+        status: "True"
+        type: Started
+      created-at: "2024-12-16T17:39:43Z"
+      id: CRDN-ciuqrp5u
+      image:
+        arangodb-version: 3.12.3
+        image: arangodb/arangodb:latest
+        image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      initialized: true
+      phase: Created
+      pod:
+        name: sac-crdn-ciuqrp5u-ae16ad
+        specVersion: afa614161efb62e688b00c34e91448f1ed4375f01844cd207e1a31709cd2cefa
+        uid: 9e77862c-3b1a-4015-9ea9-eb6a75d3d388
+      podName: sac-crdn-ciuqrp5u-ae16ad
+      podSpecVersion: afa614161efb62e688b00c34e91448f1ed4375f01844cd207e1a31709cd2cefa
+      podUID: 9e77862c-3b1a-4015-9ea9-eb6a75d3d388
+      recent-terminations: null
+      rid: 4f3102ec-95cb-403c-9f7d-71c65053fc8f
+      uid: eb43540b-d84b-4469-9b91-28e8daa54f79
+    - arango-version: 3.12.3
+      architecture: amd64
+      cid: c22fb4b7-de56-4736-bd16-4302643e053e
+      conditions:
+      - lastTransitionTime: "2024-12-16T23:34:12Z"
+        lastUpdateTime: "2024-12-16T23:34:12Z"
+        status: "True"
+        type: MemberOfCluster
+      - lastTransitionTime: "2024-12-18T12:10:15Z"
+        lastUpdateTime: "2024-12-18T12:10:15Z"
+        reason: ArangoDB is reachable
+        status: "True"
+        type: Reachable
+      - lastTransitionTime: "2024-12-18T12:10:15Z"
+        lastUpdateTime: "2024-12-18T12:10:15Z"
+        reason: Pod Ready
+        status: "True"
+        type: Ready
+      - lastTransitionTime: "2024-12-18T12:10:15Z"
+        lastUpdateTime: "2024-12-18T12:10:15Z"
+        reason: Pod Serving
+        status: "True"
+        type: Serving
+      - lastTransitionTime: "2024-12-18T12:09:54Z"
+        lastUpdateTime: "2024-12-18T12:09:54Z"
+        message: Assigned to node ip-10-0-121-95.us-west-2.compute.internal
+        reason: Pod is scheduled
+        status: "True"
+        type: Scheduled
+      - lastTransitionTime: "2024-12-18T12:10:15Z"
+        lastUpdateTime: "2024-12-18T12:10:15Z"
+        reason: Core Pod Container started
+        status: "True"
+        type: Active
+      - lastTransitionTime: "2024-12-18T12:10:15Z"
+        lastUpdateTime: "2024-12-18T12:10:15Z"
+        reason: Pod Started
+        status: "True"
+        type: Started
+      created-at: "2024-12-16T23:34:05Z"
+      id: CRDN-ihb1uadw
+      image:
+        arangodb-version: 3.12.3
+        image: arangodb/arangodb:latest
+        image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      initialized: true
+      phase: Created
+      pod:
+        name: sac-crdn-ihb1uadw-c7b35c
+        specVersion: ecdfb334defcaf5560009f34d6f44a5d3cef26ea37f19aeb08d2216605a36841
+        uid: 1fe6d5b3-b4a8-4a81-b55d-3ca0bef660c4
+      podName: sac-crdn-ihb1uadw-c7b35c
+      podSpecVersion: ecdfb334defcaf5560009f34d6f44a5d3cef26ea37f19aeb08d2216605a36841
+      podUID: 1fe6d5b3-b4a8-4a81-b55d-3ca0bef660c4
+      recent-terminations: null
+      rid: 2d140f7a-f7d6-49be-94ef-a75fd16012cb
+      uid: 93148ff0-8453-4408-8431-1a39856f02bd
+    - arango-version: 3.12.3
+      architecture: amd64
+      cid: c22fb4b7-de56-4736-bd16-4302643e053e
+      conditions:
+      - lastTransitionTime: "2024-12-16T17:33:23Z"
+        lastUpdateTime: "2024-12-16T17:33:23Z"
+        status: "True"
+        type: MemberOfCluster
+      - lastTransitionTime: "2024-12-18T10:54:23Z"
+        lastUpdateTime: "2024-12-18T10:54:23Z"
+        reason: ArangoDB is reachable
+        status: "True"
+        type: Reachable
+      - lastTransitionTime: "2024-12-18T10:54:25Z"
+        lastUpdateTime: "2024-12-18T10:54:25Z"
+        reason: Pod Ready
+        status: "True"
+        type: Ready
+      - lastTransitionTime: "2024-12-18T10:54:25Z"
+        lastUpdateTime: "2024-12-18T10:54:25Z"
+        reason: Pod Serving
+        status: "True"
+        type: Serving
+      - lastTransitionTime: "2024-12-18T10:54:18Z"
+        lastUpdateTime: "2024-12-18T10:54:18Z"
+        message: Assigned to node ip-10-0-114-234.us-west-2.compute.internal
+        reason: Pod is scheduled
+        status: "True"
+        type: Scheduled
+      - lastTransitionTime: "2024-12-18T10:54:22Z"
+        lastUpdateTime: "2024-12-18T10:54:22Z"
+        reason: Core Pod Container started
+        status: "True"
+        type: Active
+      - lastTransitionTime: "2024-12-18T10:54:25Z"
+        lastUpdateTime: "2024-12-18T10:54:25Z"
+        reason: Pod Started
+        status: "True"
+        type: Started
+      created-at: "2024-12-16T17:33:10Z"
+      id: CRDN-pcq7m4mt
+      image:
+        arangodb-version: 3.12.3
+        image: arangodb/arangodb:latest
+        image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      initialized: true
+      phase: Created
+      pod:
+        name: sac-crdn-pcq7m4mt-ae16ad
+        specVersion: c7cafe30a17435ff4119c263c9df164bbced5361e84db561afcd932257066e0b
+        uid: 7d2d90df-04cb-4a09-a3ef-aa5aea0d4f14
+      podName: sac-crdn-pcq7m4mt-ae16ad
+      podSpecVersion: c7cafe30a17435ff4119c263c9df164bbced5361e84db561afcd932257066e0b
+      podUID: 7d2d90df-04cb-4a09-a3ef-aa5aea0d4f14
+      recent-terminations:
+      - "2024-12-18T10:54:16Z"
+      rid: 064437f8-e11f-43e5-b4f1-877c1b9a0367
+      uid: 16782d0f-3d51-48c3-88f4-db34c3d2360e
+    - arango-version: 3.12.3
+      architecture: amd64
+      cid: c22fb4b7-de56-4736-bd16-4302643e053e
+      conditions:
+      - lastTransitionTime: "2024-12-11T21:31:46Z"
+        lastUpdateTime: "2024-12-11T21:31:46Z"
+        status: "True"
+        type: MemberOfCluster
+      - lastTransitionTime: "2024-12-18T12:13:42Z"
+        lastUpdateTime: "2024-12-18T12:13:42Z"
+        reason: ArangoDB is reachable
+        status: "True"
+        type: Reachable
+      - lastTransitionTime: "2024-12-18T12:13:59Z"
+        lastUpdateTime: "2024-12-18T12:13:59Z"
+        reason: Pod Ready
+        status: "True"
+        type: Ready
+      - lastTransitionTime: "2024-12-18T12:13:59Z"
+        lastUpdateTime: "2024-12-18T12:13:59Z"
+        reason: Pod Serving
+        status: "True"
+        type: Serving
+      - lastTransitionTime: "2024-12-18T12:13:38Z"
+        lastUpdateTime: "2024-12-18T12:13:38Z"
+        message: Assigned to node ip-10-0-121-95.us-west-2.compute.internal
+        reason: Pod is scheduled
+        status: "True"
+        type: Scheduled
+      - lastTransitionTime: "2024-12-18T12:13:42Z"
+        lastUpdateTime: "2024-12-18T12:13:42Z"
+        reason: Core Pod Container started
+        status: "True"
+        type: Active
+      - lastTransitionTime: "2024-12-18T12:13:59Z"
+        lastUpdateTime: "2024-12-18T12:13:59Z"
+        reason: Pod Started
+        status: "True"
+        type: Started
+      created-at: "2024-12-11T21:31:07Z"
+      id: CRDN-upfcobwh
+      image:
+        arangodb-version: 3.12.3
+        image: arangodb/arangodb:latest
+        image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      initialized: true
+      phase: Created
+      pod:
+        name: sac-crdn-upfcobwh-ae16ad
+        specVersion: c985b6d97f68d9654dbde5121dc5cb2346ba9bb8d38b06fd979a8a363fd0de49
+        uid: 43e9026c-632f-438c-ae06-fbe6bde54a73
+      podName: sac-crdn-upfcobwh-ae16ad
+      podSpecVersion: c985b6d97f68d9654dbde5121dc5cb2346ba9bb8d38b06fd979a8a363fd0de49
+      podUID: 43e9026c-632f-438c-ae06-fbe6bde54a73
+      recent-terminations: null
+      rid: 0d6a3552-5634-4baa-90a0-bdea4af0d7bf
+      uid: 09b96b83-0dd5-4c5e-a849-27e9a525f892
+    - arango-version: 3.12.3
+      architecture: amd64
+      cid: c22fb4b7-de56-4736-bd16-4302643e053e
+      conditions:
+      - lastTransitionTime: "2024-12-16T23:34:16Z"
+        lastUpdateTime: "2024-12-16T23:34:16Z"
+        status: "True"
+        type: MemberOfCluster
+      - lastTransitionTime: "2024-12-18T12:13:41Z"
+        lastUpdateTime: "2024-12-18T12:13:41Z"
+        reason: ArangoDB is reachable
+        status: "True"
+        type: Reachable
+      - lastTransitionTime: "2024-12-18T12:13:42Z"
+        lastUpdateTime: "2024-12-18T12:13:42Z"
+        reason: Pod Ready
+        status: "True"
+        type: Ready
+      - lastTransitionTime: "2024-12-18T12:13:42Z"
+        lastUpdateTime: "2024-12-18T12:13:42Z"
+        reason: Pod Serving
+        status: "True"
+        type: Serving
+      - lastTransitionTime: "2024-12-18T12:13:36Z"
+        lastUpdateTime: "2024-12-18T12:13:36Z"
+        message: Assigned to node ip-10-0-121-95.us-west-2.compute.internal
+        reason: Pod is scheduled
+        status: "True"
+        type: Scheduled
+      - lastTransitionTime: "2024-12-18T12:13:40Z"
+        lastUpdateTime: "2024-12-18T12:13:40Z"
+        reason: Core Pod Container started
+        status: "True"
+        type: Active
+      - lastTransitionTime: "2024-12-18T12:13:42Z"
+        lastUpdateTime: "2024-12-18T12:13:42Z"
+        reason: Pod Started
+        status: "True"
+        type: Started
+      created-at: "2024-12-16T23:34:05Z"
+      id: CRDN-vwq5ut32
+      image:
+        arangodb-version: 3.12.3
+        image: arangodb/arangodb:latest
+        image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      initialized: true
+      phase: Created
+      pod:
+        name: sac-crdn-vwq5ut32-c7b35c
+        specVersion: d9484f216123862ec0045717c03e55e1246f37ae86eaf198af572e62e726c521
+        uid: fac2f9e5-f375-473c-ac4e-1cc0473f49f3
+      podName: sac-crdn-vwq5ut32-c7b35c
+      podSpecVersion: d9484f216123862ec0045717c03e55e1246f37ae86eaf198af572e62e726c521
+      podUID: fac2f9e5-f375-473c-ac4e-1cc0473f49f3
+      recent-terminations:
+      - "2024-12-18T12:13:34Z"
+      rid: 59b67783-5c6c-4f42-a518-4e8dcc6c3380
+      uid: be47b581-3e8b-418f-8103-2a9260f15570
+    dbservers:
+    - arango-version: 3.12.3
+      architecture: amd64
+      cid: c22fb4b7-de56-4736-bd16-4302643e053e
+      conditions:
+      - lastTransitionTime: "2024-12-11T21:31:46Z"
+        lastUpdateTime: "2024-12-11T21:31:46Z"
+        status: "True"
+        type: MemberOfCluster
+      - lastTransitionTime: "2024-12-18T10:49:58Z"
+        lastUpdateTime: "2024-12-18T10:49:58Z"
+        reason: ArangoDB is reachable
+        status: "True"
+        type: Reachable
+      - lastTransitionTime: "2024-12-18T10:50:05Z"
+        lastUpdateTime: "2024-12-18T10:50:05Z"
+        reason: Pod Ready
+        status: "True"
+        type: Ready
+      - lastTransitionTime: "2024-12-18T10:50:05Z"
+        lastUpdateTime: "2024-12-18T10:50:05Z"
+        reason: Pod Serving
+        status: "True"
+        type: Serving
+      - lastTransitionTime: "2024-12-18T10:49:28Z"
+        lastUpdateTime: "2024-12-18T10:49:28Z"
+        message: Assigned to node ip-10-0-114-234.us-west-2.compute.internal
+        reason: Pod is scheduled
+        status: "True"
+        type: Scheduled
+      - lastTransitionTime: "2024-12-18T10:49:58Z"
+        lastUpdateTime: "2024-12-18T10:49:58Z"
+        reason: Core Pod Container started
+        status: "True"
+        type: Active
+      - lastTransitionTime: "2024-12-18T10:50:05Z"
+        lastUpdateTime: "2024-12-18T10:50:05Z"
+        reason: Pod Started
+        status: "True"
+        type: Started
+      created-at: "2024-12-11T21:31:06Z"
+      id: PRMR-16kcg4i2
+      image:
+        arangodb-version: 3.12.3
+        image: arangodb/arangodb:latest
+        image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      initialized: true
+      persistentVolumeClaim:
+        name: sac-dbserver-16kcg4i2
+      persistentVolumeClaimName: sac-dbserver-16kcg4i2
+      phase: Created
+      pod:
+        name: sac-prmr-16kcg4i2-618edc
+        specVersion: 877e10b7e2a91ff77ee80f3ea9466dc81d79e982001453eb075c0f5951e644c3
+        uid: 06e7d3bb-4e58-4d70-a4b9-2353ddb4abda
+      podName: sac-prmr-16kcg4i2-618edc
+      podSpecVersion: 877e10b7e2a91ff77ee80f3ea9466dc81d79e982001453eb075c0f5951e644c3
+      podUID: 06e7d3bb-4e58-4d70-a4b9-2353ddb4abda
+      recent-terminations: null
+      rid: 51ae5b5b-80e1-4fbf-8ed2-e210b7be2fba
+      uid: 0b6ffbbe-8f8a-4053-a256-a34bf476e306
+    - arango-version: 3.12.3
+      architecture: amd64
+      cid: c22fb4b7-de56-4736-bd16-4302643e053e
+      conditions:
+      - lastTransitionTime: "2024-12-11T21:31:46Z"
+        lastUpdateTime: "2024-12-11T21:31:46Z"
+        status: "True"
+        type: MemberOfCluster
+      - lastTransitionTime: "2024-12-18T10:26:52Z"
+        lastUpdateTime: "2024-12-18T10:26:52Z"
+        reason: ArangoDB is reachable
+        status: "True"
+        type: Reachable
+      - lastTransitionTime: "2024-12-18T10:26:56Z"
+        lastUpdateTime: "2024-12-18T10:26:56Z"
+        reason: Pod Ready
+        status: "True"
+        type: Ready
+      - lastTransitionTime: "2024-12-18T10:26:56Z"
+        lastUpdateTime: "2024-12-18T10:26:56Z"
+        reason: Pod Serving
+        status: "True"
+        type: Serving
+      - lastTransitionTime: "2024-12-18T10:26:20Z"
+        lastUpdateTime: "2024-12-18T10:26:20Z"
+        message: Assigned to node ip-10-0-146-13.us-west-2.compute.internal
+        reason: Pod is scheduled
+        status: "True"
+        type: Scheduled
+      - lastTransitionTime: "2024-12-18T10:26:56Z"
+        lastUpdateTime: "2024-12-18T10:26:56Z"
+        reason: Core Pod Container started
+        status: "True"
+        type: Active
+      - lastTransitionTime: "2024-12-18T10:26:56Z"
+        lastUpdateTime: "2024-12-18T10:26:56Z"
+        reason: Pod Started
+        status: "True"
+        type: Started
+      created-at: "2024-12-11T21:31:07Z"
+      id: PRMR-9ya2vtot
+      image:
+        arangodb-version: 3.12.3
+        image: arangodb/arangodb:latest
+        image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      initialized: true
+      persistentVolumeClaim:
+        name: sac-dbserver-9ya2vtot
+      persistentVolumeClaimName: sac-dbserver-9ya2vtot
+      phase: Created
+      pod:
+        name: sac-prmr-9ya2vtot-618edc
+        specVersion: 099ec94699e68b66a44d4ea2b7cccaa2f74cf478661f718e8ec2dc569dada70c
+        uid: bb71ca4b-4b99-4d68-8121-6f78c845a302
+      podName: sac-prmr-9ya2vtot-618edc
+      podSpecVersion: 099ec94699e68b66a44d4ea2b7cccaa2f74cf478661f718e8ec2dc569dada70c
+      podUID: bb71ca4b-4b99-4d68-8121-6f78c845a302
+      recent-terminations: null
+      rid: 4ad5ba5e-29c1-4bd0-8fd5-49f76e9a8ed1
+      uid: 07689ec4-8c97-4635-a26c-2fa55d57d4e2
+    - arango-version: 3.12.3
+      architecture: amd64
+      cid: c22fb4b7-de56-4736-bd16-4302643e053e
+      conditions:
+      - lastTransitionTime: "2024-12-14T00:31:13Z"
+        lastUpdateTime: "2024-12-14T00:31:13Z"
+        status: "True"
+        type: MemberOfCluster
+      - lastTransitionTime: "2024-12-18T11:00:58Z"
+        lastUpdateTime: "2024-12-18T11:00:58Z"
+        reason: ArangoDB is reachable
+        status: "True"
+        type: Reachable
+      - lastTransitionTime: "2024-12-18T11:00:59Z"
+        lastUpdateTime: "2024-12-18T11:00:59Z"
+        reason: Pod Ready
+        status: "True"
+        type: Ready
+      - lastTransitionTime: "2024-12-18T11:00:59Z"
+        lastUpdateTime: "2024-12-18T11:00:59Z"
+        reason: Pod Serving
+        status: "True"
+        type: Serving
+      - lastTransitionTime: "2024-12-18T11:00:37Z"
+        lastUpdateTime: "2024-12-18T11:00:37Z"
+        message: Assigned to node ip-10-0-114-234.us-west-2.compute.internal
+        reason: Pod is scheduled
+        status: "True"
+        type: Scheduled
+      - lastTransitionTime: "2024-12-18T11:00:58Z"
+        lastUpdateTime: "2024-12-18T11:00:58Z"
+        reason: Core Pod Container started
+        status: "True"
+        type: Active
+      - lastTransitionTime: "2024-12-18T11:00:59Z"
+        lastUpdateTime: "2024-12-18T11:00:59Z"
+        reason: Pod Started
+        status: "True"
+        type: Started
+      created-at: "2024-12-14T00:29:23Z"
+      id: PRMR-t79dxjnh
+      image:
+        arangodb-version: 3.12.3
+        image: arangodb/arangodb:latest
+        image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      image-id: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+      initialized: true
+      persistentVolumeClaim:
+        name: sac-dbserver-t79dxjnh
+      persistentVolumeClaimName: sac-dbserver-t79dxjnh
+      phase: Created
+      pod:
+        name: sac-prmr-t79dxjnh-7f2b55
+        specVersion: 9be227ecf876a586215a85bc8b3038cb41996217c0c61755ef9efb4d34b25fe9
+        uid: 073b4b00-e6ab-458b-889d-e2622290b5c6
+      podName: sac-prmr-t79dxjnh-7f2b55
+      podSpecVersion: 9be227ecf876a586215a85bc8b3038cb41996217c0c61755ef9efb4d34b25fe9
+      podUID: 073b4b00-e6ab-458b-889d-e2622290b5c6
+      recent-terminations: null
+      rid: bbd2eeca-3d0c-434c-bca4-62209c095a1e
+      uid: 1104278e-72c2-4418-86fc-2ab2488f534a
+  phase: Running
+  secret-hashes:
+    auth-jwt: 8ca20b61bcd1d2a4412a16bcf4ed538d74503c475c75f0496aac437a66e3b7e7
+  serviceName: sac
+  version: 1.2.8.1

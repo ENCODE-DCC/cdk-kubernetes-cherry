@@ -1,0 +1,210 @@
+metadata:
+  creationTimestamp: "2024-12-10T23:07:45Z"
+  generateName: arango-kubernetesstack31clusterchartarangodb4eeb22b5-operator-7dd474ff58-
+  labels:
+    app.kubernetes.io/instance: kubernetesstack31clusterchartarangodb4eeb22b5
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kube-arangodb
+    backup/role: leader
+    helm.sh/chart: kube-arangodb-1.2.43
+    networking/role: leader
+    pod-template-hash: 7dd474ff58
+    release: kubernetesstack31clusterchartarangodb4eeb22b5
+    role: leader
+    scheduler/role: leader
+  name: arango-kubernetesstack31clusterchartarangodb4eeb22b5-operad4sjz
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: arango-kubernetesstack31clusterchartarangodb4eeb22b5-operator-7dd474ff58
+    uid: f528b212-cb4f-4136-8771-672377797912
+  resourceVersion: "2456594"
+  uid: 3ac4dfcb-9150-461d-81fc-1081ae4d50f9
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/arch
+            operator: In
+            values:
+            - amd64
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+              - kube-arangodb
+            - key: app.kubernetes.io/instance
+              operator: In
+              values:
+              - kubernetesstack31clusterchartarangodb4eeb22b5
+          topologyKey: kubernetes.io/hostname
+        weight: 100
+  containers:
+  - args:
+    - --scope=legacy
+    - --operator.deployment
+    - --operator.deployment-replication
+    - --operator.storage
+    - --operator.backup
+    - --mode.single
+    - --operator.networking
+    - --operator.scheduler
+    - --chaos.allowed=false
+    env:
+    - name: MY_POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: MY_CONTAINER_NAME
+      value: operator
+    - name: MY_POD_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.podIP
+    image: arangodb/kube-arangodb:1.2.43
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /health
+        port: 8528
+        scheme: HTTPS
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    name: operator
+    ports:
+    - containerPort: 8528
+      name: metrics
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /ready
+        port: 8528
+        scheme: HTTPS
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: 250m
+        memory: 256Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      privileged: false
+      readOnlyRootFilesystem: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-vxsnq
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: ip-10-0-105-207.us-west-2.compute.internal
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+  serviceAccount: arango-kubernetesstack31clusterchartarangodb4eeb22b5-operator
+  serviceAccountName: arango-kubernetesstack31clusterchartarangodb4eeb22b5-operator
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 5
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 5
+  volumes:
+  - name: kube-api-access-vxsnq
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-10T23:07:46Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-10T23:07:45Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-10T23:07:51Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-10T23:07:51Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-10T23:07:45Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://9be5334e5ecf11af2bc373606a17c47331365197eadbd8e04daf8b8f50e6c973
+    image: docker.io/arangodb/kube-arangodb:1.2.43
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: operator
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2024-12-10T23:07:46Z"
+  hostIP: 10.0.105.207
+  hostIPs:
+  - ip: 10.0.105.207
+  phase: Running
+  podIP: 10.0.107.166
+  podIPs:
+  - ip: 10.0.107.166
+  qosClass: Burstable
+  startTime: "2024-12-10T23:07:45Z"

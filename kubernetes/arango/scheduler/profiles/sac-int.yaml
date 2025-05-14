@@ -1,0 +1,190 @@
+apiVersion: scheduler.arangodb.com/v1beta1
+kind: ArangoProfile
+metadata:
+  creationTimestamp: "2024-12-11T21:30:59Z"
+  generation: 1
+  name: sac-int
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoDeployment
+    name: sac
+    uid: c22fb4b7-de56-4736-bd16-4302643e053e
+  resourceVersion: "2835255"
+  uid: ce43a771-d51b-461d-b7fa-06e0d6d7ca77
+spec:
+  selectors:
+    label:
+      matchLabels:
+        profiles.arangodb.com/deployment: sac
+  template:
+    container:
+      all:
+        env:
+        - name: INTEGRATION_API_ADDRESS
+          value: 127.0.0.1:9201
+        - name: INTEGRATION_SERVICE_ADDRESS
+          value: 127.0.0.1:9201
+      containers:
+        integration:
+          command:
+          - /usr/bin/arangodb_operator
+          - integration
+          - --health.address=0.0.0.0:9202
+          - --services.address=127.0.0.1:9201
+          env:
+          - name: MY_POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: MY_POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: MY_NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                - /usr/bin/arangodb_operator
+                - lifecycle
+                - preStop
+                - finalizers
+          ports:
+          - containerPort: 9201
+            name: integration
+            protocol: TCP
+          - containerPort: 9202
+            name: health
+            protocol: TCP
+          readinessProbe:
+            failureThreshold: 2
+            grpc:
+              port: 9202
+              service: null
+            initialDelaySeconds: 1
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 2
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          securityContext:
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+            runAsGroup: 2000
+            runAsNonRoot: true
+            runAsUser: 1000
+    pod:
+      annotations:
+        container.shutdown.arangodb.com/integration: health
+        shutdown.arangodb.com/managed: "true"
+    priority: 128
+status:
+  accepted:
+    checksum: a366502da888a2df8160b2b2a56f04bbcfc69ef972c510f50a568e2632ab733c
+    template:
+      container:
+        all:
+          env:
+          - name: INTEGRATION_API_ADDRESS
+            value: 127.0.0.1:9201
+          - name: INTEGRATION_SERVICE_ADDRESS
+            value: 127.0.0.1:9201
+        containers:
+          integration:
+            command:
+            - /usr/bin/arangodb_operator
+            - integration
+            - --health.address=0.0.0.0:9202
+            - --services.address=127.0.0.1:9201
+            env:
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: MY_POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: MY_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+            lifecycle:
+              preStop:
+                exec:
+                  command:
+                  - /usr/bin/arangodb_operator
+                  - lifecycle
+                  - preStop
+                  - finalizers
+            ports:
+            - containerPort: 9201
+              name: integration
+              protocol: TCP
+            - containerPort: 9202
+              name: health
+              protocol: TCP
+            readinessProbe:
+              failureThreshold: 2
+              grpc:
+                port: 9202
+                service: null
+              initialDelaySeconds: 1
+              periodSeconds: 30
+              successThreshold: 1
+              timeoutSeconds: 2
+            resources:
+              limits:
+                cpu: 200m
+                memory: 256Mi
+              requests:
+                cpu: 100m
+                memory: 128Mi
+            securityContext:
+              capabilities:
+                drop:
+                - ALL
+              readOnlyRootFilesystem: true
+              runAsGroup: 2000
+              runAsNonRoot: true
+              runAsUser: 1000
+      pod:
+        annotations:
+          container.shutdown.arangodb.com/integration: health
+          shutdown.arangodb.com/managed: "true"
+      priority: 128
+  conditions:
+  - lastTransitionTime: "2024-12-11T21:30:59Z"
+    lastUpdateTime: "2024-12-11T21:30:59Z"
+    message: Spec is valid
+    reason: Spec is valid
+    status: "True"
+    type: SpecValid
+  - lastTransitionTime: "2024-12-11T21:31:01Z"
+    lastUpdateTime: "2024-12-11T21:31:01Z"
+    message: Ready
+    reason: Ready
+    status: "True"
+    type: Ready

@@ -1,0 +1,13 @@
+metadata:
+  creationTimestamp: "2024-12-09T23:33:52Z"
+  labels:
+    app.kubernetes.io/instance: kube-arangodb
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kube-arangodb
+    argocd.argoproj.io/instance: arango-operator
+    helm.sh/chart: kube-arangodb-1.2.43
+    release: kube-arangodb
+  name: arango-kube-arangodb-operator
+  namespace: default
+  resourceVersion: "2452650"
+  uid: 3cd9ef7b-79b2-4c7f-8f0f-f37f38659350

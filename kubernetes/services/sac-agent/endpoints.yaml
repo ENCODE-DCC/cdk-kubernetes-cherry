@@ -1,0 +1,35 @@
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2024-12-11T21:31:36Z"
+  creationTimestamp: "2024-12-11T21:30:58Z"
+  name: sac-agent
+  namespace: default
+  resourceVersion: "2835979"
+  uid: 6ed7a9d2-96d0-4a37-9475-0a3749ef2fcd
+subsets:
+- addresses:
+  - ip: 10.0.106.69
+    nodeName: ip-10-0-105-207.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-agnt-piomvxzf-c1478a
+      namespace: default
+      uid: 1be4d05b-1e98-4821-84a7-3729f6828279
+  - ip: 10.0.109.105
+    nodeName: ip-10-0-105-207.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-agnt-ampr1nzg-c1478a
+      namespace: default
+      uid: acd2e077-eb05-4426-a2b3-142591699ce9
+  - ip: 10.0.144.57
+    nodeName: ip-10-0-145-209.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-agnt-bh7j5zwi-c1478a
+      namespace: default
+      uid: fc40f493-227b-4e4c-8e71-c6a8a5a2cb82
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP

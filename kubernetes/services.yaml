@@ -1,0 +1,822 @@
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app.kubernetes.io/instance":"kube-arangodb","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"kube-arangodb","argocd.argoproj.io/instance":"arango-operator","helm.sh/chart":"kube-arangodb-1.2.43","release":"kube-arangodb"},"name":"arango-kube-arangodb-operator","namespace":"default"},"spec":{"ports":[{"name":"server","port":8528,"protocol":"TCP","targetPort":8528},{"name":"http-api","port":8628,"protocol":"TCP","targetPort":8628},{"name":"grpc-api","port":8728,"protocol":"TCP","targetPort":8728}],"selector":{"app.kubernetes.io/instance":"kube-arangodb","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"kube-arangodb","release":"kube-arangodb","role":"leader"},"type":"ClusterIP"}}
+  creationTimestamp: "2024-12-09T23:33:52Z"
+  labels:
+    app.kubernetes.io/instance: kube-arangodb
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kube-arangodb
+    argocd.argoproj.io/instance: arango-operator
+    helm.sh/chart: kube-arangodb-1.2.43
+    release: kube-arangodb
+  name: arango-kube-arangodb-operator
+  namespace: default
+  resourceVersion: "2051528"
+  uid: 3c010e5e-d2fa-4873-8f82-c46d4cfe3cdb
+spec:
+  clusterIP: 172.20.188.33
+  clusterIPs:
+  - 172.20.188.33
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: server
+    port: 8528
+    protocol: TCP
+    targetPort: 8528
+  - name: http-api
+    port: 8628
+    protocol: TCP
+    targetPort: 8628
+  - name: grpc-api
+    port: 8728
+    protocol: TCP
+    targetPort: 8728
+  selector:
+    app.kubernetes.io/instance: kube-arangodb
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kube-arangodb
+    release: kube-arangodb
+    role: leader
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-11T21:31:10Z"
+  name: sac-agent-ampr1nzg
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoMember
+    name: sac-agent-ampr1nzg
+    uid: ad5b88c2-d961-4a8b-bc6f-94353e2980e8
+  resourceVersion: "2835367"
+  uid: f9e1b9c9-6cf6-4780-a083-369d3017c43f
+spec:
+  clusterIP: 172.20.173.149
+  clusterIPs:
+  - 172.20.173.149
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP
+    targetPort: server
+  publishNotReadyAddresses: true
+  selector:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: AGNT-ampr1nzg
+    role: agent
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-11T21:31:10Z"
+  name: sac-agent-bh7j5zwi
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoMember
+    name: sac-agent-bh7j5zwi
+    uid: 61afba82-1781-42bb-b03e-2104bed1f624
+  resourceVersion: "2835371"
+  uid: 496fb8c1-4814-43c7-8026-d3960e2ca967
+spec:
+  clusterIP: 172.20.201.35
+  clusterIPs:
+  - 172.20.201.35
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP
+    targetPort: server
+  publishNotReadyAddresses: true
+  selector:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: AGNT-bh7j5zwi
+    role: agent
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-16T17:33:11Z"
+  name: sac-coordinator-8su19dug
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoMember
+    name: sac-coordinator-8su19dug
+    uid: 37bfcf38-d813-4841-9fbb-807ee74ef84e
+  resourceVersion: "4864750"
+  uid: 0d4e6925-1152-4304-8b55-3d6e297665d4
+spec:
+  clusterIP: 172.20.109.203
+  clusterIPs:
+  - 172.20.109.203
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP
+    targetPort: server
+  publishNotReadyAddresses: true
+  selector:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: CRDN-8su19dug
+    role: coordinator
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-11T21:30:58Z"
+  name: sac-dbserver
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoDeployment
+    name: sac
+    uid: c22fb4b7-de56-4736-bd16-4302643e053e
+  resourceVersion: "2835187"
+  uid: 7496c958-1c03-49ea-bec3-e29a465ee517
+spec:
+  clusterIP: 172.20.192.145
+  clusterIPs:
+  - 172.20.192.145
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP
+    targetPort: server
+  selector:
+    app: arangodb
+    arango_deployment: sac
+    role: dbserver
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-11T21:31:10Z"
+  name: sac-dbserver-9ya2vtot
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoMember
+    name: sac-dbserver-9ya2vtot
+    uid: 6ccc46cf-3de8-4fe0-869a-7355abb77eae
+  resourceVersion: "2835384"
+  uid: a34935b9-2cec-4f08-ae90-8e65ce5f1240
+spec:
+  clusterIP: 172.20.63.152
+  clusterIPs:
+  - 172.20.63.152
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP
+    targetPort: server
+  publishNotReadyAddresses: true
+  selector:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: PRMR-9ya2vtot
+    role: dbserver
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-11T21:30:59Z"
+  labels:
+    app: arangodb
+    arango_deployment: sac
+    role: coordinator
+  name: sac-ea
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoDeployment
+    name: sac
+    uid: c22fb4b7-de56-4736-bd16-4302643e053e
+  resourceVersion: "2835204"
+  uid: 3c199e94-20b6-4c48-b370-50056b03db02
+spec:
+  clusterIP: 172.20.154.171
+  clusterIPs:
+  - 172.20.154.171
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: server
+    nodePort: 32451
+    port: 8529
+    protocol: TCP
+    targetPort: server
+  selector:
+    app: arangodb
+    arango_deployment: sac
+    role: coordinator
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-16T17:33:11Z"
+  name: sac-coordinator-pcq7m4mt
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoMember
+    name: sac-coordinator-pcq7m4mt
+    uid: 81e2925f-4959-4a95-ad26-6370ef754562
+  resourceVersion: "4864756"
+  uid: b55048ee-af38-4031-a536-82968944f713
+spec:
+  clusterIP: 172.20.107.169
+  clusterIPs:
+  - 172.20.107.169
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP
+    targetPort: server
+  publishNotReadyAddresses: true
+  selector:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: CRDN-pcq7m4mt
+    role: coordinator
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-05T00:54:09Z"
+  labels:
+    component: apiserver
+    provider: kubernetes
+  name: kubernetes
+  namespace: default
+  resourceVersion: "194"
+  uid: df5ac97e-f5b5-4992-8f92-b8a5362e6245
+spec:
+  clusterIP: 172.20.0.1
+  clusterIPs:
+  - 172.20.0.1
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: 443
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-11T21:30:58Z"
+  labels:
+    app: arangodb
+    arango_deployment: sac
+    role: coordinator
+  name: sac
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoDeployment
+    name: sac
+    uid: c22fb4b7-de56-4736-bd16-4302643e053e
+  resourceVersion: "2835198"
+  uid: 606a1f17-65e1-4b2e-8ec9-c4415e0ac749
+spec:
+  clusterIP: 172.20.228.131
+  clusterIPs:
+  - 172.20.228.131
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP
+    targetPort: server
+  selector:
+    app: arangodb
+    arango_deployment: sac
+    role: coordinator
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-11T21:31:10Z"
+  name: sac-agent-piomvxzf
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoMember
+    name: sac-agent-piomvxzf
+    uid: 92578b53-cf46-4436-8573-c0552c22b687
+  resourceVersion: "2835376"
+  uid: 62847099-151e-4120-be86-3d0d9fbe5fd5
+spec:
+  clusterIP: 172.20.221.81
+  clusterIPs:
+  - 172.20.221.81
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP
+    targetPort: server
+  publishNotReadyAddresses: true
+  selector:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: AGNT-piomvxzf
+    role: agent
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-11T21:30:58Z"
+  name: sac-coordinator
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoDeployment
+    name: sac
+    uid: c22fb4b7-de56-4736-bd16-4302643e053e
+  resourceVersion: "2835191"
+  uid: 116b466b-041f-4205-9d3a-3d065699bdf2
+spec:
+  clusterIP: 172.20.147.125
+  clusterIPs:
+  - 172.20.147.125
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP
+    targetPort: server
+  selector:
+    app: arangodb
+    arango_deployment: sac
+    role: coordinator
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-16T23:34:06Z"
+  name: sac-coordinator-vwq5ut32
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoMember
+    name: sac-coordinator-vwq5ut32
+    uid: adf4db1b-c70f-4a55-bce4-7addca8e6c75
+  resourceVersion: "4973152"
+  uid: bcbd96fb-4159-4848-b6ec-03cc482e58b6
+spec:
+  clusterIP: 172.20.5.29
+  clusterIPs:
+  - 172.20.5.29
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP
+    targetPort: server
+  publishNotReadyAddresses: true
+  selector:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: CRDN-vwq5ut32
+    role: coordinator
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-11T21:30:58Z"
+  labels:
+    app: arangodb
+    arango_deployment: sac
+  name: sac-int
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoDeployment
+    name: sac
+    uid: c22fb4b7-de56-4736-bd16-4302643e053e
+  resourceVersion: "2835194"
+  uid: 2101de16-9ded-4e58-a1ef-459205330a69
+spec:
+  clusterIP: None
+  clusterIPs:
+  - None
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP
+    targetPort: server
+  publishNotReadyAddresses: true
+  selector:
+    app: arangodb
+    arango_deployment: sac
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+---
+
+metadata:
+  annotations:
+    meta.helm.sh/release-name: kubernetesstack31clusterchartarangodb4eeb22b5
+    meta.helm.sh/release-namespace: default
+  creationTimestamp: "2024-12-10T23:07:45Z"
+  labels:
+    app.kubernetes.io/instance: kubernetesstack31clusterchartarangodb4eeb22b5
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kube-arangodb
+    helm.sh/chart: kube-arangodb-1.2.43
+    release: kubernetesstack31clusterchartarangodb4eeb22b5
+  name: arango-kubernetesstack31clusterchartarangodb4eeb22b5-operator
+  namespace: default
+  resourceVersion: "2456506"
+  uid: 1d5b05b1-42e6-477a-acb4-cc0bf17a24cd
+spec:
+  clusterIP: 172.20.104.108
+  clusterIPs:
+  - 172.20.104.108
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: server
+    port: 8528
+    protocol: TCP
+    targetPort: 8528
+  - name: http-api
+    port: 8628
+    protocol: TCP
+    targetPort: 8628
+  - name: grpc-api
+    port: 8728
+    protocol: TCP
+    targetPort: 8728
+  selector:
+    app.kubernetes.io/instance: kubernetesstack31clusterchartarangodb4eeb22b5
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kube-arangodb
+    release: kubernetesstack31clusterchartarangodb4eeb22b5
+    role: leader
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-11T21:30:58Z"
+  name: sac-agent
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoDeployment
+    name: sac
+    uid: c22fb4b7-de56-4736-bd16-4302643e053e
+  resourceVersion: "2835183"
+  uid: 03104e3b-32f4-49d6-94fe-882f11c325d6
+spec:
+  clusterIP: 172.20.240.143
+  clusterIPs:
+  - 172.20.240.143
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP
+    targetPort: server
+  selector:
+    app: arangodb
+    arango_deployment: sac
+    role: agent
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-16T17:39:44Z"
+  name: sac-coordinator-ciuqrp5u
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoMember
+    name: sac-coordinator-ciuqrp5u
+    uid: 64c912d6-b4f0-42a1-be46-cda9500040c1
+  resourceVersion: "4866885"
+  uid: c638c9ac-faaa-4332-b7df-a36f884e1cbb
+spec:
+  clusterIP: 172.20.213.40
+  clusterIPs:
+  - 172.20.213.40
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP
+    targetPort: server
+  publishNotReadyAddresses: true
+  selector:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: CRDN-ciuqrp5u
+    role: coordinator
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-16T23:34:06Z"
+  name: sac-coordinator-ihb1uadw
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoMember
+    name: sac-coordinator-ihb1uadw
+    uid: cad383f1-fb8c-401a-a340-2b25ecc14108
+  resourceVersion: "4973147"
+  uid: f33ee823-98a0-46d8-bba4-00fac61e264c
+spec:
+  clusterIP: 172.20.238.186
+  clusterIPs:
+  - 172.20.238.186
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP
+    targetPort: server
+  publishNotReadyAddresses: true
+  selector:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: CRDN-ihb1uadw
+    role: coordinator
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-11T21:31:10Z"
+  name: sac-coordinator-upfcobwh
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoMember
+    name: sac-coordinator-upfcobwh
+    uid: 0cbc3796-4536-4456-857c-f636cb25a604
+  resourceVersion: "2835396"
+  uid: 257c8cfd-b3f3-43eb-a68f-933120b11d09
+spec:
+  clusterIP: 172.20.75.95
+  clusterIPs:
+  - 172.20.75.95
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP
+    targetPort: server
+  publishNotReadyAddresses: true
+  selector:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: CRDN-upfcobwh
+    role: coordinator
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-11T21:31:10Z"
+  name: sac-dbserver-16kcg4i2
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoMember
+    name: sac-dbserver-16kcg4i2
+    uid: 51997b25-3bf7-437e-809b-0d4170269c84
+  resourceVersion: "2835380"
+  uid: ea2ffa9a-7136-4f8d-96f6-07e55137849d
+spec:
+  clusterIP: 172.20.170.255
+  clusterIPs:
+  - 172.20.170.255
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP
+    targetPort: server
+  publishNotReadyAddresses: true
+  selector:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: PRMR-16kcg4i2
+    role: dbserver
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-14T00:29:25Z"
+  name: sac-dbserver-t79dxjnh
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoMember
+    name: sac-dbserver-t79dxjnh
+    uid: 5828a35e-9095-4f2c-ae21-f66b9d81ee04
+  resourceVersion: "3704647"
+  uid: 561ef98e-4893-4309-8586-c37cb3bff2cb
+spec:
+  clusterIP: 172.20.155.188
+  clusterIPs:
+  - 172.20.155.188
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP
+    targetPort: server
+  publishNotReadyAddresses: true
+  selector:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: PRMR-t79dxjnh
+    role: dbserver
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

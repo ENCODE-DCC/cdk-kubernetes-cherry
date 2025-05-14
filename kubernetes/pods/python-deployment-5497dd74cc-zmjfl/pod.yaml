@@ -1,0 +1,139 @@
+metadata:
+  creationTimestamp: "2024-12-05T02:21:54Z"
+  generateName: python-deployment-5497dd74cc-
+  labels:
+    app: python
+    pod-template-hash: 5497dd74cc
+  name: python-deployment-5497dd74cc-zmjfl
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: python-deployment-5497dd74cc
+    uid: acfadfc4-fd20-48a0-98ae-e5c00934179e
+  resourceVersion: "27571"
+  uid: fc2a9f84-7ad9-4590-aedb-f48404a2058f
+spec:
+  containers:
+  - command:
+    - /bin/sh
+    - -c
+    - tail -f /dev/null
+    env:
+    - name: QUEUE_URL
+      value: https://sqs.us-west-2.amazonaws.com/618537831167/KubernetesStack31-TestEksQueueD2A233F2-pvIccvk0Zbhp
+    - name: AWS_STS_REGIONAL_ENDPOINTS
+      value: regional
+    - name: AWS_DEFAULT_REGION
+      value: us-west-2
+    - name: AWS_REGION
+      value: us-west-2
+    - name: AWS_ROLE_ARN
+      value: arn:aws:iam::618537831167:role/KubernetesStack31-ClusterPythonServiceAccountRole2A-gIkDr4kzhtQz
+    - name: AWS_WEB_IDENTITY_TOKEN_FILE
+      value: /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+    image: python:3.12.1-bullseye
+    imagePullPolicy: IfNotPresent
+    name: python
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-bbdsx
+      readOnly: true
+    - mountPath: /var/run/secrets/eks.amazonaws.com/serviceaccount
+      name: aws-iam-token
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: ip-10-0-145-209.us-west-2.compute.internal
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: python-sa
+  serviceAccountName: python-sa
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: aws-iam-token
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          audience: sts.amazonaws.com
+          expirationSeconds: 86400
+          path: token
+  - name: kube-api-access-bbdsx
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-05T02:22:12Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-05T02:21:54Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-05T02:22:12Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-05T02:22:12Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-05T02:21:54Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://1af573c25610ce4216328d8c86cb022577d5454043b543f86629cc5ee37e5749
+    image: docker.io/library/python:3.12.1-bullseye
+    imageID: docker.io/library/python@sha256:d40b6853c3e99cf23950b8d067a44fbbab171cc478bb05c2b50cfe1741003bfa
+    lastState: {}
+    name: python
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2024-12-05T02:22:12Z"
+  hostIP: 10.0.145.209
+  hostIPs:
+  - ip: 10.0.145.209
+  phase: Running
+  podIP: 10.0.157.18
+  podIPs:
+  - ip: 10.0.157.18
+  qosClass: BestEffort
+  startTime: "2024-12-05T02:21:54Z"

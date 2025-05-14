@@ -1,0 +1,4 @@
+2024-12-11T21:31:28.793360409Z 2024-12-11T21:31:28.793278Z [1-1] INFO [a1c60] {syscall} file-descriptors (nofiles) hard limit is 1048576, soft limit is 1048576
+2024-12-11T21:31:28.793368921Z 2024-12-11T21:31:28.793278Z [1-1] INFO [a1c60] {syscall} file-descriptors (nofiles) hard limit is 1048576, soft limit is 1048576
+2024-12-11T21:31:28.830504442Z 2024-12-11T21:31:28.830385Z [1-1] INFO [f6e0e] {aql} memory limit per AQL query automatically set to 4860073575 bytes. to modify this value, please adjust the startup option `--query.memory-limit`
+2024-12-11T21:31:28.830504445Z 2024-12-11T21:31:28.830385Z [1-1] INFO [f6e0e] {aql} memory limit per AQL query automatically set to 4860073575 bytes. to modify this value, please adjust the startup option `--query.memory-limit`

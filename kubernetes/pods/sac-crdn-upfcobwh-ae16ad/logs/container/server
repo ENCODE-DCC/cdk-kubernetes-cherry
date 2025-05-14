@@ -1,0 +1,30 @@
+2024-12-18T12:13:40.830178507Z 2024-12-18T12:13:40.779878Z [1-2] INFO [e52b0] {general} ArangoDB 3.12.3 [linux] 64bit, using jemalloc, build refs/tags/v3.12.3 a80fc5d849b, VPack 0.2.1, RocksDB 7.2.0, ICU 64.2, V8 12.1.165, OpenSSL 3.3.2 3 Sep 2024, build-id: 5af364826ef690377f52b0836c4a08d32ce0b085
+2024-12-18T12:13:40.830269873Z 2024-12-18T12:13:40.779886Z [1-2] INFO [11111] {general} This executable uses the GNU C library (glibc), which is licensed under the GNU Lesser General Public License (LGPL), see https://www.gnu.org/copyleft/lesser.html and https://www.gnu.org/licenses/gpl.html
+2024-12-18T12:13:40.830273525Z 2024-12-18T12:13:40.779957Z [1-2] INFO [a1c60] {syscall} file-descriptors (nofiles) hard limit is 1048576, soft limit is 1048576
+2024-12-18T12:13:40.830279178Z 2024-12-18T12:13:40.780221Z [1-2] INFO [75ddc] {general} detected operating system: Linux version 6.1.115-126.197.amzn2023.x86_64 (mockbuild@ip-10-0-32-224) (gcc (GCC) 11.4.1 20230605 (Red Hat 11.4.1-2), GNU ld version 2.39-6.amzn2023.0.10) #1 SMP PREEMPT_DYNAMIC Tue Nov  5 17:36:57 UTC 2024
+2024-12-18T12:13:40.830281689Z 2024-12-18T12:13:40.780244Z [1-2] INFO [25362] {memory} Available physical memory: 536870912 bytes (overriden by environment variable), available cores: 1 (overriden by environment variable)
+2024-12-18T12:13:40.830283377Z 2024-12-18T12:13:40.781685Z [1-2] INFO [3bb7d] {cluster} Starting up with role COORDINATOR
+2024-12-18T12:13:40.830284891Z 2024-12-18T12:13:40.828103Z [1-2] INFO [f6e0e] {aql} memory limit per AQL query automatically set to 201326592 bytes. to modify this value, please adjust the startup option `--query.memory-limit`
+2024-12-18T12:13:40.830292373Z 2024-12-18T12:13:40.779878Z [1-2] INFO [e52b0] {general} ArangoDB 3.12.3 [linux] 64bit, using jemalloc, build refs/tags/v3.12.3 a80fc5d849b, VPack 0.2.1, RocksDB 7.2.0, ICU 64.2, V8 12.1.165, OpenSSL 3.3.2 3 Sep 2024, build-id: 5af364826ef690377f52b0836c4a08d32ce0b085
+2024-12-18T12:13:40.830305234Z 2024-12-18T12:13:40.779886Z [1-2] INFO [11111] {general} This executable uses the GNU C library (glibc), which is licensed under the GNU Lesser General Public License (LGPL), see https://www.gnu.org/copyleft/lesser.html and https://www.gnu.org/licenses/gpl.html
+2024-12-18T12:13:40.830307187Z 2024-12-18T12:13:40.779957Z [1-2] INFO [a1c60] {syscall} file-descriptors (nofiles) hard limit is 1048576, soft limit is 1048576
+2024-12-18T12:13:40.830308694Z 2024-12-18T12:13:40.780221Z [1-2] INFO [75ddc] {general} detected operating system: Linux version 6.1.115-126.197.amzn2023.x86_64 (mockbuild@ip-10-0-32-224) (gcc (GCC) 11.4.1 20230605 (Red Hat 11.4.1-2), GNU ld version 2.39-6.amzn2023.0.10) #1 SMP PREEMPT_DYNAMIC Tue Nov  5 17:36:57 UTC 2024
+2024-12-18T12:13:40.830311567Z 2024-12-18T12:13:40.780244Z [1-2] INFO [25362] {memory} Available physical memory: 536870912 bytes (overriden by environment variable), available cores: 1 (overriden by environment variable)
+2024-12-18T12:13:40.830313216Z 2024-12-18T12:13:40.781685Z [1-2] INFO [3bb7d] {cluster} Starting up with role COORDINATOR
+2024-12-18T12:13:40.830315601Z 2024-12-18T12:13:40.828103Z [1-2] INFO [f6e0e] {aql} memory limit per AQL query automatically set to 201326592 bytes. to modify this value, please adjust the startup option `--query.memory-limit`
+2024-12-18T12:13:40.855374685Z 2024-12-18T12:13:40.840426Z [1-2] INFO [e6460] {general} created base application directory '/var/lib/arangodb3-apps/_db'
+2024-12-18T12:13:40.855393558Z 2024-12-18T12:13:40.848617Z [1-2] INFO [d4db4] {cluster} Waiting for DBservers to show up...
+2024-12-18T12:13:40.855395926Z 2024-12-18T12:13:40.848849Z [1-2] INFO [22f55] {cluster} Found 3 DBservers.
+2024-12-18T12:13:40.855398569Z 2024-12-18T12:13:40.853294Z [1-2] INFO [b6826] {cluster} Cluster feature is turned on. Agency version: 3.12.3, Agency endpoints: http+tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529, server id: 'CRDN-upfcobwh', internal endpoint / address: tcp://sac-coordinator-upfcobwh.sac-int.default.svc:8529, advertised endpoint: -, role: COORDINATOR
+2024-12-18T12:13:40.855409007Z 2024-12-18T12:13:40.853311Z [1-2] INFO [805b2] {cluster} using heartbeat interval value '1000 ms' from agency
+2024-12-18T12:13:40.855383019Z 2024-12-18T12:13:40.840426Z [1-2] INFO [e6460] {general} created base application directory '/var/lib/arangodb3-apps/_db'
+2024-12-18T12:13:40.855414216Z 2024-12-18T12:13:40.848617Z [1-2] INFO [d4db4] {cluster} Waiting for DBservers to show up...
+2024-12-18T12:13:40.855415589Z 2024-12-18T12:13:40.848849Z [1-2] INFO [22f55] {cluster} Found 3 DBservers.
+2024-12-18T12:13:40.855416973Z 2024-12-18T12:13:40.853294Z [1-2] INFO [b6826] {cluster} Cluster feature is turned on. Agency version: 3.12.3, Agency endpoints: http+tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529, server id: 'CRDN-upfcobwh', internal endpoint / address: tcp://sac-coordinator-upfcobwh.sac-int.default.svc:8529, advertised endpoint: -, role: COORDINATOR
+2024-12-18T12:13:40.855418507Z 2024-12-18T12:13:40.853311Z [1-2] INFO [805b2] {cluster} using heartbeat interval value '1000 ms' from agency
+2024-12-18T12:13:41.130831067Z 2024-12-18T12:13:41.033627Z [1-2] INFO [6ea38] {general} using endpoint 'http+tcp://[::]:8529' for non-encrypted requests
+2024-12-18T12:13:41.130863002Z 2024-12-18T12:13:41.036178Z [1-2] INFO [99d80] {general} bootstrapped coordinator CRDN-upfcobwh
+2024-12-18T12:13:41.130865238Z 2024-12-18T12:13:41.037038Z [1-2] INFO [cf3f4] {general} ArangoDB (version 3.12.3 [linux]) is ready for business. Have fun!
+2024-12-18T12:13:41.130840101Z 2024-12-18T12:13:41.033627Z [1-2] INFO [6ea38] {general} using endpoint 'http+tcp://[::]:8529' for non-encrypted requests
+2024-12-18T12:13:41.130890767Z 2024-12-18T12:13:41.036178Z [1-2] INFO [99d80] {general} bootstrapped coordinator CRDN-upfcobwh
+2024-12-18T12:13:41.130896734Z 2024-12-18T12:13:41.037038Z [1-2] INFO [cf3f4] {general} ArangoDB (version 3.12.3 [linux]) is ready for business. Have fun!

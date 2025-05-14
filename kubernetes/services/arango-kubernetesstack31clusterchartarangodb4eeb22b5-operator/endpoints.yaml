@@ -1,0 +1,33 @@
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2024-12-10T23:07:51Z"
+  creationTimestamp: "2024-12-10T23:07:45Z"
+  labels:
+    app.kubernetes.io/instance: kubernetesstack31clusterchartarangodb4eeb22b5
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kube-arangodb
+    helm.sh/chart: kube-arangodb-1.2.43
+    release: kubernetesstack31clusterchartarangodb4eeb22b5
+  name: arango-kubernetesstack31clusterchartarangodb4eeb22b5-operator
+  namespace: default
+  resourceVersion: "2456576"
+  uid: f109e40e-7d58-4869-97a6-b846f4882f54
+subsets:
+- addresses:
+  - ip: 10.0.107.166
+    nodeName: ip-10-0-105-207.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: arango-kubernetesstack31clusterchartarangodb4eeb22b5-operad4sjz
+      namespace: default
+      uid: 3ac4dfcb-9150-461d-81fc-1081ae4d50f9
+  ports:
+  - name: http-api
+    port: 8628
+    protocol: TCP
+  - name: server
+    port: 8528
+    protocol: TCP
+  - name: grpc-api
+    port: 8728
+    protocol: TCP

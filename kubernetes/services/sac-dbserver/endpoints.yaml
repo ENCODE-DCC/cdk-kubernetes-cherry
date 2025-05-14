@@ -1,0 +1,35 @@
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2024-12-18T11:00:56Z"
+  creationTimestamp: "2024-12-11T21:30:58Z"
+  name: sac-dbserver
+  namespace: default
+  resourceVersion: "5620963"
+  uid: 68c40acb-4328-4fb1-81f1-b1e5e487e4fc
+subsets:
+- addresses:
+  - ip: 10.0.110.102
+    nodeName: ip-10-0-114-234.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-prmr-16kcg4i2-618edc
+      namespace: default
+      uid: 06e7d3bb-4e58-4d70-a4b9-2353ddb4abda
+  - ip: 10.0.118.161
+    nodeName: ip-10-0-114-234.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-prmr-t79dxjnh-7f2b55
+      namespace: default
+      uid: 073b4b00-e6ab-458b-889d-e2622290b5c6
+  - ip: 10.0.141.24
+    nodeName: ip-10-0-146-13.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-prmr-9ya2vtot-618edc
+      namespace: default
+      uid: bb71ca4b-4b99-4d68-8121-6f78c845a302
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP

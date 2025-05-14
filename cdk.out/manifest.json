@@ -1,0 +1,1187 @@
+{
+  "version": "38.0.1",
+  "artifacts": {
+    "KubernetesStack3.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "KubernetesStack3.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "KubernetesStack3": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://618537831167/us-west-2",
+      "properties": {
+        "templateFile": "KubernetesStack3.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::618537831167:role/cdk-hnb659fds-deploy-role-618537831167-us-west-2",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::618537831167:role/cdk-hnb659fds-cfn-exec-role-618537831167-us-west-2",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-618537831167-us-west-2/9df33266b739edfc12e6048cb9d393a559e63b7f033e527ad37ae579bb8469d6.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "KubernetesStack3.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::618537831167:role/cdk-hnb659fds-lookup-role-618537831167-us-west-2",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "KubernetesStack3.assets"
+      ],
+      "metadata": {
+        "/KubernetesStack3/KubernetesAdminRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "KubernetesAdminRole00E0E673"
+          }
+        ],
+        "/KubernetesStack3/KubernetesAdminRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "KubernetesAdminRoleDefaultPolicyC092FE82"
+          }
+        ],
+        "/KubernetesStack3/kubectl/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "kubectl290BBFC9"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcFA9F2722"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PublicSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPublicSubnet1Subnet3BFE1BDA"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PublicSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPublicSubnet1RouteTable1DCCDD98"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PublicSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPublicSubnet1RouteTableAssociationAFBE6789"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PublicSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPublicSubnet1DefaultRouteCF22EF6E"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PublicSubnet1/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPublicSubnet1EIP498E2BD2"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PublicSubnet1/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPublicSubnet1NATGateway6E21013E"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PublicSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPublicSubnet2SubnetC4E9A966"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PublicSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPublicSubnet2RouteTable6F1F5F47"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PublicSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPublicSubnet2RouteTableAssociationA8539C50"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PublicSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPublicSubnet2DefaultRoute1FA8621E"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PublicSubnet2/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPublicSubnet2EIP265F4810"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PublicSubnet2/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPublicSubnet2NATGateway4AF4B728"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PublicSubnet3/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPublicSubnet3Subnet1A46184A"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PublicSubnet3/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPublicSubnet3RouteTableC81F99EF"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PublicSubnet3/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPublicSubnet3RouteTableAssociation7C5D21CC"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PublicSubnet3/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPublicSubnet3DefaultRouteB6080504"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PublicSubnet3/EIP": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPublicSubnet3EIP0CBF6D05"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PublicSubnet3/NATGateway": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPublicSubnet3NATGatewayEF4BA49A"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PrivateSubnet1/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPrivateSubnet1Subnet03F39409"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PrivateSubnet1/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPrivateSubnet1RouteTable7844020C"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PrivateSubnet1/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPrivateSubnet1RouteTableAssociationF8A67D95"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PrivateSubnet1/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPrivateSubnet1DefaultRouteD624C8BD"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PrivateSubnet2/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPrivateSubnet2SubnetA526AEA7"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PrivateSubnet2/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPrivateSubnet2RouteTable1F9A5298"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PrivateSubnet2/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPrivateSubnet2RouteTableAssociationE1240DF2"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PrivateSubnet2/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPrivateSubnet2DefaultRouteAB55737C"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PrivateSubnet3/Subnet": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPrivateSubnet3SubnetB64BC839"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PrivateSubnet3/RouteTable": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPrivateSubnet3RouteTableF71314D0"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PrivateSubnet3/RouteTableAssociation": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPrivateSubnet3RouteTableAssociation3007DC36"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/PrivateSubnet3/DefaultRoute": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcPrivateSubnet3DefaultRoute932EDFF0"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/IGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcIGW756BE43E"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/VPCGW": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcVPCGWC1D00388"
+          }
+        ],
+        "/KubernetesStack3/Cluster/DefaultVpc/RestrictDefaultSecurityGroupCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterDefaultVpcRestrictDefaultSecurityGroupCustomResource59F333B7"
+          }
+        ],
+        "/KubernetesStack3/Cluster/KubectlHandlerRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterKubectlHandlerRole94549F93"
+          }
+        ],
+        "/KubernetesStack3/Cluster/KubectlHandlerRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterKubectlHandlerRoleDefaultPolicyE44083DD"
+          }
+        ],
+        "/KubernetesStack3/Cluster/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterRoleFA261979"
+          }
+        ],
+        "/KubernetesStack3/Cluster/ControlPlaneSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterControlPlaneSecurityGroupD274242C"
+          }
+        ],
+        "/KubernetesStack3/Cluster/Resource/CreationRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterCreationRole360249B6"
+          }
+        ],
+        "/KubernetesStack3/Cluster/Resource/CreationRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterCreationRoleDefaultPolicyE8BDFC7B"
+          }
+        ],
+        "/KubernetesStack3/Cluster/Resource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Cluster9EE0221C"
+          }
+        ],
+        "/KubernetesStack3/Cluster/KubectlReadyBarrier": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterKubectlReadyBarrier200052AF"
+          }
+        ],
+        "/KubernetesStack3/Cluster/HasEcrPublic": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterHasEcrPublic8EE1114E"
+          }
+        ],
+        "/KubernetesStack3/Cluster/AwsAuth/manifest/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterAwsAuthmanifestFE51F8AE"
+          }
+        ],
+        "/KubernetesStack3/Cluster/OpenIdConnectProvider/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterOpenIdConnectProviderE7EB0530"
+          }
+        ],
+        "/KubernetesStack3/Cluster/NodegroupDefaultCapacity/NodeGroupRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterNodegroupDefaultCapacityNodeGroupRole55953B04"
+          }
+        ],
+        "/KubernetesStack3/Cluster/NodegroupDefaultCapacity/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterNodegroupDefaultCapacityDA0920A3"
+          }
+        ],
+        "/KubernetesStack3/Cluster/ConfigCommand": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterConfigCommand43AAE40F"
+          }
+        ],
+        "/KubernetesStack3/Cluster/GetTokenCommand": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterGetTokenCommand06AE992E"
+          }
+        ],
+        "/KubernetesStack3/Cluster/manifest-ReadOnlyAdminClusterRoleBinding/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClustermanifestReadOnlyAdminClusterRoleBinding10682329"
+          }
+        ],
+        "/KubernetesStack3/Cluster/Nodegroupmore-nodes/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterNodegroupmorenodesE9D6AD53"
+          }
+        ],
+        "/KubernetesStack3/Cluster/manifest-testpod/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClustermanifesttestpodA7A2B082"
+          }
+        ],
+        "/KubernetesStack3/Cluster/EBSDriverServiceAccount/ConditionJson/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterEBSDriverServiceAccountConditionJson382A8566"
+          }
+        ],
+        "/KubernetesStack3/Cluster/EBSDriverServiceAccount/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterEBSDriverServiceAccountRole2834BDB4"
+          }
+        ],
+        "/KubernetesStack3/Cluster/EBSDriverServiceAccount/manifest-EBSDriverServiceAccountServiceAccountResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterEBSDriverServiceAccountmanifestEBSDriverServiceAccountServiceAccountResourceB418B98B"
+          }
+        ],
+        "/KubernetesStack3/Cluster/chart-EBSCSIDriver/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterchartEBSCSIDriver581C78A8"
+          }
+        ],
+        "/KubernetesStack3/Cluster/EFSDriverServiceAccount/ConditionJson/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterEFSDriverServiceAccountConditionJsonF51A25B1"
+          }
+        ],
+        "/KubernetesStack3/Cluster/EFSDriverServiceAccount/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterEFSDriverServiceAccountRoleBC0C0D6A"
+          }
+        ],
+        "/KubernetesStack3/Cluster/EFSDriverServiceAccount/manifest-EFSDriverServiceAccountServiceAccountResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterEFSDriverServiceAccountmanifestEFSDriverServiceAccountServiceAccountResource717262D4"
+          }
+        ],
+        "/KubernetesStack3/Cluster/chart-EFSCSIDriver/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterchartEFSCSIDriverE6E11685"
+          }
+        ],
+        "/KubernetesStack3/Cluster/S3DriverServiceAccount/ConditionJson/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterS3DriverServiceAccountConditionJsonD4B5377B"
+          }
+        ],
+        "/KubernetesStack3/Cluster/S3DriverServiceAccount/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterS3DriverServiceAccountRoleDB147D82"
+          }
+        ],
+        "/KubernetesStack3/Cluster/S3DriverServiceAccount/manifest-S3DriverServiceAccountServiceAccountResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterS3DriverServiceAccountmanifestS3DriverServiceAccountServiceAccountResource9A4C9B8E"
+          }
+        ],
+        "/KubernetesStack3/Cluster/chart-S3CSIDriver/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterchartS3CSIDriver9054DA50"
+          }
+        ],
+        "/KubernetesStack3/Cluster/chart-SecretsStoreDriver/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterchartSecretsStoreDriverB14BF5E3"
+          }
+        ],
+        "/KubernetesStack3/Cluster/chart-SecretsStoreCSIDriver/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterchartSecretsStoreCSIDriver0AAD21A4"
+          }
+        ],
+        "/KubernetesStack3/Cluster/manifest-ESONamespace/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClustermanifestESONamespace74DE1D41"
+          }
+        ],
+        "/KubernetesStack3/Cluster/chart-ExternalSecretsOperator/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterchartExternalSecretsOperator31231874"
+          }
+        ],
+        "/KubernetesStack3/Cluster/manifest-ESOPasswordGenerator/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClustermanifestESOPasswordGenerator3723954E"
+          }
+        ],
+        "/KubernetesStack3/Cluster/manifest-PasswordTest/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClustermanifestPasswordTest384B8D16"
+          }
+        ],
+        "/KubernetesStack3/Cluster/chart-MetricsServer/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterchartMetricsServer5CFA6187"
+          }
+        ],
+        "/KubernetesStack3/Cluster/PythonServiceAccount/ConditionJson/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterPythonServiceAccountConditionJson45815DB0"
+          }
+        ],
+        "/KubernetesStack3/Cluster/PythonServiceAccount/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterPythonServiceAccountRole2A73BE89"
+          }
+        ],
+        "/KubernetesStack3/Cluster/PythonServiceAccount/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterPythonServiceAccountRoleDefaultPolicyCD3A41D7"
+          }
+        ],
+        "/KubernetesStack3/Cluster/PythonServiceAccount/manifest-PythonServiceAccountServiceAccountResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterPythonServiceAccountmanifestPythonServiceAccountServiceAccountResourceE8073E25"
+          }
+        ],
+        "/KubernetesStack3/Cluster/manifest-pythonapp/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Clustermanifestpythonapp40E1EC72"
+          }
+        ],
+        "/KubernetesStack3/Cluster/manifest-externaldns-ns/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Clustermanifestexternaldnsns73DE4C0B"
+          }
+        ],
+        "/KubernetesStack3/Cluster/ExternalDnsServiceAccount/ConditionJson/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterExternalDnsServiceAccountConditionJson6F4AA586"
+          }
+        ],
+        "/KubernetesStack3/Cluster/ExternalDnsServiceAccount/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterExternalDnsServiceAccountRole9220D8EE"
+          }
+        ],
+        "/KubernetesStack3/Cluster/ExternalDnsServiceAccount/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterExternalDnsServiceAccountRoleDefaultPolicy9D1B19FB"
+          }
+        ],
+        "/KubernetesStack3/Cluster/ExternalDnsServiceAccount/manifest-ExternalDnsServiceAccountServiceAccountResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterExternalDnsServiceAccountmanifestExternalDnsServiceAccountServiceAccountResource2D457C81"
+          }
+        ],
+        "/KubernetesStack3/Cluster/chart-ExternalDns/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterchartExternalDns260491C5"
+          }
+        ],
+        "/KubernetesStack3/Cluster/chart-ArgoCD/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterchartArgoCD4C72618D"
+          }
+        ],
+        "/KubernetesStack3/Cluster/manifest-argocd-ingress/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Clustermanifestargocdingress61666CC7"
+          }
+        ],
+        "/KubernetesStack3/Cluster/karpenter/ConditionJson/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterkarpenterConditionJson63931B24"
+          }
+        ],
+        "/KubernetesStack3/Cluster/karpenter/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterkarpenterRoleDCA4CD53"
+          }
+        ],
+        "/KubernetesStack3/Cluster/karpenter/manifest-karpenterServiceAccountResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterkarpentermanifestkarpenterServiceAccountResource770AEC6E"
+          }
+        ],
+        "/KubernetesStack3/Cluster/chart-karpenter/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Clusterchartkarpenter7AE712BC"
+          }
+        ],
+        "/KubernetesStack3/Cluster/manifest-nodeclass/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Clustermanifestnodeclass46122A3A"
+          }
+        ],
+        "/KubernetesStack3/Cluster/manifest-nodepool/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Clustermanifestnodepool9668C774"
+          }
+        ],
+        "/KubernetesStack3/Cluster/chart-ArangoDB/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterchartArangoDB14149679"
+          }
+        ],
+        "/KubernetesStack3/Cluster/manifest-test-secrets-store-ns/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Clustermanifesttestsecretsstorens7FE37563"
+          }
+        ],
+        "/KubernetesStack3/Cluster/TestSecretsStoreServiceAccount/ConditionJson/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterTestSecretsStoreServiceAccountConditionJson648FC5EE"
+          }
+        ],
+        "/KubernetesStack3/Cluster/TestSecretsStoreServiceAccount/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterTestSecretsStoreServiceAccountRole1CCC09EB"
+          }
+        ],
+        "/KubernetesStack3/Cluster/TestSecretsStoreServiceAccount/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterTestSecretsStoreServiceAccountRoleDefaultPolicyEBED12DE"
+          }
+        ],
+        "/KubernetesStack3/Cluster/TestSecretsStoreServiceAccount/manifest-TestSecretsStoreServiceAccountServiceAccountResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterTestSecretsStoreServiceAccountmanifestTestSecretsStoreServiceAccountServiceAccountResource7430AA60"
+          }
+        ],
+        "/KubernetesStack3/Cluster/manifest-data-stack-dev-ns/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClustermanifestdatastackdevnsEAA9D626"
+          }
+        ],
+        "/KubernetesStack3/Cluster/SparkBucketReadServiceAccount/ConditionJson/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterSparkBucketReadServiceAccountConditionJson4BE448DF"
+          }
+        ],
+        "/KubernetesStack3/Cluster/SparkBucketReadServiceAccount/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterSparkBucketReadServiceAccountRole2A1074D2"
+          }
+        ],
+        "/KubernetesStack3/Cluster/SparkBucketReadServiceAccount/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterSparkBucketReadServiceAccountRoleDefaultPolicyC97F62A6"
+          }
+        ],
+        "/KubernetesStack3/Cluster/SparkBucketReadServiceAccount/manifest-SparkBucketReadServiceAccountServiceAccountResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterSparkBucketReadServiceAccountmanifestSparkBucketReadServiceAccountServiceAccountResource8477A495"
+          }
+        ],
+        "/KubernetesStack3/Cluster/manifest-spark-aws-secrets-provider/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Clustermanifestsparkawssecretsprovider8DE6D7F4"
+          }
+        ],
+        "/KubernetesStack3/Cluster/manifest-spark-bucket-read-role/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClustermanifestsparkbucketreadroleD2BFD24A"
+          }
+        ],
+        "/KubernetesStack3/Cluster/manifest-spark-bucket-read-rolebinding/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Clustermanifestsparkbucketreadrolebinding2BF80C4D"
+          }
+        ],
+        "/KubernetesStack3/Cluster/manifest-AirflowStaticWebserverSecret/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClustermanifestAirflowStaticWebserverSecret98A168CD"
+          }
+        ],
+        "/KubernetesStack3/Cluster/AirflowLoggingServiceAccount/ConditionJson/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterAirflowLoggingServiceAccountConditionJson99578D7B"
+          }
+        ],
+        "/KubernetesStack3/Cluster/AirflowLoggingServiceAccount/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterAirflowLoggingServiceAccountRoleC2F8FD42"
+          }
+        ],
+        "/KubernetesStack3/Cluster/AirflowLoggingServiceAccount/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterAirflowLoggingServiceAccountRoleDefaultPolicy1288072D"
+          }
+        ],
+        "/KubernetesStack3/Cluster/AirflowLoggingServiceAccount/manifest-AirflowLoggingServiceAccountServiceAccountResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterAirflowLoggingServiceAccountmanifestAirflowLoggingServiceAccountServiceAccountResourceAD4CBF7F"
+          }
+        ],
+        "/KubernetesStack3/Cluster/manifest-spark-operator-role/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Clustermanifestsparkoperatorrole20732278"
+          }
+        ],
+        "/KubernetesStack3/Cluster/manifest-spark-operator-rolebinding/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClustermanifestsparkoperatorrolebindingB607890E"
+          }
+        ],
+        "/KubernetesStack3/Custom::VpcRestrictDefaultSGCustomResourceProvider": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+            "data": true
+          }
+        ],
+        "/KubernetesStack3/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+          }
+        ],
+        "/KubernetesStack3/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/NodeProxyAgentLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NodeProxyAgentLayer924C1971"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+            "data": 0
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OnEventHandlerServiceRole15A26729"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/OnEventHandler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "OnEventHandler42BEBAE0"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+            "data": 0
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IsCompleteHandlerServiceRole5810CC58"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/IsCompleteHandler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "IsCompleteHandler7073F4DA"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRole9FF04296"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRoleDefaultPolicy48CD2133"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEvent83C1D0A7"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkisCompleteServiceRoleB1087139"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkisCompleteServiceRoleDefaultPolicy2E7140AC"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-isComplete/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkisComplete26D7B0CB"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonTimeoutServiceRole28643D26"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonTimeoutServiceRoleDefaultPolicy2688969F"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/framework-onTimeout/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonTimeout0B47CA38"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderwaiterstatemachineRole0C7159F9"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderwaiterstatemachineRoleDefaultPolicyD3C3DA1A"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/LogGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderwaiterstatemachineLogGroupDD693A98"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/Provider/waiter-state-machine/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Providerwaiterstatemachine5D4A9DF0"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/KubernetesStack3awscdkawseksClusterResourceProviderOnEventHandlerServiceRole00DAE499Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "KubernetesStack3awscdkawseksClusterResourceProviderOnEventHandlerServiceRole00DAE499Arn"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/KubernetesStack3awscdkawseksClusterResourceProviderIsCompleteHandlerServiceRole84F9961FArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "KubernetesStack3awscdkawseksClusterResourceProviderIsCompleteHandlerServiceRole84F9961FArn"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider/KubernetesStack3awscdkawseksClusterResourceProviderframeworkonEvent16F85DC3Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "KubernetesStack3awscdkawseksClusterResourceProviderframeworkonEvent16F85DC3Arn"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStack/@aws-cdk--aws-eks.ClusterResourceProvider.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awscdkawseksClusterResourceProviderNestedStackawscdkawseksClusterResourceProviderNestedStackResource9827C454"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.KubectlProvider/Handler": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+            "data": 2
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.KubectlProvider/Handler/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Handler886CB40B"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.KubectlProvider/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AwsCliLayerF44AAF94"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRole9FF04296"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEventServiceRoleDefaultPolicy48CD2133"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.KubectlProvider/Provider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProviderframeworkonEvent83C1D0A7"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.KubectlProvider/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.KubectlProvider/KubernetesStack3awscdkawseksKubectlProviderframeworkonEvent602A4D98Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "KubernetesStack3awscdkawseksKubectlProviderframeworkonEvent602A4D98Arn"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.KubectlProvider/reference-to-KubernetesStack3kubectl25567417Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoKubernetesStack3kubectl25567417Ref"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.KubectlProvider/reference-to-KubernetesStack3ClusterKubectlHandlerRole3FFCD1D7Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoKubernetesStack3ClusterKubectlHandlerRole3FFCD1D7Arn"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.KubectlProvider/reference-to-KubernetesStack3ClusterDefaultVpcPrivateSubnet1Subnet945500E8Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoKubernetesStack3ClusterDefaultVpcPrivateSubnet1Subnet945500E8Ref"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.KubectlProvider/reference-to-KubernetesStack3ClusterDefaultVpcPrivateSubnet2SubnetDAE40AACRef": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoKubernetesStack3ClusterDefaultVpcPrivateSubnet2SubnetDAE40AACRef"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.KubectlProvider/reference-to-KubernetesStack3ClusterDefaultVpcPrivateSubnet3SubnetAC3D477CRef": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoKubernetesStack3ClusterDefaultVpcPrivateSubnet3SubnetAC3D477CRef"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.KubectlProvider/reference-to-KubernetesStack3Cluster14E3C19BClusterSecurityGroupId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoKubernetesStack3Cluster14E3C19BClusterSecurityGroupId"
+          }
+        ],
+        "/KubernetesStack3/@aws-cdk--aws-eks.KubectlProvider.NestedStack/@aws-cdk--aws-eks.KubectlProvider.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awscdkawseksKubectlProviderNestedStackawscdkawseksKubectlProviderNestedStackResourceA7AEBA6B"
+          }
+        ],
+        "/KubernetesStack3/KubernetesStack3ClusterA29023BC-AlbController/alb-sa/ConditionJson/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "KubernetesStack3ClusterA29023BCAlbControlleralbsaConditionJson9AFA9C7C"
+          }
+        ],
+        "/KubernetesStack3/KubernetesStack3ClusterA29023BC-AlbController/alb-sa/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "KubernetesStack3ClusterA29023BCAlbControlleralbsaRole2FFDE2AE"
+          }
+        ],
+        "/KubernetesStack3/KubernetesStack3ClusterA29023BC-AlbController/alb-sa/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "KubernetesStack3ClusterA29023BCAlbControlleralbsaRoleDefaultPolicyED22F6EF"
+          }
+        ],
+        "/KubernetesStack3/KubernetesStack3ClusterA29023BC-AlbController/alb-sa/manifest-alb-saServiceAccountResource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "KubernetesStack3ClusterA29023BCAlbControlleralbsamanifestalbsaServiceAccountResource9BBAC142"
+          }
+        ],
+        "/KubernetesStack3/KubernetesStack3ClusterA29023BC-AlbController/Resource/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "KubernetesStack3ClusterA29023BCAlbController141C1359"
+          }
+        ],
+        "/KubernetesStack3/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+            "data": true
+          }
+        ],
+        "/KubernetesStack3/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderRole517FED65"
+          }
+        ],
+        "/KubernetesStack3/Custom::AWSCDKOpenIdConnectProviderCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomAWSCDKOpenIdConnectProviderCustomResourceProviderHandlerF2C543E0"
+          }
+        ],
+        "/KubernetesStack3/AWSCDKCfnUtilsProviderCustomResourceProvider": [
+          {
+            "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+            "data": true
+          }
+        ],
+        "/KubernetesStack3/AWSCDKCfnUtilsProviderCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AWSCDKCfnUtilsProviderCustomResourceProviderRoleFE0EE867"
+          }
+        ],
+        "/KubernetesStack3/AWSCDKCfnUtilsProviderCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AWSCDKCfnUtilsProviderCustomResourceProviderHandlerCF82AA57"
+          }
+        ],
+        "/KubernetesStack3/CloudwatchObservability/AmazonCloudwatchObservabilityCfnAddon": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CloudwatchObservabilityAmazonCloudwatchObservabilityCfnAddon9373AE39"
+          }
+        ],
+        "/KubernetesStack3/VpcCni/VpcCniCfnAddon": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VpcCniVpcCniCfnAddon97A871B2"
+          }
+        ],
+        "/KubernetesStack3/TestEksQueue/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TestEksQueueD2A233F2"
+          }
+        ],
+        "/KubernetesStack3/ClusterAutoscaler/Karpenter/NodeRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterAutoscalerKarpenterNodeRole61BAABE3"
+          }
+        ],
+        "/KubernetesStack3/ClusterAutoscaler/Karpenter/InstanceProfile": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterAutoscalerKarpenterInstanceProfile9F3B466E"
+          }
+        ],
+        "/KubernetesStack3/ClusterAutoscaler/Karpenter/AllowScopedInstanceProfileTagActions/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterAutoscalerKarpenterAllowScopedInstanceProfileTagActions7A9DC8B0"
+          }
+        ],
+        "/KubernetesStack3/ClusterAutoscaler/Karpenter/AllowScopedEC2InstanceActionsWithTags/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterAutoscalerKarpenterAllowScopedEC2InstanceActionsWithTags36C2BCC0"
+          }
+        ],
+        "/KubernetesStack3/ClusterAutoscaler/Karpenter/AllowScopedResourceCreationTagging/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterAutoscalerKarpenterAllowScopedResourceCreationTagging6549D5F5"
+          }
+        ],
+        "/KubernetesStack3/ClusterAutoscaler/Karpenter/AllowScopedResourceTagging/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterAutoscalerKarpenterAllowScopedResourceTaggingCF1C92E1"
+          }
+        ],
+        "/KubernetesStack3/ClusterAutoscaler/Karpenter/AllowScopedDeletion/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterAutoscalerKarpenterAllowScopedDeletionC6E3D125"
+          }
+        ],
+        "/KubernetesStack3/ClusterAutoscaler/Karpenter/AllowScopedInstanceProfileCreationActions/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterAutoscalerKarpenterAllowScopedInstanceProfileCreationActionsCDE8AC45"
+          }
+        ],
+        "/KubernetesStack3/ClusterAutoscaler/Karpenter/AllowScopedInstanceProfileActions/Resource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterAutoscalerKarpenterAllowScopedInstanceProfileActions9D22526C"
+          }
+        ],
+        "/KubernetesStack3/ClusterAutoscaler/Karpenter/KarpenterInterruptionQueue/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterAutoscalerKarpenterKarpenterInterruptionQueue25425972"
+          }
+        ],
+        "/KubernetesStack3/ClusterAutoscaler/Karpenter/KarpenterInterruptionQueue/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterAutoscalerKarpenterKarpenterInterruptionQueuePolicy5D220B21"
+          }
+        ],
+        "/KubernetesStack3/ClusterAutoscaler/Karpenter/ScheduledChangeRule/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterAutoscalerKarpenterScheduledChangeRuleB9A8F171"
+          }
+        ],
+        "/KubernetesStack3/ClusterAutoscaler/Karpenter/SpotInterruptionRule/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterAutoscalerKarpenterSpotInterruptionRule5528EE88"
+          }
+        ],
+        "/KubernetesStack3/ClusterAutoscaler/Karpenter/RebalanceRule/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterAutoscalerKarpenterRebalanceRule97748AD8"
+          }
+        ],
+        "/KubernetesStack3/ClusterAutoscaler/Karpenter/InstanceStateChangeRule/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterAutoscalerKarpenterInstanceStateChangeRuleF767535B"
+          }
+        ],
+        "/KubernetesStack3/ClusterAutoscaler/Karpenter/ControllerPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ClusterAutoscalerKarpenterControllerPolicyEB4B98C1"
+          }
+        ],
+        "/KubernetesStack3/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/KubernetesStack3/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/KubernetesStack3/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "KubernetesStack3"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

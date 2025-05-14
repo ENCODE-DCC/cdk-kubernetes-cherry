@@ -1,0 +1,82 @@
+2024-12-18T10:27:11.042349523Z 2024-12-18T10:27:10.992228Z [1-2] INFO [e52b0] {general} ArangoDB 3.12.3 [linux] 64bit, using jemalloc, build refs/tags/v3.12.3 a80fc5d849b, VPack 0.2.1, RocksDB 7.2.0, ICU 64.2, V8 12.1.165, OpenSSL 3.3.2 3 Sep 2024, build-id: 5af364826ef690377f52b0836c4a08d32ce0b085
+2024-12-18T10:27:11.042465000Z 2024-12-18T10:27:10.992228Z [1-2] INFO [e52b0] {general} ArangoDB 3.12.3 [linux] 64bit, using jemalloc, build refs/tags/v3.12.3 a80fc5d849b, VPack 0.2.1, RocksDB 7.2.0, ICU 64.2, V8 12.1.165, OpenSSL 3.3.2 3 Sep 2024, build-id: 5af364826ef690377f52b0836c4a08d32ce0b085
+2024-12-18T10:27:11.042471210Z 2024-12-18T10:27:10.992239Z [1-2] INFO [11111] {general} This executable uses the GNU C library (glibc), which is licensed under the GNU Lesser General Public License (LGPL), see https://www.gnu.org/copyleft/lesser.html and https://www.gnu.org/licenses/gpl.html
+2024-12-18T10:27:11.042475671Z 2024-12-18T10:27:10.992290Z [1-2] INFO [a1c60] {syscall} file-descriptors (nofiles) hard limit is 1048576, soft limit is 1048576
+2024-12-18T10:27:11.042478501Z 2024-12-18T10:27:10.992542Z [1-2] INFO [75ddc] {general} detected operating system: Linux version 6.1.115-126.197.amzn2023.x86_64 (mockbuild@ip-10-0-32-224) (gcc (GCC) 11.4.1 20230605 (Red Hat 11.4.1-2), GNU ld version 2.39-6.amzn2023.0.10) #1 SMP PREEMPT_DYNAMIC Tue Nov  5 17:36:57 UTC 2024
+2024-12-18T10:27:11.042482251Z 2024-12-18T10:27:10.992571Z [1-2] INFO [25362] {memory} Available physical memory: 536870912 bytes (overriden by environment variable), available cores: 1 (overriden by environment variable)
+2024-12-18T10:27:11.042485111Z 2024-12-18T10:27:10.994223Z [1-2] INFO [3bb7d] {cluster} Starting up with role COORDINATOR
+2024-12-18T10:27:11.042487901Z 2024-12-18T10:27:11.040188Z [1-2] INFO [f6e0e] {aql} memory limit per AQL query automatically set to 201326592 bytes. to modify this value, please adjust the startup option `--query.memory-limit`
+2024-12-18T10:27:11.042471350Z 2024-12-18T10:27:10.992239Z [1-2] INFO [11111] {general} This executable uses the GNU C library (glibc), which is licensed under the GNU Lesser General Public License (LGPL), see https://www.gnu.org/copyleft/lesser.html and https://www.gnu.org/licenses/gpl.html
+2024-12-18T10:27:11.042493722Z 2024-12-18T10:27:10.992290Z [1-2] INFO [a1c60] {syscall} file-descriptors (nofiles) hard limit is 1048576, soft limit is 1048576
+2024-12-18T10:27:11.042496482Z 2024-12-18T10:27:10.992542Z [1-2] INFO [75ddc] {general} detected operating system: Linux version 6.1.115-126.197.amzn2023.x86_64 (mockbuild@ip-10-0-32-224) (gcc (GCC) 11.4.1 20230605 (Red Hat 11.4.1-2), GNU ld version 2.39-6.amzn2023.0.10) #1 SMP PREEMPT_DYNAMIC Tue Nov  5 17:36:57 UTC 2024
+2024-12-18T10:27:11.042499222Z 2024-12-18T10:27:10.992571Z [1-2] INFO [25362] {memory} Available physical memory: 536870912 bytes (overriden by environment variable), available cores: 1 (overriden by environment variable)
+2024-12-18T10:27:11.042501832Z 2024-12-18T10:27:10.994223Z [1-2] INFO [3bb7d] {cluster} Starting up with role COORDINATOR
+2024-12-18T10:27:11.042504332Z 2024-12-18T10:27:11.040188Z [1-2] INFO [f6e0e] {aql} memory limit per AQL query automatically set to 201326592 bytes. to modify this value, please adjust the startup option `--query.memory-limit`
+2024-12-18T10:27:11.067572375Z 2024-12-18T10:27:11.054466Z [1-2] INFO [e6460] {general} created base application directory '/var/lib/arangodb3-apps/_db'
+2024-12-18T10:27:11.067587006Z 2024-12-18T10:27:11.061494Z [1-2] INFO [d4db4] {cluster} Waiting for DBservers to show up...
+2024-12-18T10:27:11.067590806Z 2024-12-18T10:27:11.061619Z [1-2] INFO [22f55] {cluster} Found 3 DBservers.
+2024-12-18T10:27:11.067608557Z 2024-12-18T10:27:11.063776Z [1-2] INFO [b6826] {cluster} Cluster feature is turned on. Agency version: 3.12.3, Agency endpoints: http+tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529, server id: 'CRDN-8su19dug', internal endpoint / address: tcp://sac-coordinator-8su19dug.sac-int.default.svc:8529, advertised endpoint: -, role: COORDINATOR
+2024-12-18T10:27:11.067648880Z 2024-12-18T10:27:11.063787Z [1-2] INFO [805b2] {cluster} using heartbeat interval value '1000 ms' from agency
+2024-12-18T10:27:11.067575655Z 2024-12-18T10:27:11.054466Z [1-2] INFO [e6460] {general} created base application directory '/var/lib/arangodb3-apps/_db'
+2024-12-18T10:27:11.067656840Z 2024-12-18T10:27:11.061494Z [1-2] INFO [d4db4] {cluster} Waiting for DBservers to show up...
+2024-12-18T10:27:11.067659330Z 2024-12-18T10:27:11.061619Z [1-2] INFO [22f55] {cluster} Found 3 DBservers.
+2024-12-18T10:27:11.067661871Z 2024-12-18T10:27:11.063776Z [1-2] INFO [b6826] {cluster} Cluster feature is turned on. Agency version: 3.12.3, Agency endpoints: http+tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529, server id: 'CRDN-8su19dug', internal endpoint / address: tcp://sac-coordinator-8su19dug.sac-int.default.svc:8529, advertised endpoint: -, role: COORDINATOR
+2024-12-18T10:27:11.067664450Z 2024-12-18T10:27:11.063787Z [1-2] INFO [805b2] {cluster} using heartbeat interval value '1000 ms' from agency
+2024-12-18T10:27:11.342931329Z 2024-12-18T10:27:11.290328Z [1-2] INFO [6ea38] {general} using endpoint 'http+tcp://[::]:8529' for non-encrypted requests
+2024-12-18T10:27:11.342968891Z 2024-12-18T10:27:11.292702Z [1-2] INFO [99d80] {general} bootstrapped coordinator CRDN-8su19dug
+2024-12-18T10:27:11.342973992Z 2024-12-18T10:27:11.293172Z [1-2] INFO [cf3f4] {general} ArangoDB (version 3.12.3 [linux]) is ready for business. Have fun!
+2024-12-18T10:27:11.342931249Z 2024-12-18T10:27:11.290328Z [1-2] INFO [6ea38] {general} using endpoint 'http+tcp://[::]:8529' for non-encrypted requests
+2024-12-18T10:27:11.342983362Z 2024-12-18T10:27:11.292702Z [1-2] INFO [99d80] {general} bootstrapped coordinator CRDN-8su19dug
+2024-12-18T10:27:11.342987442Z 2024-12-18T10:27:11.293172Z [1-2] INFO [cf3f4] {general} ArangoDB (version 3.12.3 [linux]) is ready for business. Have fun!
+2024-12-18T10:27:32.034093205Z 2024-12-18T10:27:31.974662Z [1-12] INFO [88857] {cluster} Server CRDN-ciuqrp5u gone or rebooted, aborting its old jobs now.
+2024-12-18T10:27:32.034095866Z 2024-12-18T10:27:31.974662Z [1-12] INFO [88857] {cluster} Server CRDN-ciuqrp5u gone or rebooted, aborting its old jobs now.
+2024-12-18T10:30:58.459630630Z 2024-12-18T10:30:58.439794Z [1-12] INFO [88857] {cluster} Server CRDN-ciuqrp5u gone or rebooted, aborting its old jobs now.
+2024-12-18T10:30:58.459630070Z 2024-12-18T10:30:58.439794Z [1-12] INFO [88857] {cluster} Server CRDN-ciuqrp5u gone or rebooted, aborting its old jobs now.
+2024-12-18T10:48:21.711173284Z 2024-12-18T10:48:21.673366Z [1-12] INFO [88857] {cluster} Server PRMR-16kcg4i2 gone or rebooted, aborting its old jobs now.
+2024-12-18T10:48:21.711173275Z 2024-12-18T10:48:21.673366Z [1-12] INFO [88857] {cluster} Server PRMR-16kcg4i2 gone or rebooted, aborting its old jobs now.
+2024-12-18T10:49:55.454112908Z 2024-12-18T10:49:55.405425Z [1-12] INFO [88857] {cluster} Server PRMR-16kcg4i2 gone or rebooted, aborting its old jobs now.
+2024-12-18T10:49:55.454114108Z 2024-12-18T10:49:55.405425Z [1-12] INFO [88857] {cluster} Server PRMR-16kcg4i2 gone or rebooted, aborting its old jobs now.
+2024-12-18T10:50:07.044836627Z 2024-12-18T10:50:07.044698Z [1-19] ERROR [f29ef] {communication} did not find endpoint of server 'PRMR-t79dxjnh'
+2024-12-18T10:50:07.044881011Z 2024-12-18T10:50:07.044732Z [1-19] WARNING [82af5] {statistics} could not commit stats to _statisticsRaw: A cluster backend which was required for the operation could not be reached
+2024-12-18T10:50:07.044843278Z 2024-12-18T10:50:07.044698Z [1-19] ERROR [f29ef] {communication} did not find endpoint of server 'PRMR-t79dxjnh'
+2024-12-18T10:50:07.044891492Z 2024-12-18T10:50:07.044732Z [1-19] WARNING [82af5] {statistics} could not commit stats to _statisticsRaw: A cluster backend which was required for the operation could not be reached
+2024-12-18T10:50:07.044989066Z 2024-12-18T10:50:07.044858Z [1-19] ERROR [f29ef] {communication} did not find endpoint of server 'PRMR-t79dxjnh'
+2024-12-18T10:50:07.045002298Z 2024-12-18T10:50:07.044880Z [1-19] WARNING [82af5] {statistics} could not commit stats to _statistics: A cluster backend which was required for the operation could not be reached
+2024-12-18T10:50:07.044990586Z 2024-12-18T10:50:07.044858Z [1-19] ERROR [f29ef] {communication} did not find endpoint of server 'PRMR-t79dxjnh'
+2024-12-18T10:50:07.045013598Z 2024-12-18T10:50:07.044880Z [1-19] WARNING [82af5] {statistics} could not commit stats to _statistics: A cluster backend which was required for the operation could not be reached
+2024-12-18T10:50:11.223097899Z 2024-12-18T10:50:11.204004Z [1-12] INFO [88857] {cluster} Server CRDN-pcq7m4mt gone or rebooted, aborting its old jobs now.
+2024-12-18T10:50:11.223125879Z 2024-12-18T10:50:11.204009Z [1-12] INFO [88857] {cluster} Server PRMR-t79dxjnh gone or rebooted, aborting its old jobs now.
+2024-12-18T10:50:11.223119140Z 2024-12-18T10:50:11.204004Z [1-12] INFO [88857] {cluster} Server CRDN-pcq7m4mt gone or rebooted, aborting its old jobs now.
+2024-12-18T10:50:11.223137491Z 2024-12-18T10:50:11.204009Z [1-12] INFO [88857] {cluster} Server PRMR-t79dxjnh gone or rebooted, aborting its old jobs now.
+2024-12-18T10:54:20.983186111Z 2024-12-18T10:54:20.925158Z [1-12] INFO [88857] {cluster} Server CRDN-pcq7m4mt gone or rebooted, aborting its old jobs now.
+2024-12-18T10:54:20.983186531Z 2024-12-18T10:54:20.925158Z [1-12] INFO [88857] {cluster} Server CRDN-pcq7m4mt gone or rebooted, aborting its old jobs now.
+2024-12-18T11:00:20.730426637Z 2024-12-18T11:00:20.639259Z [1-12] INFO [88857] {cluster} Server PRMR-t79dxjnh gone or rebooted, aborting its old jobs now.
+2024-12-18T11:00:20.730431198Z 2024-12-18T11:00:20.639259Z [1-12] INFO [88857] {cluster} Server PRMR-t79dxjnh gone or rebooted, aborting its old jobs now.
+2024-12-18T11:00:38.320118495Z 2024-12-18T11:00:38.269702Z [1-12] INFO [88857] {cluster} Server PRMR-t79dxjnh gone or rebooted, aborting its old jobs now.
+2024-12-18T11:00:38.320118436Z 2024-12-18T11:00:38.269702Z [1-12] INFO [88857] {cluster} Server PRMR-t79dxjnh gone or rebooted, aborting its old jobs now.
+2024-12-18T11:00:54.809302554Z 2024-12-18T11:00:54.737093Z [1-12] INFO [88857] {cluster} Server PRMR-t79dxjnh gone or rebooted, aborting its old jobs now.
+2024-12-18T11:00:54.809303674Z 2024-12-18T11:00:54.737093Z [1-12] INFO [88857] {cluster} Server PRMR-t79dxjnh gone or rebooted, aborting its old jobs now.
+2024-12-18T11:08:44.329108205Z 2024-12-18T11:08:44.311927Z [1-12] INFO [88857] {cluster} Server CRDN-ihb1uadw gone or rebooted, aborting its old jobs now.
+2024-12-18T11:08:44.329109796Z 2024-12-18T11:08:44.311927Z [1-12] INFO [88857] {cluster} Server CRDN-ihb1uadw gone or rebooted, aborting its old jobs now.
+2024-12-18T11:10:03.461159181Z 2024-12-18T11:10:03.427095Z [1-12] INFO [88857] {cluster} Server CRDN-ihb1uadw gone or rebooted, aborting its old jobs now.
+2024-12-18T11:10:03.461170622Z 2024-12-18T11:10:03.427095Z [1-12] INFO [88857] {cluster} Server CRDN-ihb1uadw gone or rebooted, aborting its old jobs now.
+2024-12-18T11:10:24.351043297Z 2024-12-18T11:10:24.321056Z [1-12] INFO [88857] {cluster} Server CRDN-upfcobwh gone or rebooted, aborting its old jobs now.
+2024-12-18T11:10:24.351046027Z 2024-12-18T11:10:24.321056Z [1-12] INFO [88857] {cluster} Server CRDN-upfcobwh gone or rebooted, aborting its old jobs now.
+2024-12-18T11:10:29.129563419Z 2024-12-18T11:10:29.084009Z [1-12] INFO [88857] {cluster} Server CRDN-upfcobwh gone or rebooted, aborting its old jobs now.
+2024-12-18T11:10:29.129570539Z 2024-12-18T11:10:29.084009Z [1-12] INFO [88857] {cluster} Server CRDN-upfcobwh gone or rebooted, aborting its old jobs now.
+2024-12-18T11:10:35.409076065Z 2024-12-18T11:10:35.320263Z [1-12] INFO [88857] {cluster} Server CRDN-vwq5ut32 gone or rebooted, aborting its old jobs now.
+2024-12-18T11:10:35.409077345Z 2024-12-18T11:10:35.320263Z [1-12] INFO [88857] {cluster} Server CRDN-vwq5ut32 gone or rebooted, aborting its old jobs now.
+2024-12-18T11:14:15.547080253Z 2024-12-18T11:14:15.467884Z [1-12] INFO [88857] {cluster} Server CRDN-vwq5ut32 gone or rebooted, aborting its old jobs now.
+2024-12-18T11:14:15.547080223Z 2024-12-18T11:14:15.467884Z [1-12] INFO [88857] {cluster} Server CRDN-vwq5ut32 gone or rebooted, aborting its old jobs now.
+2024-12-18T12:08:41.636742173Z 2024-12-18T12:08:41.582582Z [1-12] INFO [88857] {cluster} Server CRDN-ihb1uadw gone or rebooted, aborting its old jobs now.
+2024-12-18T12:08:41.636744933Z 2024-12-18T12:08:41.582582Z [1-12] INFO [88857] {cluster} Server CRDN-ihb1uadw gone or rebooted, aborting its old jobs now.
+2024-12-18T12:10:11.977277385Z 2024-12-18T12:10:11.887936Z [1-12] INFO [88857] {cluster} Server CRDN-ihb1uadw gone or rebooted, aborting its old jobs now.
+2024-12-18T12:10:11.977278635Z 2024-12-18T12:10:11.887936Z [1-12] INFO [88857] {cluster} Server CRDN-ihb1uadw gone or rebooted, aborting its old jobs now.
+2024-12-18T12:10:30.665869698Z 2024-12-18T12:10:30.583074Z [1-12] INFO [88857] {cluster} Server CRDN-upfcobwh gone or rebooted, aborting its old jobs now.
+2024-12-18T12:10:30.665871608Z 2024-12-18T12:10:30.583074Z [1-12] INFO [88857] {cluster} Server CRDN-upfcobwh gone or rebooted, aborting its old jobs now.
+2024-12-18T12:10:31.641671351Z 2024-12-18T12:10:31.586321Z [1-15] INFO [88857] {cluster} Server CRDN-vwq5ut32 gone or rebooted, aborting its old jobs now.
+2024-12-18T12:10:31.641713164Z 2024-12-18T12:10:31.586321Z [1-15] INFO [88857] {cluster} Server CRDN-vwq5ut32 gone or rebooted, aborting its old jobs now.
+2024-12-18T12:13:38.854681613Z 2024-12-18T12:13:38.826348Z [1-12] INFO [88857] {cluster} Server CRDN-vwq5ut32 gone or rebooted, aborting its old jobs now.
+2024-12-18T12:13:38.854683915Z 2024-12-18T12:13:38.826348Z [1-12] INFO [88857] {cluster} Server CRDN-vwq5ut32 gone or rebooted, aborting its old jobs now.
+2024-12-18T12:13:40.831347384Z 2024-12-18T12:13:40.818240Z [1-12] INFO [88857] {cluster} Server CRDN-upfcobwh gone or rebooted, aborting its old jobs now.
+2024-12-18T12:13:40.831378665Z 2024-12-18T12:13:40.818240Z [1-12] INFO [88857] {cluster} Server CRDN-upfcobwh gone or rebooted, aborting its old jobs now.

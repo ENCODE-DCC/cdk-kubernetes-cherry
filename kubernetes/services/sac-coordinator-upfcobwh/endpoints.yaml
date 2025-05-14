@@ -1,0 +1,21 @@
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2024-12-18T12:13:37Z"
+  creationTimestamp: "2024-12-11T21:31:10Z"
+  name: sac-coordinator-upfcobwh
+  namespace: default
+  resourceVersion: "5644451"
+  uid: 872ad780-3e3f-4cf4-bf18-24a0d00a24ac
+subsets:
+- addresses:
+  - ip: 10.0.117.52
+    nodeName: ip-10-0-121-95.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-crdn-upfcobwh-ae16ad
+      namespace: default
+      uid: 43e9026c-632f-438c-ae06-fbe6bde54a73
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP

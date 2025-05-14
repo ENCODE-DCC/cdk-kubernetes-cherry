@@ -1,0 +1,54 @@
+2024-12-18T11:00:54.746907778Z 2024-12-18T11:00:54.696754Z [1-2] INFO [e52b0] {general} ArangoDB 3.12.3 [linux] 64bit, using jemalloc, build refs/tags/v3.12.3 a80fc5d849b, VPack 0.2.1, RocksDB 7.2.0, ICU 64.2, V8 12.1.165, OpenSSL 3.3.2 3 Sep 2024, build-id: 5af364826ef690377f52b0836c4a08d32ce0b085
+2024-12-18T11:00:54.746962221Z 2024-12-18T11:00:54.696762Z [1-2] INFO [11111] {general} This executable uses the GNU C library (glibc), which is licensed under the GNU Lesser General Public License (LGPL), see https://www.gnu.org/copyleft/lesser.html and https://www.gnu.org/licenses/gpl.html
+2024-12-18T11:00:54.746965139Z 2024-12-18T11:00:54.696835Z [1-2] INFO [a1c60] {syscall} file-descriptors (nofiles) hard limit is 1048576, soft limit is 1048576
+2024-12-18T11:00:54.746966648Z 2024-12-18T11:00:54.697013Z [1-2] INFO [75ddc] {general} detected operating system: Linux version 6.1.115-126.197.amzn2023.x86_64 (mockbuild@ip-10-0-32-224) (gcc (GCC) 11.4.1 20230605 (Red Hat 11.4.1-2), GNU ld version 2.39-6.amzn2023.0.10) #1 SMP PREEMPT_DYNAMIC Tue Nov  5 17:36:57 UTC 2024
+2024-12-18T11:00:54.746969268Z 2024-12-18T11:00:54.697029Z [1-2] INFO [25362] {memory} Available physical memory: 2147483648 bytes (overriden by environment variable), available cores: 1 (overriden by environment variable)
+2024-12-18T11:00:54.746974151Z 2024-12-18T11:00:54.698541Z [1-2] INFO [3bb7d] {cluster} Starting up with role PRIMARY
+2024-12-18T11:00:54.746975859Z 2024-12-18T11:00:54.739394Z [1-2] INFO [42531] {maintenance} Using 3 threads for maintenance, of which 1 may be used for slow operations.
+2024-12-18T11:00:54.746986184Z 2024-12-18T11:00:54.696754Z [1-2] INFO [e52b0] {general} ArangoDB 3.12.3 [linux] 64bit, using jemalloc, build refs/tags/v3.12.3 a80fc5d849b, VPack 0.2.1, RocksDB 7.2.0, ICU 64.2, V8 12.1.165, OpenSSL 3.3.2 3 Sep 2024, build-id: 5af364826ef690377f52b0836c4a08d32ce0b085
+2024-12-18T11:00:54.746991897Z 2024-12-18T11:00:54.696762Z [1-2] INFO [11111] {general} This executable uses the GNU C library (glibc), which is licensed under the GNU Lesser General Public License (LGPL), see https://www.gnu.org/copyleft/lesser.html and https://www.gnu.org/licenses/gpl.html
+2024-12-18T11:00:54.746993874Z 2024-12-18T11:00:54.696835Z [1-2] INFO [a1c60] {syscall} file-descriptors (nofiles) hard limit is 1048576, soft limit is 1048576
+2024-12-18T11:00:54.746995211Z 2024-12-18T11:00:54.697013Z [1-2] INFO [75ddc] {general} detected operating system: Linux version 6.1.115-126.197.amzn2023.x86_64 (mockbuild@ip-10-0-32-224) (gcc (GCC) 11.4.1 20230605 (Red Hat 11.4.1-2), GNU ld version 2.39-6.amzn2023.0.10) #1 SMP PREEMPT_DYNAMIC Tue Nov  5 17:36:57 UTC 2024
+2024-12-18T11:00:54.747000473Z 2024-12-18T11:00:54.697029Z [1-2] INFO [25362] {memory} Available physical memory: 2147483648 bytes (overriden by environment variable), available cores: 1 (overriden by environment variable)
+2024-12-18T11:00:54.747001774Z 2024-12-18T11:00:54.698541Z [1-2] INFO [3bb7d] {cluster} Starting up with role PRIMARY
+2024-12-18T11:00:54.747002982Z 2024-12-18T11:00:54.739394Z [1-2] INFO [42531] {maintenance} Using 3 threads for maintenance, of which 1 may be used for slow operations.
+2024-12-18T11:00:54.772164174Z 2024-12-18T11:00:54.748789Z [1-2] INFO [f6e0e] {aql} memory limit per AQL query automatically set to 1288490189 bytes. to modify this value, please adjust the startup option `--query.memory-limit`
+2024-12-18T11:00:54.772188064Z 2024-12-18T11:00:54.759601Z [1-2] INFO [6ea38] {general} using endpoint 'http+tcp://[::]:8529' for non-encrypted requests
+2024-12-18T11:00:54.772178469Z 2024-12-18T11:00:54.748789Z [1-2] INFO [f6e0e] {aql} memory limit per AQL query automatically set to 1288490189 bytes. to modify this value, please adjust the startup option `--query.memory-limit`
+2024-12-18T11:00:54.772200261Z 2024-12-18T11:00:54.759601Z [1-2] INFO [6ea38] {general} using endpoint 'http+tcp://[::]:8529' for non-encrypted requests
+2024-12-18T11:00:55.017700396Z 2024-12-18T11:00:54.976477Z [1-2] INFO [fe333] {engines} RocksDB recovery starting, scanning WAL starting from sequence number 92157198, latest sequence number: 92157202, active log files: 8, files in archive: 0
+2024-12-18T11:00:55.017730286Z 2024-12-18T11:00:54.976721Z [1-2] INFO [a4ec8] {engines} RocksDB recovery finished, WAL entries scanned: 5, recovery start sequence number: 92157198, latest WAL sequence number: 92157202, max tick value found in WAL: 0, last HLC value found in WAL: 0
+2024-12-18T11:00:55.017740059Z 2024-12-18T11:00:54.985328Z [1-2] INFO [b6826] {cluster} Cluster feature is turned on. Agency version: 3.12.3, Agency endpoints: http+tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529, server id: 'PRMR-t79dxjnh', internal endpoint / address: tcp://sac-dbserver-t79dxjnh.sac-int.default.svc:8529, advertised endpoint: -, role: PRIMARY
+2024-12-18T11:00:55.017742224Z 2024-12-18T11:00:54.985350Z [1-2] INFO [805b2] {cluster} using heartbeat interval value '1000 ms' from agency
+2024-12-18T11:00:55.017744087Z 2024-12-18T11:00:55.017329Z [1-2] INFO [c1b63] {arangosearch} ArangoSearch maintenance: [1..1] commit thread(s), [1..1] consolidation thread(s). ArangoSearch execution parallel threads limit: 2
+2024-12-18T11:00:55.017713284Z 2024-12-18T11:00:54.976477Z [1-2] INFO [fe333] {engines} RocksDB recovery starting, scanning WAL starting from sequence number 92157198, latest sequence number: 92157202, active log files: 8, files in archive: 0
+2024-12-18T11:00:55.017748938Z 2024-12-18T11:00:54.976721Z [1-2] INFO [a4ec8] {engines} RocksDB recovery finished, WAL entries scanned: 5, recovery start sequence number: 92157198, latest WAL sequence number: 92157202, max tick value found in WAL: 0, last HLC value found in WAL: 0
+2024-12-18T11:00:55.017750217Z 2024-12-18T11:00:54.985328Z [1-2] INFO [b6826] {cluster} Cluster feature is turned on. Agency version: 3.12.3, Agency endpoints: http+tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529, server id: 'PRMR-t79dxjnh', internal endpoint / address: tcp://sac-dbserver-t79dxjnh.sac-int.default.svc:8529, advertised endpoint: -, role: PRIMARY
+2024-12-18T11:00:55.017751160Z 2024-12-18T11:00:54.985350Z [1-2] INFO [805b2] {cluster} using heartbeat interval value '1000 ms' from agency
+2024-12-18T11:00:55.017752189Z 2024-12-18T11:00:55.017329Z [1-2] INFO [c1b63] {arangosearch} ArangoSearch maintenance: [1..1] commit thread(s), [1..1] consolidation thread(s). ArangoSearch execution parallel threads limit: 2
+2024-12-18T11:00:55.042850449Z 2024-12-18T11:00:55.019412Z [1-2] INFO [cf3f4] {general} ArangoDB (version 3.12.3 [linux]) is ready for business. Have fun!
+2024-12-18T11:00:55.042865214Z 2024-12-18T11:00:55.019412Z [1-2] INFO [cf3f4] {general} ArangoDB (version 3.12.3 [linux]) is ready for business. Have fun!
+2024-12-18T11:08:44.370885989Z 2024-12-18T11:08:44.312143Z [1-15] INFO [88857] {cluster} Server CRDN-ihb1uadw gone or rebooted, aborting its old jobs now.
+2024-12-18T11:08:44.370895483Z 2024-12-18T11:08:44.312143Z [1-15] INFO [88857] {cluster} Server CRDN-ihb1uadw gone or rebooted, aborting its old jobs now.
+2024-12-18T11:10:03.437461005Z 2024-12-18T11:10:03.427528Z [1-15] INFO [88857] {cluster} Server CRDN-ihb1uadw gone or rebooted, aborting its old jobs now.
+2024-12-18T11:10:03.437470339Z 2024-12-18T11:10:03.427528Z [1-15] INFO [88857] {cluster} Server CRDN-ihb1uadw gone or rebooted, aborting its old jobs now.
+2024-12-18T11:10:24.334982498Z 2024-12-18T11:10:24.321463Z [1-15] INFO [88857] {cluster} Server CRDN-upfcobwh gone or rebooted, aborting its old jobs now.
+2024-12-18T11:10:24.334982545Z 2024-12-18T11:10:24.321463Z [1-15] INFO [88857] {cluster} Server CRDN-upfcobwh gone or rebooted, aborting its old jobs now.
+2024-12-18T11:10:29.116752879Z 2024-12-18T11:10:29.084555Z [1-15] INFO [88857] {cluster} Server CRDN-upfcobwh gone or rebooted, aborting its old jobs now.
+2024-12-18T11:10:29.116758284Z 2024-12-18T11:10:29.084555Z [1-15] INFO [88857] {cluster} Server CRDN-upfcobwh gone or rebooted, aborting its old jobs now.
+2024-12-18T11:10:35.398517970Z 2024-12-18T11:10:35.320343Z [1-15] INFO [88857] {cluster} Server CRDN-vwq5ut32 gone or rebooted, aborting its old jobs now.
+2024-12-18T11:10:35.398519564Z 2024-12-18T11:10:35.320343Z [1-15] INFO [88857] {cluster} Server CRDN-vwq5ut32 gone or rebooted, aborting its old jobs now.
+2024-12-18T11:14:15.521631363Z 2024-12-18T11:14:15.468459Z [1-15] INFO [88857] {cluster} Server CRDN-vwq5ut32 gone or rebooted, aborting its old jobs now.
+2024-12-18T11:14:15.521632967Z 2024-12-18T11:14:15.468459Z [1-15] INFO [88857] {cluster} Server CRDN-vwq5ut32 gone or rebooted, aborting its old jobs now.
+2024-12-18T12:08:41.676323800Z 2024-12-18T12:08:41.582898Z [1-15] INFO [88857] {cluster} Server CRDN-ihb1uadw gone or rebooted, aborting its old jobs now.
+2024-12-18T12:08:41.676345995Z 2024-12-18T12:08:41.582898Z [1-15] INFO [88857] {cluster} Server CRDN-ihb1uadw gone or rebooted, aborting its old jobs now.
+2024-12-18T12:10:11.948477128Z 2024-12-18T12:10:11.888399Z [1-15] INFO [88857] {cluster} Server CRDN-ihb1uadw gone or rebooted, aborting its old jobs now.
+2024-12-18T12:10:11.948491041Z 2024-12-18T12:10:11.888399Z [1-15] INFO [88857] {cluster} Server CRDN-ihb1uadw gone or rebooted, aborting its old jobs now.
+2024-12-18T12:10:30.646360454Z 2024-12-18T12:10:30.583449Z [1-15] INFO [88857] {cluster} Server CRDN-upfcobwh gone or rebooted, aborting its old jobs now.
+2024-12-18T12:10:30.646375359Z 2024-12-18T12:10:30.583449Z [1-15] INFO [88857] {cluster} Server CRDN-upfcobwh gone or rebooted, aborting its old jobs now.
+2024-12-18T12:10:31.621993356Z 2024-12-18T12:10:31.586732Z [1-15] INFO [88857] {cluster} Server CRDN-vwq5ut32 gone or rebooted, aborting its old jobs now.
+2024-12-18T12:10:31.621992182Z 2024-12-18T12:10:31.586732Z [1-15] INFO [88857] {cluster} Server CRDN-vwq5ut32 gone or rebooted, aborting its old jobs now.
+2024-12-18T12:13:38.917715787Z 2024-12-18T12:13:38.826371Z [1-15] INFO [88857] {cluster} Server CRDN-vwq5ut32 gone or rebooted, aborting its old jobs now.
+2024-12-18T12:13:38.917715789Z 2024-12-18T12:13:38.826371Z [1-15] INFO [88857] {cluster} Server CRDN-vwq5ut32 gone or rebooted, aborting its old jobs now.
+2024-12-18T12:13:40.894855001Z 2024-12-18T12:13:40.818419Z [1-15] INFO [88857] {cluster} Server CRDN-upfcobwh gone or rebooted, aborting its old jobs now.
+2024-12-18T12:13:40.894855000Z 2024-12-18T12:13:40.818419Z [1-15] INFO [88857] {cluster} Server CRDN-upfcobwh gone or rebooted, aborting its old jobs now.

@@ -1,0 +1,21 @@
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2024-12-11T21:31:32Z"
+  creationTimestamp: "2024-12-11T21:31:10Z"
+  name: sac-agent-ampr1nzg
+  namespace: default
+  resourceVersion: "2835932"
+  uid: 5b0c487a-89c8-4c0b-8d4c-abd20153d718
+subsets:
+- addresses:
+  - ip: 10.0.109.105
+    nodeName: ip-10-0-105-207.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-agnt-ampr1nzg-c1478a
+      namespace: default
+      uid: acd2e077-eb05-4426-a2b3-142591699ce9
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP

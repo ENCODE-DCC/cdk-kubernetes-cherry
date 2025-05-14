@@ -1,0 +1,21 @@
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2024-12-11T21:31:36Z"
+  creationTimestamp: "2024-12-11T21:31:10Z"
+  name: sac-agent-bh7j5zwi
+  namespace: default
+  resourceVersion: "2836045"
+  uid: 5513d57a-0bf1-4761-9c89-2e9fab6d24c8
+subsets:
+- addresses:
+  - ip: 10.0.144.57
+    nodeName: ip-10-0-145-209.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-agnt-bh7j5zwi-c1478a
+      namespace: default
+      uid: fc40f493-227b-4e4c-8e71-c6a8a5a2cb82
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP

@@ -1,0 +1,21 @@
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2024-12-18T10:27:08Z"
+  creationTimestamp: "2024-12-16T17:33:11Z"
+  name: sac-coordinator-8su19dug
+  namespace: default
+  resourceVersion: "5609718"
+  uid: fd810559-c033-4950-9ba7-cc4c6dbc3aee
+subsets:
+- addresses:
+  - ip: 10.0.145.115
+    nodeName: ip-10-0-146-13.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-crdn-8su19dug-ae16ad
+      namespace: default
+      uid: b72af959-3e13-473a-8570-850e42e7cf76
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP

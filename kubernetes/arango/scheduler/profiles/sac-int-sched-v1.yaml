@@ -1,0 +1,77 @@
+apiVersion: scheduler.arangodb.com/v1beta1
+kind: ArangoProfile
+metadata:
+  creationTimestamp: "2024-12-11T21:31:00Z"
+  generation: 1
+  name: sac-int-sched-v1
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoDeployment
+    name: sac
+    uid: c22fb4b7-de56-4736-bd16-4302643e053e
+  resourceVersion: "2835262"
+  uid: 4972035c-b021-4297-b132-02fa9670342c
+spec:
+  selectors:
+    label:
+      matchLabels:
+        integration.profiles.arangodb.com/sched: v1
+        profiles.arangodb.com/deployment: sac
+  template:
+    container:
+      all: {}
+      containers:
+        integration:
+          env:
+          - name: INTEGRATION_SCHEDULER_V1_INTERNAL
+            value: "true"
+          - name: INTEGRATION_SCHEDULER_V1_EXTERNAL
+            value: "false"
+          - name: INTEGRATION_SCHEDULER_V1
+            value: "true"
+          - name: INTEGRATION_SCHEDULER_V1_VERIFY_ACCESS
+            value: "true"
+          - name: INTEGRATION_SCHEDULER_V1_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+    pod: {}
+    priority: 127
+status:
+  accepted:
+    checksum: 03bb2d64b30d7cf2a4b8581ce9386095d79ccaed360cd7717e21f989c0c07111
+    template:
+      container:
+        all: {}
+        containers:
+          integration:
+            env:
+            - name: INTEGRATION_SCHEDULER_V1_INTERNAL
+              value: "true"
+            - name: INTEGRATION_SCHEDULER_V1_EXTERNAL
+              value: "false"
+            - name: INTEGRATION_SCHEDULER_V1
+              value: "true"
+            - name: INTEGRATION_SCHEDULER_V1_VERIFY_ACCESS
+              value: "true"
+            - name: INTEGRATION_SCHEDULER_V1_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+      pod: {}
+      priority: 127
+  conditions:
+  - lastTransitionTime: "2024-12-11T21:31:00Z"
+    lastUpdateTime: "2024-12-11T21:31:00Z"
+    message: Spec is valid
+    reason: Spec is valid
+    status: "True"
+    type: SpecValid
+  - lastTransitionTime: "2024-12-11T21:31:02Z"
+    lastUpdateTime: "2024-12-11T21:31:02Z"
+    message: Ready
+    reason: Ready
+    status: "True"
+    type: Ready

@@ -1,0 +1,2 @@
+2024-12-18T10:54:19.081324362Z 2024-12-18T10:54:19Z INF Starting arangodb-operator (Community), lifecycle copy, version 1.2.43 build c6fd4a4c
+2024-12-18T10:54:19.109386814Z 2024-12-18T10:54:19Z INF Executable copied to /lifecycle/tools/arangodb_operator

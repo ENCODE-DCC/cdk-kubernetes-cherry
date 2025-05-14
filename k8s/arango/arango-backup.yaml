@@ -1,0 +1,10 @@
+apiVersion: "backup.arangodb.com/v1alpha"
+kind: "ArangoBackup"
+metadata:
+  name: backup
+spec:
+  deployment:
+    name: sac
+  upload:
+    repositoryURL: "s3://arangobackup/sac-backup/"
+    credentialsSecretName: arangodb-cluster-backup-credentials

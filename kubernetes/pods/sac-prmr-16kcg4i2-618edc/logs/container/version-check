@@ -1,0 +1,6 @@
+2024-12-18T10:49:49.063221325Z 2024-12-18T10:49:49.063097Z [1-1] INFO [a1c60] {syscall} file-descriptors (nofiles) hard limit is 1048576, soft limit is 1048576
+2024-12-18T10:49:49.063234028Z 2024-12-18T10:49:49.063097Z [1-1] INFO [a1c60] {syscall} file-descriptors (nofiles) hard limit is 1048576, soft limit is 1048576
+2024-12-18T10:49:49.073542864Z 2024-12-18T10:49:49.073236Z [1-1] INFO [f6e0e] {aql} memory limit per AQL query automatically set to 1288490189 bytes. to modify this value, please adjust the startup option `--query.memory-limit`
+2024-12-18T10:49:49.073545911Z 2024-12-18T10:49:49.073236Z [1-1] INFO [f6e0e] {aql} memory limit per AQL query automatically set to 1288490189 bytes. to modify this value, please adjust the startup option `--query.memory-limit`
+2024-12-18T10:49:49.736235694Z 2024-12-18T10:49:49.735855Z [1-1] INFO [e6460] {general} created base application directory '/var/lib/arangodb3-apps/_db'
+2024-12-18T10:49:49.736244903Z 2024-12-18T10:49:49.735855Z [1-1] INFO [e6460] {general} created base application directory '/var/lib/arangodb3-apps/_db'

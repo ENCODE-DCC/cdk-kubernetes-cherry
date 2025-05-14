@@ -1,0 +1,21 @@
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2024-12-18T12:13:36Z"
+  creationTimestamp: "2024-12-16T23:34:06Z"
+  name: sac-coordinator-vwq5ut32
+  namespace: default
+  resourceVersion: "5644413"
+  uid: 454fb7dc-f795-4710-8b8d-23f4a35fba72
+subsets:
+- addresses:
+  - ip: 10.0.125.239
+    nodeName: ip-10-0-121-95.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-crdn-vwq5ut32-c7b35c
+      namespace: default
+      uid: fac2f9e5-f375-473c-ac4e-1cc0473f49f3
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP

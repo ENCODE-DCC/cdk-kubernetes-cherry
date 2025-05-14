@@ -1,0 +1,36 @@
+2024-12-11T21:31:31.869188663Z 2024-12-11T21:31:31.845145Z [1-1] INFO [e52b0] {general} ArangoDB 3.12.3 [linux] 64bit, using jemalloc, build refs/tags/v3.12.3 a80fc5d849b, VPack 0.2.1, RocksDB 7.2.0, ICU 64.2, V8 12.1.165, OpenSSL 3.3.2 3 Sep 2024, build-id: 5af364826ef690377f52b0836c4a08d32ce0b085
+2024-12-11T21:31:31.869209856Z 2024-12-11T21:31:31.845154Z [1-1] INFO [11111] {general} This executable uses the GNU C library (glibc), which is licensed under the GNU Lesser General Public License (LGPL), see https://www.gnu.org/copyleft/lesser.html and https://www.gnu.org/licenses/gpl.html
+2024-12-11T21:31:31.869213353Z 2024-12-11T21:31:31.845338Z [1-1] INFO [a1c60] {syscall} file-descriptors (nofiles) hard limit is 1048576, soft limit is 1048576
+2024-12-11T21:31:31.869213862Z 2024-12-11T21:31:31.845145Z [1-1] INFO [e52b0] {general} ArangoDB 3.12.3 [linux] 64bit, using jemalloc, build refs/tags/v3.12.3 a80fc5d849b, VPack 0.2.1, RocksDB 7.2.0, ICU 64.2, V8 12.1.165, OpenSSL 3.3.2 3 Sep 2024, build-id: 5af364826ef690377f52b0836c4a08d32ce0b085
+2024-12-11T21:31:31.869220606Z 2024-12-11T21:31:31.845154Z [1-1] INFO [11111] {general} This executable uses the GNU C library (glibc), which is licensed under the GNU Lesser General Public License (LGPL), see https://www.gnu.org/copyleft/lesser.html and https://www.gnu.org/licenses/gpl.html
+2024-12-11T21:31:31.869223958Z 2024-12-11T21:31:31.845338Z [1-1] INFO [a1c60] {syscall} file-descriptors (nofiles) hard limit is 1048576, soft limit is 1048576
+2024-12-11T21:31:31.869216090Z 2024-12-11T21:31:31.845988Z [1-1] INFO [75ddc] {general} detected operating system: Linux version 5.10.228-219.884.amzn2.x86_64 (mockbuild@ip-10-0-35-25) (gcc10-gcc (GCC) 10.5.0 20230707 (Red Hat 10.5.0-1), GNU ld version 2.35.2-9.amzn2.0.1) #1 SMP Wed Oct 23 17:17:00 UTC 2024
+2024-12-11T21:31:31.869226886Z 2024-12-11T21:31:31.845988Z [1-1] INFO [75ddc] {general} detected operating system: Linux version 5.10.228-219.884.amzn2.x86_64 (mockbuild@ip-10-0-35-25) (gcc10-gcc (GCC) 10.5.0 20230707 (Red Hat 10.5.0-1), GNU ld version 2.35.2-9.amzn2.0.1) #1 SMP Wed Oct 23 17:17:00 UTC 2024
+2024-12-11T21:31:31.869230703Z 2024-12-11T21:31:31.846017Z [1-1] INFO [25362] {memory} Available physical memory: 8100122624 bytes, available cores: 2
+2024-12-11T21:31:31.869233480Z 2024-12-11T21:31:31.849820Z [1-1] INFO [3bb7d] {cluster} Starting up with role AGENT
+2024-12-11T21:31:31.869240054Z 2024-12-11T21:31:31.846017Z [1-1] INFO [25362] {memory} Available physical memory: 8100122624 bytes, available cores: 2
+2024-12-11T21:31:31.869243683Z 2024-12-11T21:31:31.849820Z [1-1] INFO [3bb7d] {cluster} Starting up with role AGENT
+2024-12-11T21:31:31.890809984Z 2024-12-11T21:31:31.883717Z [1-1] INFO [f6e0e] {aql} memory limit per AQL query automatically set to 4860073575 bytes. to modify this value, please adjust the startup option `--query.memory-limit`
+2024-12-11T21:31:31.890809982Z 2024-12-11T21:31:31.883717Z [1-1] INFO [f6e0e] {aql} memory limit per AQL query automatically set to 4860073575 bytes. to modify this value, please adjust the startup option `--query.memory-limit`
+2024-12-11T21:31:32.197047764Z 2024-12-11T21:31:32.168301Z [1-1] INFO [fe333] {engines} RocksDB recovery starting, scanning WAL starting from sequence number 0, latest sequence number: 5, active log files: 3, files in archive: 0
+2024-12-11T21:31:32.197071077Z 2024-12-11T21:31:32.168402Z [1-1] INFO [a4ec8] {engines} RocksDB recovery finished, WAL entries scanned: 6, recovery start sequence number: 0, latest WAL sequence number: 5, max tick value found in WAL: 1, last HLC value found in WAL: 0
+2024-12-11T21:31:32.197087370Z 2024-12-11T21:31:32.168301Z [1-1] INFO [fe333] {engines} RocksDB recovery starting, scanning WAL starting from sequence number 0, latest sequence number: 5, active log files: 3, files in archive: 0
+2024-12-11T21:31:32.197091355Z 2024-12-11T21:31:32.168402Z [1-1] INFO [a4ec8] {engines} RocksDB recovery finished, WAL entries scanned: 6, recovery start sequence number: 0, latest WAL sequence number: 5, max tick value found in WAL: 1, last HLC value found in WAL: 0
+2024-12-11T21:31:32.222115111Z 2024-12-11T21:31:32.197312Z [1-1] INFO [6ea38] {general} using endpoint 'http+tcp://[::]:8529' for non-encrypted requests
+2024-12-11T21:31:32.222131266Z 2024-12-11T21:31:32.197323Z [1-1] INFO [cf3f4] {general} ArangoDB (version 3.12.3 [linux]) is ready for business. Have fun!
+2024-12-11T21:31:32.222134569Z 2024-12-11T21:31:32.208161Z [1-19] INFO [7b6f3] {agency} Entering gossip phase ...
+2024-12-11T21:31:32.222137830Z 2024-12-11T21:31:32.212000Z [1-6] INFO [95b8d] {agency} Adding AGNT-piomvxzf(tcp://sac-agent-piomvxzf.sac-int.default.svc:8529) to agent pool
+2024-12-11T21:31:32.222150906Z 2024-12-11T21:31:32.197312Z [1-1] INFO [6ea38] {general} using endpoint 'http+tcp://[::]:8529' for non-encrypted requests
+2024-12-11T21:31:32.222154114Z 2024-12-11T21:31:32.197323Z [1-1] INFO [cf3f4] {general} ArangoDB (version 3.12.3 [linux]) is ready for business. Have fun!
+2024-12-11T21:31:32.222156365Z 2024-12-11T21:31:32.208161Z [1-19] INFO [7b6f3] {agency} Entering gossip phase ...
+2024-12-11T21:31:32.222158193Z 2024-12-11T21:31:32.212000Z [1-6] INFO [95b8d] {agency} Adding AGNT-piomvxzf(tcp://sac-agent-piomvxzf.sac-int.default.svc:8529) to agent pool
+2024-12-11T21:31:36.065381748Z 2024-12-11T21:31:36.017315Z [1-6] INFO [95b8d] {agency} Adding AGNT-bh7j5zwi(tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529) to agent pool
+2024-12-11T21:31:36.065400156Z 2024-12-11T21:31:36.020456Z [1-19] INFO [c1d8f] {agency} Activating agent.
+2024-12-11T21:31:36.065404238Z 2024-12-11T21:31:36.025101Z [1-18] INFO [29175] {agency} Setting role to follower in term 0
+2024-12-11T21:31:36.065421406Z 2024-12-11T21:31:36.017315Z [1-6] INFO [95b8d] {agency} Adding AGNT-bh7j5zwi(tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529) to agent pool
+2024-12-11T21:31:36.065425558Z 2024-12-11T21:31:36.020456Z [1-19] INFO [c1d8f] {agency} Activating agent.
+2024-12-11T21:31:36.065427770Z 2024-12-11T21:31:36.025101Z [1-18] INFO [29175] {agency} Setting role to follower in term 0
+2024-12-11T21:31:37.543150183Z 2024-12-11T21:31:37.477521Z [1-6] INFO [53541] {agency} AGNT-ampr1nzg: changing term or votedFor, current role: Follower term 1 votedFor: 
+2024-12-11T21:31:37.543170947Z 2024-12-11T21:31:37.479995Z [1-6] INFO [53541] {agency} AGNT-ampr1nzg: changing term or votedFor, current role: Follower term 1 votedFor: AGNT-bh7j5zwi
+2024-12-11T21:31:37.543150184Z 2024-12-11T21:31:37.477521Z [1-6] INFO [53541] {agency} AGNT-ampr1nzg: changing term or votedFor, current role: Follower term 1 votedFor: 
+2024-12-11T21:31:37.543179036Z 2024-12-11T21:31:37.479995Z [1-6] INFO [53541] {agency} AGNT-ampr1nzg: changing term or votedFor, current role: Follower term 1 votedFor: AGNT-bh7j5zwi

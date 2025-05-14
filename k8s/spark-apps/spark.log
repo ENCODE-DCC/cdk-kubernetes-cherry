@@ -1,0 +1,70 @@
+[2025-04-28T00:05:34.639+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-04-28T00:05:34.664+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: test-spark-app.spark_task scheduled__2025-04-27T00:00:00+00:00 [queued]>
+[2025-04-28T00:05:34.674+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: test-spark-app.spark_task scheduled__2025-04-27T00:00:00+00:00 [queued]>
+[2025-04-28T00:05:34.675+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 2
+[2025-04-28T00:05:34.690+0000] {taskinstance.py:2330} INFO - Executing <Task(SparkKubernetesOperator): spark_task> on 2025-04-27 00:00:00+00:00
+[2025-04-28T00:05:34.695+0000] {standard_task_runner.py:64} INFO - Started process 14 to run task
+[2025-04-28T00:05:34.698+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'test-spark-app', 'spark_task', 'scheduled__2025-04-27T00:00:00+00:00', '--job-id', '41', '--raw', '--subdir', 'DAGS_FOLDER/test_spark_app.py', '--cfg-path', '/tmp/tmpstu4xb_8']
+[2025-04-28T00:05:34.700+0000] {standard_task_runner.py:91} INFO - Job 41: Subtask spark_task
+[2025-04-28T00:05:34.766+0000] {task_command.py:426} INFO - Running <TaskInstance: test-spark-app.spark_task scheduled__2025-04-27T00:00:00+00:00 [running]> on host test-spark-app-spark-task-j3wa8cas
+[2025-04-28T00:05:34.874+0000] {pod_generator.py:559} WARNING - Model file /opt/airflow/pod_templates/pod_template_file.yaml does not exist
+[2025-04-28T00:05:34.930+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='me' AIRFLOW_CTX_DAG_ID='test-spark-app' AIRFLOW_CTX_TASK_ID='spark_task' AIRFLOW_CTX_EXECUTION_DATE='2025-04-27T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-04-27T00:00:00+00:00'
+[2025-04-28T00:05:34.931+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-04-28T00:05:34.970+0000] {spark_kubernetes.py:282} INFO - Creating sparkApplication.
+[2025-04-28T00:05:34.998+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-04-28T00:05:34.999+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/cncf/kubernetes/operators/spark_kubernetes.py", line 290, in execute
+    self.pod = self.get_or_create_spark_crd(self.launcher, context)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/cncf/kubernetes/operators/spark_kubernetes.py", line 244, in get_or_create_spark_crd
+    driver_pod = self.find_spark_job(context)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/cncf/kubernetes/operators/spark_kubernetes.py", line 228, in find_spark_job
+    pod_list = self.client.list_namespaced_pod(self.namespace, label_selector=label_selector).items
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kubernetes/client/api/core_v1_api.py", line 15823, in list_namespaced_pod
+    return self.list_namespaced_pod_with_http_info(namespace, **kwargs)  # noqa: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kubernetes/client/api/core_v1_api.py", line 15942, in list_namespaced_pod_with_http_info
+    return self.api_client.call_api(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kubernetes/client/api_client.py", line 348, in call_api
+    return self.__call_api(resource_path, method,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kubernetes/client/api_client.py", line 180, in __call_api
+    response_data = self.request(
+                    ^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kubernetes/client/api_client.py", line 373, in request
+    return self.rest_client.GET(url,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kubernetes/client/rest.py", line 244, in GET
+    return self.request("GET", url,
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/kubernetes/client/rest.py", line 238, in request
+    raise ApiException(http_resp=r)
+kubernetes.client.exceptions.ApiException: (403)
+Reason: Forbidden
+HTTP response headers: HTTPHeaderDict({'Audit-Id': 'b56a2708-f3d8-40e2-81da-2811c34dc1e8', 'Cache-Control': 'no-cache, private', 'Content-Type': 'application/json', 'X-Content-Type-Options': 'nosniff', 'X-Kubernetes-Pf-Flowschema-Uid': 'ed1bef6c-9769-4ad8-a3d9-4dfbb616c1ed', 'X-Kubernetes-Pf-Prioritylevel-Uid': 'b56665b5-5f62-440f-b764-f6a72d9c3d7c', 'Date': 'Mon, 28 Apr 2025 00:05:34 GMT', 'Content-Length': '300'})
+HTTP response body: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"pods is forbidden: User \"system:serviceaccount:data-stack-dev:airflow-logging-sa\" cannot list resource \"pods\" in API group \"\" in the namespace \"default\"","reason":"Forbidden","details":{"kind":"pods"},"code":403}
+
+
+[2025-04-28T00:05:35.028+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=test-spark-app, task_id=spark_task, run_id=scheduled__2025-04-27T00:00:00+00:00, execution_date=20250427T000000, start_date=20250428T000534, end_date=20250428T000535
+[2025-04-28T00:05:35.041+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 41 for task spark_task ((403)
+Reason: Forbidden
+HTTP response headers: HTTPHeaderDict({'Audit-Id': 'b56a2708-f3d8-40e2-81da-2811c34dc1e8', 'Cache-Control': 'no-cache, private', 'Content-Type': 'application/json', 'X-Content-Type-Options': 'nosniff', 'X-Kubernetes-Pf-Flowschema-Uid': 'ed1bef6c-9769-4ad8-a3d9-4dfbb616c1ed', 'X-Kubernetes-Pf-Prioritylevel-Uid': 'b56665b5-5f62-440f-b764-f6a72d9c3d7c', 'Date': 'Mon, 28 Apr 2025 00:05:34 GMT', 'Content-Length': '300'})
+HTTP response body: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"pods is forbidden: User \"system:serviceaccount:data-stack-dev:airflow-logging-sa\" cannot list resource \"pods\" in API group \"\" in the namespace \"default\"","reason":"Forbidden","details":{"kind":"pods"},"code":403}
+
+; 14)
+[2025-04-28T00:05:35.071+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2025-04-28T00:05:35.095+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-04-28T00:05:35.097+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

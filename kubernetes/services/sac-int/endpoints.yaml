@@ -1,0 +1,114 @@
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2024-12-18T12:13:37Z"
+  creationTimestamp: "2024-12-11T21:30:58Z"
+  labels:
+    app: arangodb
+    arango_deployment: sac
+    service.kubernetes.io/headless: ""
+  name: sac-int
+  namespace: default
+  resourceVersion: "5644387"
+  uid: 7e37a492-71c5-4356-b9e9-232620d1f478
+subsets:
+- addresses:
+  - hostname: sac-coordinator-pcq7m4mt
+    ip: 10.0.104.202
+    nodeName: ip-10-0-114-234.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-crdn-pcq7m4mt-ae16ad
+      namespace: default
+      uid: 7d2d90df-04cb-4a09-a3ef-aa5aea0d4f14
+  - hostname: sac-agent-piomvxzf
+    ip: 10.0.106.69
+    nodeName: ip-10-0-105-207.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-agnt-piomvxzf-c1478a
+      namespace: default
+      uid: 1be4d05b-1e98-4821-84a7-3729f6828279
+  - hostname: sac-coordinator-ihb1uadw
+    ip: 10.0.107.8
+    nodeName: ip-10-0-121-95.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-crdn-ihb1uadw-c7b35c
+      namespace: default
+      uid: 1fe6d5b3-b4a8-4a81-b55d-3ca0bef660c4
+  - hostname: sac-agent-ampr1nzg
+    ip: 10.0.109.105
+    nodeName: ip-10-0-105-207.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-agnt-ampr1nzg-c1478a
+      namespace: default
+      uid: acd2e077-eb05-4426-a2b3-142591699ce9
+  - hostname: sac-dbserver-16kcg4i2
+    ip: 10.0.110.102
+    nodeName: ip-10-0-114-234.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-prmr-16kcg4i2-618edc
+      namespace: default
+      uid: 06e7d3bb-4e58-4d70-a4b9-2353ddb4abda
+  - hostname: sac-coordinator-upfcobwh
+    ip: 10.0.117.52
+    nodeName: ip-10-0-121-95.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-crdn-upfcobwh-ae16ad
+      namespace: default
+      uid: 43e9026c-632f-438c-ae06-fbe6bde54a73
+  - hostname: sac-dbserver-t79dxjnh
+    ip: 10.0.118.161
+    nodeName: ip-10-0-114-234.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-prmr-t79dxjnh-7f2b55
+      namespace: default
+      uid: 073b4b00-e6ab-458b-889d-e2622290b5c6
+  - hostname: sac-coordinator-vwq5ut32
+    ip: 10.0.125.239
+    nodeName: ip-10-0-121-95.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-crdn-vwq5ut32-c7b35c
+      namespace: default
+      uid: fac2f9e5-f375-473c-ac4e-1cc0473f49f3
+  - hostname: sac-dbserver-9ya2vtot
+    ip: 10.0.141.24
+    nodeName: ip-10-0-146-13.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-prmr-9ya2vtot-618edc
+      namespace: default
+      uid: bb71ca4b-4b99-4d68-8121-6f78c845a302
+  - hostname: sac-agent-bh7j5zwi
+    ip: 10.0.144.57
+    nodeName: ip-10-0-145-209.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-agnt-bh7j5zwi-c1478a
+      namespace: default
+      uid: fc40f493-227b-4e4c-8e71-c6a8a5a2cb82
+  - hostname: sac-coordinator-8su19dug
+    ip: 10.0.145.115
+    nodeName: ip-10-0-146-13.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-crdn-8su19dug-ae16ad
+      namespace: default
+      uid: b72af959-3e13-473a-8570-850e42e7cf76
+  - hostname: sac-coordinator-ciuqrp5u
+    ip: 10.0.149.99
+    nodeName: ip-10-0-146-13.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-crdn-ciuqrp5u-ae16ad
+      namespace: default
+      uid: 9e77862c-3b1a-4015-9ea9-eb6a75d3d388
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP

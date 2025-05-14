@@ -1,0 +1,5101 @@
+metadata:
+  creationTimestamp: "2024-12-11T21:31:18Z"
+  finalizers:
+  - database.arangodb.com/graceful-shutdown
+  labels:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: AGNT-ampr1nzg
+    deployment.arangodb.com/scheduled: "1"
+    role: agent
+  name: sac-agnt-ampr1nzg-c1478a
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoDeployment
+    name: sac
+    uid: c22fb4b7-de56-4736-bd16-4302643e053e
+  resourceVersion: "2835928"
+  uid: acd2e077-eb05-4426-a2b3-142591699ce9
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/arch
+            operator: In
+            values:
+            - amd64
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app: arangodb
+              arango_deployment: sac
+              role: agent
+          topologyKey: kubernetes.io/hostname
+        weight: 1
+  containers:
+  - command:
+    - /usr/sbin/arangod
+    - --agency.activate=true
+    - --agency.disaster-recovery-id=AGNT-ampr1nzg
+    - --agency.endpoint=tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529
+    - --agency.endpoint=tcp://sac-agent-piomvxzf.sac-int.default.svc:8529
+    - --agency.my-address=tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529
+    - --agency.size=3
+    - --agency.supervision=true
+    - --database.directory=/data
+    - --foxx.queues=false
+    - --log.level=INFO
+    - --log.output=+
+    - --server.authentication=true
+    - --server.endpoint=tcp://[::]:8529
+    - --server.jwt-secret-keyfile=/secrets/cluster/jwt/token
+    - --server.statistics=false
+    - --server.storage-engine=rocksdb
+    env:
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: MY_POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: MY_NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: ARANGODB_OVERRIDE_SERVER_GROUP
+      value: agent
+    - name: ARANGODB_OVERRIDE_DEPLOYMENT_MODE
+      value: Cluster
+    - name: ARANGODB_OVERRIDE_VERSION
+      value: 3.12.3
+    - name: ARANGODB_OVERRIDE_ENTERPRISE
+      value: "false"
+    envFrom:
+    - configMapRef:
+        name: arangodb-operator-feature-config-map
+        optional: true
+    image: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    imagePullPolicy: IfNotPresent
+    lifecycle:
+      preStop:
+        exec:
+          command:
+          - /lifecycle/tools/arangodb_operator
+          - lifecycle
+          - preStop
+          - port
+    livenessProbe:
+      exec:
+        command:
+        - /lifecycle/tools/arangodb_operator
+        - lifecycle
+        - probe
+        - liveness
+        - --auth
+      failureThreshold: 10
+      initialDelaySeconds: 900
+      periodSeconds: 60
+      successThreshold: 1
+      timeoutSeconds: 2
+    name: server
+    ports:
+    - containerPort: 8529
+      name: server
+      protocol: TCP
+    resources: {}
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /secrets/cluster/jwt
+      name: cluster-jwt
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-6lh5p
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: sac-agent-ampr1nzg
+  initContainers:
+  - command:
+    - /usr/bin/arangodb_operator
+    - lifecycle
+    - copy
+    - --target
+    - /lifecycle/tools
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: init-lifecycle
+    resources: {}
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-6lh5p
+      readOnly: true
+  - command:
+    - /usr/bin/arangodb_operator
+    - uuid
+    - --uuid-path
+    - /data/UUID
+    - --engine-path
+    - /data/ENGINE
+    - --uuid
+    - AGNT-ampr1nzg
+    - --engine
+    - rocksdb
+    env:
+    - name: MY_POD_NAMESPACE
+      value: default
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: uuid
+    resources:
+      limits:
+        cpu: 100m
+        memory: 50Mi
+      requests:
+        cpu: 100m
+        memory: 50Mi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-6lh5p
+      readOnly: true
+  - command:
+    - /usr/sbin/arangod
+    - --agency.activate=true
+    - --agency.disaster-recovery-id=AGNT-ampr1nzg
+    - --agency.endpoint=tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529
+    - --agency.endpoint=tcp://sac-agent-piomvxzf.sac-int.default.svc:8529
+    - --agency.my-address=tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529
+    - --agency.size=3
+    - --agency.supervision=true
+    - --database.directory=/data
+    - --foxx.queues=false
+    - --log.level=INFO
+    - --log.output=+
+    - --server.authentication=true
+    - --server.endpoint=tcp://[::]:8529
+    - --server.jwt-secret-keyfile=/secrets/cluster/jwt/token
+    - --server.statistics=false
+    - --server.storage-engine=rocksdb
+    - --database.check-version=true
+    env:
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: MY_POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: MY_NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: ARANGODB_OVERRIDE_SERVER_GROUP
+      value: agent
+    - name: ARANGODB_OVERRIDE_DEPLOYMENT_MODE
+      value: Cluster
+    - name: ARANGODB_OVERRIDE_VERSION
+      value: 3.12.3
+    - name: ARANGODB_OVERRIDE_ENTERPRISE
+      value: "false"
+    envFrom:
+    - configMapRef:
+        name: arangodb-operator-feature-config-map
+        optional: true
+    image: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    imagePullPolicy: IfNotPresent
+    name: version-check
+    ports:
+    - containerPort: 8529
+      name: server
+      protocol: TCP
+    resources: {}
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /secrets/cluster/jwt
+      name: cluster-jwt
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-6lh5p
+      readOnly: true
+  nodeName: ip-10-0-105-207.us-west-2.compute.internal
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Never
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  subdomain: sac-int
+  terminationGracePeriodSeconds: 60
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+  - effect: NoExecute
+    key: node.alpha.kubernetes.io/unreachable
+    operator: Exists
+  volumes:
+  - name: arangod-data
+    persistentVolumeClaim:
+      claimName: sac-agent-ampr1nzg
+  - name: cluster-jwt
+    secret:
+      defaultMode: 420
+      secretName: sac-jwt
+  - emptyDir: {}
+    name: lifecycle
+  - name: kube-api-access-6lh5p
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-11T21:31:27Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-11T21:31:31Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-11T21:31:32Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-11T21:31:32Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-11T21:31:21Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://60aae1afa3f6430711666358304a4a44a46f34e5bc78ac289fd8077092e70369
+    image: docker.io/arangodb/arangodb:latest
+    imageID: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    lastState: {}
+    name: server
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2024-12-11T21:31:31Z"
+  hostIP: 10.0.105.207
+  hostIPs:
+  - ip: 10.0.105.207
+  initContainerStatuses:
+  - containerID: containerd://3c20e4a9b195c1a98f51d1eea94e6392279786d9d3b8b67ff00bbaf604620a8e
+    image: docker.io/arangodb/kube-arangodb:1.2.43
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: init-lifecycle
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://3c20e4a9b195c1a98f51d1eea94e6392279786d9d3b8b67ff00bbaf604620a8e
+        exitCode: 0
+        finishedAt: "2024-12-11T21:31:26Z"
+        reason: Completed
+        startedAt: "2024-12-11T21:31:26Z"
+  - containerID: containerd://2caad1c66b4c2f83e7480d3b7aca9d889e176af91be6472552e581072f073d74
+    image: docker.io/arangodb/kube-arangodb:1.2.43
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: uuid
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://2caad1c66b4c2f83e7480d3b7aca9d889e176af91be6472552e581072f073d74
+        exitCode: 0
+        finishedAt: "2024-12-11T21:31:28Z"
+        reason: Completed
+        startedAt: "2024-12-11T21:31:27Z"
+  - containerID: containerd://33908e7386b0d111e1d39c46a28265f8d6781f2950c6ca3bc3246b3d3086afac
+    image: docker.io/arangodb/arangodb:latest
+    imageID: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    lastState: {}
+    name: version-check
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://33908e7386b0d111e1d39c46a28265f8d6781f2950c6ca3bc3246b3d3086afac
+        exitCode: 0
+        finishedAt: "2024-12-11T21:31:30Z"
+        reason: Completed
+        startedAt: "2024-12-11T21:31:28Z"
+  phase: Running
+  podIP: 10.0.109.105
+  podIPs:
+  - ip: 10.0.109.105
+  qosClass: Burstable
+  startTime: "2024-12-11T21:31:21Z"
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-18T10:54:18Z"
+  finalizers:
+  - pod.database.arangodb.com/delay
+  - database.arangodb.com/graceful-shutdown
+  labels:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: CRDN-pcq7m4mt
+    deployment.arangodb.com/scheduled: "1"
+    role: coordinator
+  name: sac-crdn-pcq7m4mt-ae16ad
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoDeployment
+    name: sac
+    uid: c22fb4b7-de56-4736-bd16-4302643e053e
+  resourceVersion: "5618858"
+  uid: 7d2d90df-04cb-4a09-a3ef-aa5aea0d4f14
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/arch
+            operator: In
+            values:
+            - amd64
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app: arangodb
+              arango_deployment: sac
+              role: coordinator
+          topologyKey: kubernetes.io/hostname
+        weight: 1
+  containers:
+  - command:
+    - /usr/sbin/arangod
+    - --cluster.agency-endpoint=tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-piomvxzf.sac-int.default.svc:8529
+    - --cluster.my-address=tcp://sac-coordinator-pcq7m4mt.sac-int.default.svc:8529
+    - --cluster.my-role=COORDINATOR
+    - --database.directory=/data
+    - --foxx.queues=true
+    - --log.level=INFO
+    - --log.output=+
+    - --server.authentication=true
+    - --server.endpoint=tcp://[::]:8529
+    - --server.jwt-secret-keyfile=/secrets/cluster/jwt/token
+    - --server.statistics=true
+    - --server.storage-engine=rocksdb
+    env:
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: MY_POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: MY_NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: ARANGODB_OVERRIDE_DETECTED_TOTAL_MEMORY
+      value: "536870912"
+    - name: ARANGODB_OVERRIDE_DETECTED_NUMBER_OF_CORES
+      value: "1"
+    - name: ARANGODB_OVERRIDE_SERVER_GROUP
+      value: coordinator
+    - name: ARANGODB_OVERRIDE_DEPLOYMENT_MODE
+      value: Cluster
+    - name: ARANGODB_OVERRIDE_VERSION
+      value: 3.12.3
+    - name: ARANGODB_OVERRIDE_ENTERPRISE
+      value: "false"
+    envFrom:
+    - configMapRef:
+        name: arangodb-operator-feature-config-map
+        optional: true
+    image: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    imagePullPolicy: IfNotPresent
+    lifecycle:
+      preStop:
+        exec:
+          command:
+          - /lifecycle/tools/arangodb_operator
+          - lifecycle
+          - preStop
+          - port
+    name: server
+    ports:
+    - containerPort: 8529
+      name: server
+      protocol: TCP
+    readinessProbe:
+      exec:
+        command:
+        - /lifecycle/tools/arangodb_operator
+        - lifecycle
+        - probe
+        - readiness
+        - --auth
+      failureThreshold: 10
+      initialDelaySeconds: 2
+      periodSeconds: 2
+      successThreshold: 1
+      timeoutSeconds: 2
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: "1"
+        memory: 512Mi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    startupProbe:
+      exec:
+        command:
+        - /lifecycle/tools/arangodb_operator
+        - lifecycle
+        - probe
+        - startup
+        - --auth
+      failureThreshold: 720
+      initialDelaySeconds: 1
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 2
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /secrets/cluster/jwt
+      name: cluster-jwt
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-994md
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: sac-coordinator-pcq7m4mt
+  initContainers:
+  - command:
+    - /usr/bin/arangodb_operator
+    - lifecycle
+    - copy
+    - --target
+    - /lifecycle/tools
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: init-lifecycle
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: "1"
+        memory: 512Mi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-994md
+      readOnly: true
+  - command:
+    - /usr/bin/arangodb_operator
+    - uuid
+    - --uuid-path
+    - /data/UUID
+    - --engine-path
+    - /data/ENGINE
+    - --uuid
+    - CRDN-pcq7m4mt
+    - --engine
+    - rocksdb
+    env:
+    - name: MY_POD_NAMESPACE
+      value: default
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: uuid
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: "1"
+        memory: 512Mi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-994md
+      readOnly: true
+  nodeName: ip-10-0-114-234.us-west-2.compute.internal
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Never
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  subdomain: sac-int
+  terminationGracePeriodSeconds: 3600
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 15
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 15
+  - effect: NoExecute
+    key: node.alpha.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 15
+  volumes:
+  - emptyDir: {}
+    name: arangod-data
+  - name: cluster-jwt
+    secret:
+      defaultMode: 420
+      secretName: sac-jwt
+  - emptyDir: {}
+    name: lifecycle
+  - name: kube-api-access-994md
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:54:19Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:54:20Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:54:24Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:54:24Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:54:18Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://b136f8c544b816cc9805594d7db70ad41f6916230c0907adec715f09fbb955d6
+    image: sha256:44fa47c4e0035cd86636f6fd9e67ed936015ccc13d48955694cb54d399111e25
+    imageID: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    lastState: {}
+    name: server
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2024-12-18T10:54:20Z"
+  hostIP: 10.0.114.234
+  hostIPs:
+  - ip: 10.0.114.234
+  initContainerStatuses:
+  - containerID: containerd://7369366bb51351b31760a26f65d4a3c594a835a2aa3d0eb208f547e6686173ac
+    image: sha256:c33ee5763fe3c73319902d95bcd75814a12c5b2b4a9e726edadf0a1d2226e4f1
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: init-lifecycle
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://7369366bb51351b31760a26f65d4a3c594a835a2aa3d0eb208f547e6686173ac
+        exitCode: 0
+        finishedAt: "2024-12-18T10:54:19Z"
+        reason: Completed
+        startedAt: "2024-12-18T10:54:19Z"
+  - containerID: containerd://f073a93eff57e5961752c33cc8f0ad48dadada4f9814b7f1ea527a0214ab4943
+    image: sha256:c33ee5763fe3c73319902d95bcd75814a12c5b2b4a9e726edadf0a1d2226e4f1
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: uuid
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://f073a93eff57e5961752c33cc8f0ad48dadada4f9814b7f1ea527a0214ab4943
+        exitCode: 0
+        finishedAt: "2024-12-18T10:54:19Z"
+        reason: Completed
+        startedAt: "2024-12-18T10:54:19Z"
+  phase: Running
+  podIP: 10.0.104.202
+  podIPs:
+  - ip: 10.0.104.202
+  qosClass: Guaranteed
+  startTime: "2024-12-18T10:54:18Z"
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-18T10:48:24Z"
+  finalizers:
+  - database.arangodb.com/graceful-shutdown
+  labels:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: PRMR-16kcg4i2
+    deployment.arangodb.com/scheduled: "1"
+    role: dbserver
+  name: sac-prmr-16kcg4i2-618edc
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoDeployment
+    name: sac
+    uid: c22fb4b7-de56-4736-bd16-4302643e053e
+  resourceVersion: "5617317"
+  uid: 06e7d3bb-4e58-4d70-a4b9-2353ddb4abda
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/arch
+            operator: In
+            values:
+            - amd64
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app: arangodb
+              arango_deployment: sac
+              role: dbserver
+          topologyKey: kubernetes.io/hostname
+        weight: 1
+  containers:
+  - command:
+    - /usr/sbin/arangod
+    - --cluster.agency-endpoint=tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-piomvxzf.sac-int.default.svc:8529
+    - --cluster.my-address=tcp://sac-dbserver-16kcg4i2.sac-int.default.svc:8529
+    - --cluster.my-role=PRIMARY
+    - --database.directory=/data
+    - --foxx.queues=false
+    - --log.level=INFO
+    - --log.output=+
+    - --server.authentication=true
+    - --server.early-connections=true
+    - --server.endpoint=tcp://[::]:8529
+    - --server.jwt-secret-keyfile=/secrets/cluster/jwt/token
+    - --server.statistics=true
+    - --server.storage-engine=rocksdb
+    env:
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: MY_POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: MY_NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: ARANGODB_OVERRIDE_DETECTED_TOTAL_MEMORY
+      value: "2147483648"
+    - name: ARANGODB_OVERRIDE_DETECTED_NUMBER_OF_CORES
+      value: "1"
+    - name: ARANGODB_OVERRIDE_SERVER_GROUP
+      value: dbserver
+    - name: ARANGODB_OVERRIDE_DEPLOYMENT_MODE
+      value: Cluster
+    - name: ARANGODB_OVERRIDE_VERSION
+      value: 3.12.3
+    - name: ARANGODB_OVERRIDE_ENTERPRISE
+      value: "false"
+    envFrom:
+    - configMapRef:
+        name: arangodb-operator-feature-config-map
+        optional: true
+    image: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    imagePullPolicy: IfNotPresent
+    lifecycle:
+      preStop:
+        exec:
+          command:
+          - /lifecycle/tools/arangodb_operator
+          - lifecycle
+          - preStop
+          - port
+    livenessProbe:
+      exec:
+        command:
+        - /lifecycle/tools/arangodb_operator
+        - lifecycle
+        - probe
+        - liveness
+        - --auth
+      failureThreshold: 2147483647
+      initialDelaySeconds: 900
+      periodSeconds: 60
+      successThreshold: 1
+      timeoutSeconds: 2
+    name: server
+    ports:
+    - containerPort: 8529
+      name: server
+      protocol: TCP
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2Gi
+      requests:
+        cpu: "1"
+        memory: 2Gi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    startupProbe:
+      exec:
+        command:
+        - /lifecycle/tools/arangodb_operator
+        - lifecycle
+        - probe
+        - startup
+        - --auth
+      failureThreshold: 2147483647
+      initialDelaySeconds: 1
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 2
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /secrets/cluster/jwt
+      name: cluster-jwt
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-xbzn6
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: sac-dbserver-16kcg4i2
+  initContainers:
+  - command:
+    - /usr/bin/arangodb_operator
+    - lifecycle
+    - copy
+    - --target
+    - /lifecycle/tools
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: init-lifecycle
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2Gi
+      requests:
+        cpu: "1"
+        memory: 2Gi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-xbzn6
+      readOnly: true
+  - command:
+    - /usr/bin/arangodb_operator
+    - uuid
+    - --uuid-path
+    - /data/UUID
+    - --engine-path
+    - /data/ENGINE
+    - --uuid
+    - PRMR-16kcg4i2
+    - --engine
+    - rocksdb
+    - --require
+    env:
+    - name: MY_POD_NAMESPACE
+      value: default
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: uuid
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2Gi
+      requests:
+        cpu: "1"
+        memory: 2Gi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-xbzn6
+      readOnly: true
+  - command:
+    - /usr/sbin/arangod
+    - --cluster.agency-endpoint=tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-piomvxzf.sac-int.default.svc:8529
+    - --cluster.my-address=tcp://sac-dbserver-16kcg4i2.sac-int.default.svc:8529
+    - --cluster.my-role=PRIMARY
+    - --database.directory=/data
+    - --foxx.queues=false
+    - --log.level=INFO
+    - --log.output=+
+    - --server.authentication=true
+    - --server.early-connections=true
+    - --server.endpoint=tcp://[::]:8529
+    - --server.jwt-secret-keyfile=/secrets/cluster/jwt/token
+    - --server.statistics=true
+    - --server.storage-engine=rocksdb
+    - --database.check-version=true
+    env:
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: MY_POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: MY_NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: ARANGODB_OVERRIDE_DETECTED_TOTAL_MEMORY
+      value: "2147483648"
+    - name: ARANGODB_OVERRIDE_DETECTED_NUMBER_OF_CORES
+      value: "1"
+    - name: ARANGODB_OVERRIDE_SERVER_GROUP
+      value: dbserver
+    - name: ARANGODB_OVERRIDE_DEPLOYMENT_MODE
+      value: Cluster
+    - name: ARANGODB_OVERRIDE_VERSION
+      value: 3.12.3
+    - name: ARANGODB_OVERRIDE_ENTERPRISE
+      value: "false"
+    envFrom:
+    - configMapRef:
+        name: arangodb-operator-feature-config-map
+        optional: true
+    image: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    imagePullPolicy: IfNotPresent
+    name: version-check
+    ports:
+    - containerPort: 8529
+      name: server
+      protocol: TCP
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2Gi
+      requests:
+        cpu: "1"
+        memory: 2Gi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /secrets/cluster/jwt
+      name: cluster-jwt
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-xbzn6
+      readOnly: true
+  nodeName: ip-10-0-114-234.us-west-2.compute.internal
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Never
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  subdomain: sac-int
+  terminationGracePeriodSeconds: 3600
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.alpha.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: arangod-data
+    persistentVolumeClaim:
+      claimName: sac-dbserver-16kcg4i2
+  - name: cluster-jwt
+    secret:
+      defaultMode: 420
+      secretName: sac-jwt
+  - emptyDir: {}
+    name: lifecycle
+  - name: kube-api-access-xbzn6
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:49:35Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:49:55Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:50:01Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:50:01Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:49:27Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://ade872117daee939ede35196e3e3a5f6f304ace6cb6401904b88d3a45cf0b8ce
+    image: sha256:44fa47c4e0035cd86636f6fd9e67ed936015ccc13d48955694cb54d399111e25
+    imageID: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    lastState: {}
+    name: server
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2024-12-18T10:49:55Z"
+  hostIP: 10.0.114.234
+  hostIPs:
+  - ip: 10.0.114.234
+  initContainerStatuses:
+  - containerID: containerd://579c5341a99621f193bf1b24ee5bad1d5e45d2750d042a958affa3f625ca2dbb
+    image: sha256:c33ee5763fe3c73319902d95bcd75814a12c5b2b4a9e726edadf0a1d2226e4f1
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: init-lifecycle
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://579c5341a99621f193bf1b24ee5bad1d5e45d2750d042a958affa3f625ca2dbb
+        exitCode: 0
+        finishedAt: "2024-12-18T10:49:34Z"
+        reason: Completed
+        startedAt: "2024-12-18T10:49:34Z"
+  - containerID: containerd://be737f536487b8ce6ed7cb3204c38be1a024fb0b7a0aeba9abb49545f6dc6229
+    image: sha256:c33ee5763fe3c73319902d95bcd75814a12c5b2b4a9e726edadf0a1d2226e4f1
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: uuid
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://be737f536487b8ce6ed7cb3204c38be1a024fb0b7a0aeba9abb49545f6dc6229
+        exitCode: 0
+        finishedAt: "2024-12-18T10:49:37Z"
+        reason: Completed
+        startedAt: "2024-12-18T10:49:37Z"
+  - containerID: containerd://eb7e4671a7863078a0fcf0f7ba478272191c7ce81c16212a9b783a69437f6721
+    image: sha256:44fa47c4e0035cd86636f6fd9e67ed936015ccc13d48955694cb54d399111e25
+    imageID: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    lastState: {}
+    name: version-check
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://eb7e4671a7863078a0fcf0f7ba478272191c7ce81c16212a9b783a69437f6721
+        exitCode: 0
+        finishedAt: "2024-12-18T10:49:50Z"
+        reason: Completed
+        startedAt: "2024-12-18T10:49:49Z"
+  phase: Running
+  podIP: 10.0.110.102
+  podIPs:
+  - ip: 10.0.110.102
+  qosClass: Guaranteed
+  startTime: "2024-12-18T10:49:27Z"
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-11T21:31:18Z"
+  finalizers:
+  - database.arangodb.com/graceful-shutdown
+  labels:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: AGNT-bh7j5zwi
+    deployment.arangodb.com/scheduled: "1"
+    role: agent
+  name: sac-agnt-bh7j5zwi-c1478a
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoDeployment
+    name: sac
+    uid: c22fb4b7-de56-4736-bd16-4302643e053e
+  resourceVersion: "2836043"
+  uid: fc40f493-227b-4e4c-8e71-c6a8a5a2cb82
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/arch
+            operator: In
+            values:
+            - amd64
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app: arangodb
+              arango_deployment: sac
+              role: agent
+          topologyKey: kubernetes.io/hostname
+        weight: 1
+  containers:
+  - command:
+    - /usr/sbin/arangod
+    - --agency.activate=true
+    - --agency.disaster-recovery-id=AGNT-bh7j5zwi
+    - --agency.endpoint=tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529
+    - --agency.endpoint=tcp://sac-agent-piomvxzf.sac-int.default.svc:8529
+    - --agency.my-address=tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529
+    - --agency.size=3
+    - --agency.supervision=true
+    - --database.directory=/data
+    - --foxx.queues=false
+    - --log.level=INFO
+    - --log.output=+
+    - --server.authentication=true
+    - --server.endpoint=tcp://[::]:8529
+    - --server.jwt-secret-keyfile=/secrets/cluster/jwt/token
+    - --server.statistics=false
+    - --server.storage-engine=rocksdb
+    env:
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: MY_POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: MY_NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: ARANGODB_OVERRIDE_SERVER_GROUP
+      value: agent
+    - name: ARANGODB_OVERRIDE_DEPLOYMENT_MODE
+      value: Cluster
+    - name: ARANGODB_OVERRIDE_VERSION
+      value: 3.12.3
+    - name: ARANGODB_OVERRIDE_ENTERPRISE
+      value: "false"
+    envFrom:
+    - configMapRef:
+        name: arangodb-operator-feature-config-map
+        optional: true
+    image: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    imagePullPolicy: IfNotPresent
+    lifecycle:
+      preStop:
+        exec:
+          command:
+          - /lifecycle/tools/arangodb_operator
+          - lifecycle
+          - preStop
+          - port
+    livenessProbe:
+      exec:
+        command:
+        - /lifecycle/tools/arangodb_operator
+        - lifecycle
+        - probe
+        - liveness
+        - --auth
+      failureThreshold: 10
+      initialDelaySeconds: 900
+      periodSeconds: 60
+      successThreshold: 1
+      timeoutSeconds: 2
+    name: server
+    ports:
+    - containerPort: 8529
+      name: server
+      protocol: TCP
+    resources: {}
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /secrets/cluster/jwt
+      name: cluster-jwt
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-swkfx
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: sac-agent-bh7j5zwi
+  initContainers:
+  - command:
+    - /usr/bin/arangodb_operator
+    - lifecycle
+    - copy
+    - --target
+    - /lifecycle/tools
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: init-lifecycle
+    resources: {}
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-swkfx
+      readOnly: true
+  - command:
+    - /usr/bin/arangodb_operator
+    - uuid
+    - --uuid-path
+    - /data/UUID
+    - --engine-path
+    - /data/ENGINE
+    - --uuid
+    - AGNT-bh7j5zwi
+    - --engine
+    - rocksdb
+    env:
+    - name: MY_POD_NAMESPACE
+      value: default
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: uuid
+    resources:
+      limits:
+        cpu: 100m
+        memory: 50Mi
+      requests:
+        cpu: 100m
+        memory: 50Mi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-swkfx
+      readOnly: true
+  - command:
+    - /usr/sbin/arangod
+    - --agency.activate=true
+    - --agency.disaster-recovery-id=AGNT-bh7j5zwi
+    - --agency.endpoint=tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529
+    - --agency.endpoint=tcp://sac-agent-piomvxzf.sac-int.default.svc:8529
+    - --agency.my-address=tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529
+    - --agency.size=3
+    - --agency.supervision=true
+    - --database.directory=/data
+    - --foxx.queues=false
+    - --log.level=INFO
+    - --log.output=+
+    - --server.authentication=true
+    - --server.endpoint=tcp://[::]:8529
+    - --server.jwt-secret-keyfile=/secrets/cluster/jwt/token
+    - --server.statistics=false
+    - --server.storage-engine=rocksdb
+    - --database.check-version=true
+    env:
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: MY_POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: MY_NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: ARANGODB_OVERRIDE_SERVER_GROUP
+      value: agent
+    - name: ARANGODB_OVERRIDE_DEPLOYMENT_MODE
+      value: Cluster
+    - name: ARANGODB_OVERRIDE_VERSION
+      value: 3.12.3
+    - name: ARANGODB_OVERRIDE_ENTERPRISE
+      value: "false"
+    envFrom:
+    - configMapRef:
+        name: arangodb-operator-feature-config-map
+        optional: true
+    image: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    imagePullPolicy: IfNotPresent
+    name: version-check
+    ports:
+    - containerPort: 8529
+      name: server
+      protocol: TCP
+    resources: {}
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /secrets/cluster/jwt
+      name: cluster-jwt
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-swkfx
+      readOnly: true
+  nodeName: ip-10-0-145-209.us-west-2.compute.internal
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Never
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  subdomain: sac-int
+  terminationGracePeriodSeconds: 60
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+  - effect: NoExecute
+    key: node.alpha.kubernetes.io/unreachable
+    operator: Exists
+  volumes:
+  - name: arangod-data
+    persistentVolumeClaim:
+      claimName: sac-agent-bh7j5zwi
+  - name: cluster-jwt
+    secret:
+      defaultMode: 420
+      secretName: sac-jwt
+  - emptyDir: {}
+    name: lifecycle
+  - name: kube-api-access-swkfx
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-11T21:31:31Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-11T21:31:35Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-11T21:31:36Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-11T21:31:36Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-11T21:31:22Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://5e7742a9dd088cb9f8a7d53390949eeca75fed26fbf51c6707055f590f292524
+    image: docker.io/arangodb/arangodb:latest
+    imageID: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    lastState: {}
+    name: server
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2024-12-11T21:31:35Z"
+  hostIP: 10.0.145.209
+  hostIPs:
+  - ip: 10.0.145.209
+  initContainerStatuses:
+  - containerID: containerd://ca143f20eba620c1e62d81b09670fc138c2c29fa7edaf83f30417a7e6ce3b87e
+    image: docker.io/arangodb/kube-arangodb:1.2.43
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: init-lifecycle
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://ca143f20eba620c1e62d81b09670fc138c2c29fa7edaf83f30417a7e6ce3b87e
+        exitCode: 0
+        finishedAt: "2024-12-11T21:31:30Z"
+        reason: Completed
+        startedAt: "2024-12-11T21:31:30Z"
+  - containerID: containerd://80f4027528e1458976f97d985627b7f65d91dea3fb3ec2df7ca86b0a258c2e83
+    image: docker.io/arangodb/kube-arangodb:1.2.43
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: uuid
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://80f4027528e1458976f97d985627b7f65d91dea3fb3ec2df7ca86b0a258c2e83
+        exitCode: 0
+        finishedAt: "2024-12-11T21:31:32Z"
+        reason: Completed
+        startedAt: "2024-12-11T21:31:31Z"
+  - containerID: containerd://3bef1ac019a05fefa19d18540defe9cdd9ef3d0ef9f3df57f2c73b95376faddf
+    image: docker.io/arangodb/arangodb:latest
+    imageID: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    lastState: {}
+    name: version-check
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://3bef1ac019a05fefa19d18540defe9cdd9ef3d0ef9f3df57f2c73b95376faddf
+        exitCode: 0
+        finishedAt: "2024-12-11T21:31:35Z"
+        reason: Completed
+        startedAt: "2024-12-11T21:31:33Z"
+  phase: Running
+  podIP: 10.0.144.57
+  podIPs:
+  - ip: 10.0.144.57
+  qosClass: Burstable
+  startTime: "2024-12-11T21:31:22Z"
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-11T21:31:19Z"
+  finalizers:
+  - database.arangodb.com/graceful-shutdown
+  labels:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: AGNT-piomvxzf
+    deployment.arangodb.com/scheduled: "1"
+    role: agent
+  name: sac-agnt-piomvxzf-c1478a
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoDeployment
+    name: sac
+    uid: c22fb4b7-de56-4736-bd16-4302643e053e
+  resourceVersion: "2835899"
+  uid: 1be4d05b-1e98-4821-84a7-3729f6828279
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/arch
+            operator: In
+            values:
+            - amd64
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app: arangodb
+              arango_deployment: sac
+              role: agent
+          topologyKey: kubernetes.io/hostname
+        weight: 1
+  containers:
+  - command:
+    - /usr/sbin/arangod
+    - --agency.activate=true
+    - --agency.disaster-recovery-id=AGNT-piomvxzf
+    - --agency.endpoint=tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529
+    - --agency.endpoint=tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529
+    - --agency.my-address=tcp://sac-agent-piomvxzf.sac-int.default.svc:8529
+    - --agency.size=3
+    - --agency.supervision=true
+    - --database.directory=/data
+    - --foxx.queues=false
+    - --log.level=INFO
+    - --log.output=+
+    - --server.authentication=true
+    - --server.endpoint=tcp://[::]:8529
+    - --server.jwt-secret-keyfile=/secrets/cluster/jwt/token
+    - --server.statistics=false
+    - --server.storage-engine=rocksdb
+    env:
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: MY_POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: MY_NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: ARANGODB_OVERRIDE_SERVER_GROUP
+      value: agent
+    - name: ARANGODB_OVERRIDE_DEPLOYMENT_MODE
+      value: Cluster
+    - name: ARANGODB_OVERRIDE_VERSION
+      value: 3.12.3
+    - name: ARANGODB_OVERRIDE_ENTERPRISE
+      value: "false"
+    envFrom:
+    - configMapRef:
+        name: arangodb-operator-feature-config-map
+        optional: true
+    image: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    imagePullPolicy: IfNotPresent
+    lifecycle:
+      preStop:
+        exec:
+          command:
+          - /lifecycle/tools/arangodb_operator
+          - lifecycle
+          - preStop
+          - port
+    livenessProbe:
+      exec:
+        command:
+        - /lifecycle/tools/arangodb_operator
+        - lifecycle
+        - probe
+        - liveness
+        - --auth
+      failureThreshold: 10
+      initialDelaySeconds: 900
+      periodSeconds: 60
+      successThreshold: 1
+      timeoutSeconds: 2
+    name: server
+    ports:
+    - containerPort: 8529
+      name: server
+      protocol: TCP
+    resources: {}
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /secrets/cluster/jwt
+      name: cluster-jwt
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-jhwlx
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: sac-agent-piomvxzf
+  initContainers:
+  - command:
+    - /usr/bin/arangodb_operator
+    - lifecycle
+    - copy
+    - --target
+    - /lifecycle/tools
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: init-lifecycle
+    resources: {}
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-jhwlx
+      readOnly: true
+  - command:
+    - /usr/bin/arangodb_operator
+    - uuid
+    - --uuid-path
+    - /data/UUID
+    - --engine-path
+    - /data/ENGINE
+    - --uuid
+    - AGNT-piomvxzf
+    - --engine
+    - rocksdb
+    env:
+    - name: MY_POD_NAMESPACE
+      value: default
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: uuid
+    resources:
+      limits:
+        cpu: 100m
+        memory: 50Mi
+      requests:
+        cpu: 100m
+        memory: 50Mi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-jhwlx
+      readOnly: true
+  - command:
+    - /usr/sbin/arangod
+    - --agency.activate=true
+    - --agency.disaster-recovery-id=AGNT-piomvxzf
+    - --agency.endpoint=tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529
+    - --agency.endpoint=tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529
+    - --agency.my-address=tcp://sac-agent-piomvxzf.sac-int.default.svc:8529
+    - --agency.size=3
+    - --agency.supervision=true
+    - --database.directory=/data
+    - --foxx.queues=false
+    - --log.level=INFO
+    - --log.output=+
+    - --server.authentication=true
+    - --server.endpoint=tcp://[::]:8529
+    - --server.jwt-secret-keyfile=/secrets/cluster/jwt/token
+    - --server.statistics=false
+    - --server.storage-engine=rocksdb
+    - --database.check-version=true
+    env:
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: MY_POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: MY_NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: ARANGODB_OVERRIDE_SERVER_GROUP
+      value: agent
+    - name: ARANGODB_OVERRIDE_DEPLOYMENT_MODE
+      value: Cluster
+    - name: ARANGODB_OVERRIDE_VERSION
+      value: 3.12.3
+    - name: ARANGODB_OVERRIDE_ENTERPRISE
+      value: "false"
+    envFrom:
+    - configMapRef:
+        name: arangodb-operator-feature-config-map
+        optional: true
+    image: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    imagePullPolicy: IfNotPresent
+    name: version-check
+    ports:
+    - containerPort: 8529
+      name: server
+      protocol: TCP
+    resources: {}
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /secrets/cluster/jwt
+      name: cluster-jwt
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-jhwlx
+      readOnly: true
+  nodeName: ip-10-0-105-207.us-west-2.compute.internal
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Never
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  subdomain: sac-int
+  terminationGracePeriodSeconds: 60
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+  - effect: NoExecute
+    key: node.alpha.kubernetes.io/unreachable
+    operator: Exists
+  volumes:
+  - name: arangod-data
+    persistentVolumeClaim:
+      claimName: sac-agent-piomvxzf
+  - name: cluster-jwt
+    secret:
+      defaultMode: 420
+      secretName: sac-jwt
+  - emptyDir: {}
+    name: lifecycle
+  - name: kube-api-access-jhwlx
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-11T21:31:25Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-11T21:31:28Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-11T21:31:29Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-11T21:31:29Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-11T21:31:21Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://fa7e4113233f3bca7c7dd040186e3d0c69e72880b0691ea549c49089923b86f0
+    image: docker.io/arangodb/arangodb:latest
+    imageID: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    lastState: {}
+    name: server
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2024-12-11T21:31:28Z"
+  hostIP: 10.0.105.207
+  hostIPs:
+  - ip: 10.0.105.207
+  initContainerStatuses:
+  - containerID: containerd://2523518837de617b9b4ba902fe49ce39d350e888dce8f50dc2ad751103c17587
+    image: docker.io/arangodb/kube-arangodb:1.2.43
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: init-lifecycle
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://2523518837de617b9b4ba902fe49ce39d350e888dce8f50dc2ad751103c17587
+        exitCode: 0
+        finishedAt: "2024-12-11T21:31:24Z"
+        reason: Completed
+        startedAt: "2024-12-11T21:31:24Z"
+  - containerID: containerd://7832d307480708d782b171c72f9df8983f57597979557a11efab588871a70188
+    image: docker.io/arangodb/kube-arangodb:1.2.43
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: uuid
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://7832d307480708d782b171c72f9df8983f57597979557a11efab588871a70188
+        exitCode: 0
+        finishedAt: "2024-12-11T21:31:26Z"
+        reason: Completed
+        startedAt: "2024-12-11T21:31:25Z"
+  - containerID: containerd://96e9280d05673addebdcc60adc2b0d68a93deefd089a9f8735d5f246aa492b05
+    image: docker.io/arangodb/arangodb:latest
+    imageID: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    lastState: {}
+    name: version-check
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://96e9280d05673addebdcc60adc2b0d68a93deefd089a9f8735d5f246aa492b05
+        exitCode: 0
+        finishedAt: "2024-12-11T21:31:28Z"
+        reason: Completed
+        startedAt: "2024-12-11T21:31:26Z"
+  phase: Running
+  podIP: 10.0.106.69
+  podIPs:
+  - ip: 10.0.106.69
+  qosClass: Burstable
+  startTime: "2024-12-11T21:31:21Z"
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-18T10:27:08Z"
+  finalizers:
+  - pod.database.arangodb.com/delay
+  - database.arangodb.com/graceful-shutdown
+  labels:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: CRDN-8su19dug
+    deployment.arangodb.com/scheduled: "1"
+    role: coordinator
+  name: sac-crdn-8su19dug-ae16ad
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoDeployment
+    name: sac
+    uid: c22fb4b7-de56-4736-bd16-4302643e053e
+  resourceVersion: "5609745"
+  uid: b72af959-3e13-473a-8570-850e42e7cf76
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/arch
+            operator: In
+            values:
+            - amd64
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app: arangodb
+              arango_deployment: sac
+              role: coordinator
+          topologyKey: kubernetes.io/hostname
+        weight: 1
+  containers:
+  - command:
+    - /usr/sbin/arangod
+    - --cluster.agency-endpoint=tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-piomvxzf.sac-int.default.svc:8529
+    - --cluster.my-address=tcp://sac-coordinator-8su19dug.sac-int.default.svc:8529
+    - --cluster.my-role=COORDINATOR
+    - --database.directory=/data
+    - --foxx.queues=true
+    - --log.level=INFO
+    - --log.output=+
+    - --server.authentication=true
+    - --server.endpoint=tcp://[::]:8529
+    - --server.jwt-secret-keyfile=/secrets/cluster/jwt/token
+    - --server.statistics=true
+    - --server.storage-engine=rocksdb
+    env:
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: MY_POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: MY_NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: ARANGODB_OVERRIDE_DETECTED_TOTAL_MEMORY
+      value: "536870912"
+    - name: ARANGODB_OVERRIDE_DETECTED_NUMBER_OF_CORES
+      value: "1"
+    - name: ARANGODB_OVERRIDE_SERVER_GROUP
+      value: coordinator
+    - name: ARANGODB_OVERRIDE_DEPLOYMENT_MODE
+      value: Cluster
+    - name: ARANGODB_OVERRIDE_VERSION
+      value: 3.12.3
+    - name: ARANGODB_OVERRIDE_ENTERPRISE
+      value: "false"
+    envFrom:
+    - configMapRef:
+        name: arangodb-operator-feature-config-map
+        optional: true
+    image: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    imagePullPolicy: IfNotPresent
+    lifecycle:
+      preStop:
+        exec:
+          command:
+          - /lifecycle/tools/arangodb_operator
+          - lifecycle
+          - preStop
+          - port
+    name: server
+    ports:
+    - containerPort: 8529
+      name: server
+      protocol: TCP
+    readinessProbe:
+      exec:
+        command:
+        - /lifecycle/tools/arangodb_operator
+        - lifecycle
+        - probe
+        - readiness
+        - --auth
+      failureThreshold: 10
+      initialDelaySeconds: 2
+      periodSeconds: 2
+      successThreshold: 1
+      timeoutSeconds: 2
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: "1"
+        memory: 512Mi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    startupProbe:
+      exec:
+        command:
+        - /lifecycle/tools/arangodb_operator
+        - lifecycle
+        - probe
+        - startup
+        - --auth
+      failureThreshold: 720
+      initialDelaySeconds: 1
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 2
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /secrets/cluster/jwt
+      name: cluster-jwt
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-r7z5h
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: sac-coordinator-8su19dug
+  initContainers:
+  - command:
+    - /usr/bin/arangodb_operator
+    - lifecycle
+    - copy
+    - --target
+    - /lifecycle/tools
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: init-lifecycle
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: "1"
+        memory: 512Mi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-r7z5h
+      readOnly: true
+  - command:
+    - /usr/bin/arangodb_operator
+    - uuid
+    - --uuid-path
+    - /data/UUID
+    - --engine-path
+    - /data/ENGINE
+    - --uuid
+    - CRDN-8su19dug
+    - --engine
+    - rocksdb
+    env:
+    - name: MY_POD_NAMESPACE
+      value: default
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: uuid
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: "1"
+        memory: 512Mi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-r7z5h
+      readOnly: true
+  nodeName: ip-10-0-146-13.us-west-2.compute.internal
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Never
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  subdomain: sac-int
+  terminationGracePeriodSeconds: 3600
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 15
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 15
+  - effect: NoExecute
+    key: node.alpha.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 15
+  volumes:
+  - emptyDir: {}
+    name: arangod-data
+  - name: cluster-jwt
+    secret:
+      defaultMode: 420
+      secretName: sac-jwt
+  - emptyDir: {}
+    name: lifecycle
+  - name: kube-api-access-r7z5h
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:27:09Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:27:10Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:27:14Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:27:14Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:27:08Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://0c84af0e6b1c77d66c98fbdcd3e90c8bf75901d44ab4e28005f1afa15220d74f
+    image: sha256:44fa47c4e0035cd86636f6fd9e67ed936015ccc13d48955694cb54d399111e25
+    imageID: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    lastState: {}
+    name: server
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2024-12-18T10:27:10Z"
+  hostIP: 10.0.146.13
+  hostIPs:
+  - ip: 10.0.146.13
+  initContainerStatuses:
+  - containerID: containerd://31dfec3c8d5b0b647f740369d7c0250a4dca36e198eecec49fbdeea99bfb5b5f
+    image: sha256:c33ee5763fe3c73319902d95bcd75814a12c5b2b4a9e726edadf0a1d2226e4f1
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: init-lifecycle
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://31dfec3c8d5b0b647f740369d7c0250a4dca36e198eecec49fbdeea99bfb5b5f
+        exitCode: 0
+        finishedAt: "2024-12-18T10:27:09Z"
+        reason: Completed
+        startedAt: "2024-12-18T10:27:09Z"
+  - containerID: containerd://b3c82383c6b316a4ef5f5826827b97efdef05cedf57c45bc6d89b3ab3a92b234
+    image: sha256:c33ee5763fe3c73319902d95bcd75814a12c5b2b4a9e726edadf0a1d2226e4f1
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: uuid
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://b3c82383c6b316a4ef5f5826827b97efdef05cedf57c45bc6d89b3ab3a92b234
+        exitCode: 0
+        finishedAt: "2024-12-18T10:27:10Z"
+        reason: Completed
+        startedAt: "2024-12-18T10:27:09Z"
+  phase: Running
+  podIP: 10.0.145.115
+  podIPs:
+  - ip: 10.0.145.115
+  qosClass: Guaranteed
+  startTime: "2024-12-18T10:27:08Z"
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-18T12:08:44Z"
+  finalizers:
+  - pod.database.arangodb.com/delay
+  - database.arangodb.com/graceful-shutdown
+  labels:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: CRDN-ihb1uadw
+    deployment.arangodb.com/scheduled: "1"
+    role: coordinator
+  name: sac-crdn-ihb1uadw-c7b35c
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoDeployment
+    name: sac
+    uid: c22fb4b7-de56-4736-bd16-4302643e053e
+  resourceVersion: "5643123"
+  uid: 1fe6d5b3-b4a8-4a81-b55d-3ca0bef660c4
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/arch
+            operator: In
+            values:
+            - amd64
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app: arangodb
+              arango_deployment: sac
+              role: coordinator
+          topologyKey: kubernetes.io/hostname
+        weight: 1
+  containers:
+  - command:
+    - /usr/sbin/arangod
+    - --cluster.agency-endpoint=tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-piomvxzf.sac-int.default.svc:8529
+    - --cluster.my-address=tcp://sac-coordinator-ihb1uadw.sac-int.default.svc:8529
+    - --cluster.my-role=COORDINATOR
+    - --database.directory=/data
+    - --foxx.queues=true
+    - --log.level=INFO
+    - --log.output=+
+    - --server.authentication=true
+    - --server.endpoint=tcp://[::]:8529
+    - --server.jwt-secret-keyfile=/secrets/cluster/jwt/token
+    - --server.statistics=true
+    - --server.storage-engine=rocksdb
+    env:
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: MY_POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: MY_NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: ARANGODB_OVERRIDE_DETECTED_TOTAL_MEMORY
+      value: "536870912"
+    - name: ARANGODB_OVERRIDE_DETECTED_NUMBER_OF_CORES
+      value: "1"
+    - name: ARANGODB_OVERRIDE_SERVER_GROUP
+      value: coordinator
+    - name: ARANGODB_OVERRIDE_DEPLOYMENT_MODE
+      value: Cluster
+    - name: ARANGODB_OVERRIDE_VERSION
+      value: 3.12.3
+    - name: ARANGODB_OVERRIDE_ENTERPRISE
+      value: "false"
+    envFrom:
+    - configMapRef:
+        name: arangodb-operator-feature-config-map
+        optional: true
+    image: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    imagePullPolicy: IfNotPresent
+    lifecycle:
+      preStop:
+        exec:
+          command:
+          - /lifecycle/tools/arangodb_operator
+          - lifecycle
+          - preStop
+          - port
+    name: server
+    ports:
+    - containerPort: 8529
+      name: server
+      protocol: TCP
+    readinessProbe:
+      exec:
+        command:
+        - /lifecycle/tools/arangodb_operator
+        - lifecycle
+        - probe
+        - readiness
+        - --auth
+      failureThreshold: 10
+      initialDelaySeconds: 2
+      periodSeconds: 2
+      successThreshold: 1
+      timeoutSeconds: 2
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: "1"
+        memory: 512Mi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    startupProbe:
+      exec:
+        command:
+        - /lifecycle/tools/arangodb_operator
+        - lifecycle
+        - probe
+        - startup
+        - --auth
+      failureThreshold: 720
+      initialDelaySeconds: 1
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 2
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /secrets/cluster/jwt
+      name: cluster-jwt
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-6tf2g
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: sac-coordinator-ihb1uadw
+  initContainers:
+  - command:
+    - /usr/bin/arangodb_operator
+    - lifecycle
+    - copy
+    - --target
+    - /lifecycle/tools
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: init-lifecycle
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: "1"
+        memory: 512Mi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-6tf2g
+      readOnly: true
+  - command:
+    - /usr/bin/arangodb_operator
+    - uuid
+    - --uuid-path
+    - /data/UUID
+    - --engine-path
+    - /data/ENGINE
+    - --uuid
+    - CRDN-ihb1uadw
+    - --engine
+    - rocksdb
+    env:
+    - name: MY_POD_NAMESPACE
+      value: default
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: uuid
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: "1"
+        memory: 512Mi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-6tf2g
+      readOnly: true
+  nodeName: ip-10-0-121-95.us-west-2.compute.internal
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Never
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  subdomain: sac-int
+  terminationGracePeriodSeconds: 3600
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 15
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 15
+  - effect: NoExecute
+    key: node.alpha.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 15
+  volumes:
+  - emptyDir: {}
+    name: arangod-data
+  - name: cluster-jwt
+    secret:
+      defaultMode: 420
+      secretName: sac-jwt
+  - emptyDir: {}
+    name: lifecycle
+  - name: kube-api-access-6tf2g
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T12:09:56Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T12:09:59Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T12:10:13Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T12:10:13Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T12:09:52Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://8204ca5904e4cc0d89924da872f21e42c694a5f0ff2b6a784765dc396741eda4
+    image: sha256:44fa47c4e0035cd86636f6fd9e67ed936015ccc13d48955694cb54d399111e25
+    imageID: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    lastState: {}
+    name: server
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2024-12-18T12:10:11Z"
+  hostIP: 10.0.121.95
+  hostIPs:
+  - ip: 10.0.121.95
+  initContainerStatuses:
+  - containerID: containerd://267160e5c791bfdf123d4bccf12a5168dfb0f85ab3490b12a6f567908d66ac8f
+    image: sha256:c33ee5763fe3c73319902d95bcd75814a12c5b2b4a9e726edadf0a1d2226e4f1
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: init-lifecycle
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://267160e5c791bfdf123d4bccf12a5168dfb0f85ab3490b12a6f567908d66ac8f
+        exitCode: 0
+        finishedAt: "2024-12-18T12:09:56Z"
+        reason: Completed
+        startedAt: "2024-12-18T12:09:56Z"
+  - containerID: containerd://5dac54af3d0a1be6e27f9cb37cfd7d3d8509a01c60c823adf32b5c7d5989e9b7
+    image: sha256:c33ee5763fe3c73319902d95bcd75814a12c5b2b4a9e726edadf0a1d2226e4f1
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: uuid
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://5dac54af3d0a1be6e27f9cb37cfd7d3d8509a01c60c823adf32b5c7d5989e9b7
+        exitCode: 0
+        finishedAt: "2024-12-18T12:09:58Z"
+        reason: Completed
+        startedAt: "2024-12-18T12:09:58Z"
+  phase: Running
+  podIP: 10.0.107.8
+  podIPs:
+  - ip: 10.0.107.8
+  qosClass: Guaranteed
+  startTime: "2024-12-18T12:09:52Z"
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-10T23:07:45Z"
+  generateName: arango-kubernetesstack31clusterchartarangodb4eeb22b5-operator-7dd474ff58-
+  labels:
+    app.kubernetes.io/instance: kubernetesstack31clusterchartarangodb4eeb22b5
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kube-arangodb
+    backup/role: leader
+    helm.sh/chart: kube-arangodb-1.2.43
+    networking/role: leader
+    pod-template-hash: 7dd474ff58
+    release: kubernetesstack31clusterchartarangodb4eeb22b5
+    role: leader
+    scheduler/role: leader
+  name: arango-kubernetesstack31clusterchartarangodb4eeb22b5-operad4sjz
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: arango-kubernetesstack31clusterchartarangodb4eeb22b5-operator-7dd474ff58
+    uid: f528b212-cb4f-4136-8771-672377797912
+  resourceVersion: "2456594"
+  uid: 3ac4dfcb-9150-461d-81fc-1081ae4d50f9
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/arch
+            operator: In
+            values:
+            - amd64
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: app.kubernetes.io/name
+              operator: In
+              values:
+              - kube-arangodb
+            - key: app.kubernetes.io/instance
+              operator: In
+              values:
+              - kubernetesstack31clusterchartarangodb4eeb22b5
+          topologyKey: kubernetes.io/hostname
+        weight: 100
+  containers:
+  - args:
+    - --scope=legacy
+    - --operator.deployment
+    - --operator.deployment-replication
+    - --operator.storage
+    - --operator.backup
+    - --mode.single
+    - --operator.networking
+    - --operator.scheduler
+    - --chaos.allowed=false
+    env:
+    - name: MY_POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: MY_CONTAINER_NAME
+      value: operator
+    - name: MY_POD_IP
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.podIP
+    image: arangodb/kube-arangodb:1.2.43
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /health
+        port: 8528
+        scheme: HTTPS
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    name: operator
+    ports:
+    - containerPort: 8528
+      name: metrics
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /ready
+        port: 8528
+        scheme: HTTPS
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: 250m
+        memory: 256Mi
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      privileged: false
+      readOnlyRootFilesystem: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-vxsnq
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: ip-10-0-105-207.us-west-2.compute.internal
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+  serviceAccount: arango-kubernetesstack31clusterchartarangodb4eeb22b5-operator
+  serviceAccountName: arango-kubernetesstack31clusterchartarangodb4eeb22b5-operator
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 5
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 5
+  volumes:
+  - name: kube-api-access-vxsnq
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-10T23:07:46Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-10T23:07:45Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-10T23:07:51Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-10T23:07:51Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-10T23:07:45Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://9be5334e5ecf11af2bc373606a17c47331365197eadbd8e04daf8b8f50e6c973
+    image: docker.io/arangodb/kube-arangodb:1.2.43
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: operator
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2024-12-10T23:07:46Z"
+  hostIP: 10.0.105.207
+  hostIPs:
+  - ip: 10.0.105.207
+  phase: Running
+  podIP: 10.0.107.166
+  podIPs:
+  - ip: 10.0.107.166
+  qosClass: Burstable
+  startTime: "2024-12-10T23:07:45Z"
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-18T10:30:56Z"
+  finalizers:
+  - pod.database.arangodb.com/delay
+  - database.arangodb.com/graceful-shutdown
+  labels:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: CRDN-ciuqrp5u
+    deployment.arangodb.com/scheduled: "1"
+    role: coordinator
+  name: sac-crdn-ciuqrp5u-ae16ad
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoDeployment
+    name: sac
+    uid: c22fb4b7-de56-4736-bd16-4302643e053e
+  resourceVersion: "5611141"
+  uid: 9e77862c-3b1a-4015-9ea9-eb6a75d3d388
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/arch
+            operator: In
+            values:
+            - amd64
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app: arangodb
+              arango_deployment: sac
+              role: coordinator
+          topologyKey: kubernetes.io/hostname
+        weight: 1
+  containers:
+  - command:
+    - /usr/sbin/arangod
+    - --cluster.agency-endpoint=tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-piomvxzf.sac-int.default.svc:8529
+    - --cluster.my-address=tcp://sac-coordinator-ciuqrp5u.sac-int.default.svc:8529
+    - --cluster.my-role=COORDINATOR
+    - --database.directory=/data
+    - --foxx.queues=true
+    - --log.level=INFO
+    - --log.output=+
+    - --server.authentication=true
+    - --server.endpoint=tcp://[::]:8529
+    - --server.jwt-secret-keyfile=/secrets/cluster/jwt/token
+    - --server.statistics=true
+    - --server.storage-engine=rocksdb
+    env:
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: MY_POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: MY_NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: ARANGODB_OVERRIDE_DETECTED_TOTAL_MEMORY
+      value: "536870912"
+    - name: ARANGODB_OVERRIDE_DETECTED_NUMBER_OF_CORES
+      value: "1"
+    - name: ARANGODB_OVERRIDE_SERVER_GROUP
+      value: coordinator
+    - name: ARANGODB_OVERRIDE_DEPLOYMENT_MODE
+      value: Cluster
+    - name: ARANGODB_OVERRIDE_VERSION
+      value: 3.12.3
+    - name: ARANGODB_OVERRIDE_ENTERPRISE
+      value: "false"
+    envFrom:
+    - configMapRef:
+        name: arangodb-operator-feature-config-map
+        optional: true
+    image: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    imagePullPolicy: IfNotPresent
+    lifecycle:
+      preStop:
+        exec:
+          command:
+          - /lifecycle/tools/arangodb_operator
+          - lifecycle
+          - preStop
+          - port
+    name: server
+    ports:
+    - containerPort: 8529
+      name: server
+      protocol: TCP
+    readinessProbe:
+      exec:
+        command:
+        - /lifecycle/tools/arangodb_operator
+        - lifecycle
+        - probe
+        - readiness
+        - --auth
+      failureThreshold: 10
+      initialDelaySeconds: 2
+      periodSeconds: 2
+      successThreshold: 1
+      timeoutSeconds: 2
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: "1"
+        memory: 512Mi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    startupProbe:
+      exec:
+        command:
+        - /lifecycle/tools/arangodb_operator
+        - lifecycle
+        - probe
+        - startup
+        - --auth
+      failureThreshold: 720
+      initialDelaySeconds: 1
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 2
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /secrets/cluster/jwt
+      name: cluster-jwt
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-xvtkx
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: sac-coordinator-ciuqrp5u
+  initContainers:
+  - command:
+    - /usr/bin/arangodb_operator
+    - lifecycle
+    - copy
+    - --target
+    - /lifecycle/tools
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: init-lifecycle
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: "1"
+        memory: 512Mi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-xvtkx
+      readOnly: true
+  - command:
+    - /usr/bin/arangodb_operator
+    - uuid
+    - --uuid-path
+    - /data/UUID
+    - --engine-path
+    - /data/ENGINE
+    - --uuid
+    - CRDN-ciuqrp5u
+    - --engine
+    - rocksdb
+    env:
+    - name: MY_POD_NAMESPACE
+      value: default
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: uuid
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: "1"
+        memory: 512Mi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-xvtkx
+      readOnly: true
+  nodeName: ip-10-0-146-13.us-west-2.compute.internal
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Never
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  subdomain: sac-int
+  terminationGracePeriodSeconds: 3600
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 15
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 15
+  - effect: NoExecute
+    key: node.alpha.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 15
+  volumes:
+  - emptyDir: {}
+    name: arangod-data
+  - name: cluster-jwt
+    secret:
+      defaultMode: 420
+      secretName: sac-jwt
+  - emptyDir: {}
+    name: lifecycle
+  - name: kube-api-access-xvtkx
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:30:57Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:30:58Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:31:02Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:31:02Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:30:56Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://ddf183ae9d9d7bd1adc4f4293dda3e9504132e196d16532c663d9c53cdb82200
+    image: sha256:44fa47c4e0035cd86636f6fd9e67ed936015ccc13d48955694cb54d399111e25
+    imageID: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    lastState: {}
+    name: server
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2024-12-18T10:30:58Z"
+  hostIP: 10.0.146.13
+  hostIPs:
+  - ip: 10.0.146.13
+  initContainerStatuses:
+  - containerID: containerd://2e21576e321fff28e9f2e95668f6fba56ea3b56d894740bde2230edbec265679
+    image: sha256:c33ee5763fe3c73319902d95bcd75814a12c5b2b4a9e726edadf0a1d2226e4f1
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: init-lifecycle
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://2e21576e321fff28e9f2e95668f6fba56ea3b56d894740bde2230edbec265679
+        exitCode: 0
+        finishedAt: "2024-12-18T10:30:56Z"
+        reason: Completed
+        startedAt: "2024-12-18T10:30:56Z"
+  - containerID: containerd://c417aa423f95c5c91c508835b338bfed97188134c53104490dc0f55e8c3144c5
+    image: sha256:c33ee5763fe3c73319902d95bcd75814a12c5b2b4a9e726edadf0a1d2226e4f1
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: uuid
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://c417aa423f95c5c91c508835b338bfed97188134c53104490dc0f55e8c3144c5
+        exitCode: 0
+        finishedAt: "2024-12-18T10:30:57Z"
+        reason: Completed
+        startedAt: "2024-12-18T10:30:57Z"
+  phase: Running
+  podIP: 10.0.149.99
+  podIPs:
+  - ip: 10.0.149.99
+  qosClass: Guaranteed
+  startTime: "2024-12-18T10:30:56Z"
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-18T10:25:36Z"
+  finalizers:
+  - database.arangodb.com/graceful-shutdown
+  labels:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: PRMR-9ya2vtot
+    deployment.arangodb.com/scheduled: "1"
+    role: dbserver
+  name: sac-prmr-9ya2vtot-618edc
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoDeployment
+    name: sac
+    uid: c22fb4b7-de56-4736-bd16-4302643e053e
+  resourceVersion: "5609563"
+  uid: bb71ca4b-4b99-4d68-8121-6f78c845a302
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/arch
+            operator: In
+            values:
+            - amd64
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app: arangodb
+              arango_deployment: sac
+              role: dbserver
+          topologyKey: kubernetes.io/hostname
+        weight: 1
+  containers:
+  - command:
+    - /usr/sbin/arangod
+    - --cluster.agency-endpoint=tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-piomvxzf.sac-int.default.svc:8529
+    - --cluster.my-address=tcp://sac-dbserver-9ya2vtot.sac-int.default.svc:8529
+    - --cluster.my-role=PRIMARY
+    - --database.directory=/data
+    - --foxx.queues=false
+    - --log.level=INFO
+    - --log.output=+
+    - --server.authentication=true
+    - --server.early-connections=true
+    - --server.endpoint=tcp://[::]:8529
+    - --server.jwt-secret-keyfile=/secrets/cluster/jwt/token
+    - --server.statistics=true
+    - --server.storage-engine=rocksdb
+    env:
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: MY_POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: MY_NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: ARANGODB_OVERRIDE_DETECTED_TOTAL_MEMORY
+      value: "2147483648"
+    - name: ARANGODB_OVERRIDE_DETECTED_NUMBER_OF_CORES
+      value: "1"
+    - name: ARANGODB_OVERRIDE_SERVER_GROUP
+      value: dbserver
+    - name: ARANGODB_OVERRIDE_DEPLOYMENT_MODE
+      value: Cluster
+    - name: ARANGODB_OVERRIDE_VERSION
+      value: 3.12.3
+    - name: ARANGODB_OVERRIDE_ENTERPRISE
+      value: "false"
+    envFrom:
+    - configMapRef:
+        name: arangodb-operator-feature-config-map
+        optional: true
+    image: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    imagePullPolicy: IfNotPresent
+    lifecycle:
+      preStop:
+        exec:
+          command:
+          - /lifecycle/tools/arangodb_operator
+          - lifecycle
+          - preStop
+          - port
+    livenessProbe:
+      exec:
+        command:
+        - /lifecycle/tools/arangodb_operator
+        - lifecycle
+        - probe
+        - liveness
+        - --auth
+      failureThreshold: 2147483647
+      initialDelaySeconds: 900
+      periodSeconds: 60
+      successThreshold: 1
+      timeoutSeconds: 2
+    name: server
+    ports:
+    - containerPort: 8529
+      name: server
+      protocol: TCP
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2Gi
+      requests:
+        cpu: "1"
+        memory: 2Gi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    startupProbe:
+      exec:
+        command:
+        - /lifecycle/tools/arangodb_operator
+        - lifecycle
+        - probe
+        - startup
+        - --auth
+      failureThreshold: 2147483647
+      initialDelaySeconds: 1
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 2
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /secrets/cluster/jwt
+      name: cluster-jwt
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-9w5z8
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: sac-dbserver-9ya2vtot
+  initContainers:
+  - command:
+    - /usr/bin/arangodb_operator
+    - lifecycle
+    - copy
+    - --target
+    - /lifecycle/tools
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: init-lifecycle
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2Gi
+      requests:
+        cpu: "1"
+        memory: 2Gi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-9w5z8
+      readOnly: true
+  - command:
+    - /usr/bin/arangodb_operator
+    - uuid
+    - --uuid-path
+    - /data/UUID
+    - --engine-path
+    - /data/ENGINE
+    - --uuid
+    - PRMR-9ya2vtot
+    - --engine
+    - rocksdb
+    - --require
+    env:
+    - name: MY_POD_NAMESPACE
+      value: default
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: uuid
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2Gi
+      requests:
+        cpu: "1"
+        memory: 2Gi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-9w5z8
+      readOnly: true
+  - command:
+    - /usr/sbin/arangod
+    - --cluster.agency-endpoint=tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-piomvxzf.sac-int.default.svc:8529
+    - --cluster.my-address=tcp://sac-dbserver-9ya2vtot.sac-int.default.svc:8529
+    - --cluster.my-role=PRIMARY
+    - --database.directory=/data
+    - --foxx.queues=false
+    - --log.level=INFO
+    - --log.output=+
+    - --server.authentication=true
+    - --server.early-connections=true
+    - --server.endpoint=tcp://[::]:8529
+    - --server.jwt-secret-keyfile=/secrets/cluster/jwt/token
+    - --server.statistics=true
+    - --server.storage-engine=rocksdb
+    - --database.check-version=true
+    env:
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: MY_POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: MY_NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: ARANGODB_OVERRIDE_DETECTED_TOTAL_MEMORY
+      value: "2147483648"
+    - name: ARANGODB_OVERRIDE_DETECTED_NUMBER_OF_CORES
+      value: "1"
+    - name: ARANGODB_OVERRIDE_SERVER_GROUP
+      value: dbserver
+    - name: ARANGODB_OVERRIDE_DEPLOYMENT_MODE
+      value: Cluster
+    - name: ARANGODB_OVERRIDE_VERSION
+      value: 3.12.3
+    - name: ARANGODB_OVERRIDE_ENTERPRISE
+      value: "false"
+    envFrom:
+    - configMapRef:
+        name: arangodb-operator-feature-config-map
+        optional: true
+    image: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    imagePullPolicy: IfNotPresent
+    name: version-check
+    ports:
+    - containerPort: 8529
+      name: server
+      protocol: TCP
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2Gi
+      requests:
+        cpu: "1"
+        memory: 2Gi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /secrets/cluster/jwt
+      name: cluster-jwt
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-9w5z8
+      readOnly: true
+  nodeName: ip-10-0-146-13.us-west-2.compute.internal
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Never
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  subdomain: sac-int
+  terminationGracePeriodSeconds: 3600
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.alpha.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: arangod-data
+    persistentVolumeClaim:
+      claimName: sac-dbserver-9ya2vtot
+  - name: cluster-jwt
+    secret:
+      defaultMode: 420
+      secretName: sac-jwt
+  - emptyDir: {}
+    name: lifecycle
+  - name: kube-api-access-9w5z8
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:26:33Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:26:51Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:26:55Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:26:55Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T10:26:20Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://4b2bd549df759268b83132c33d07e738e90d44101ecf019bde29fc5da95a44f4
+    image: sha256:44fa47c4e0035cd86636f6fd9e67ed936015ccc13d48955694cb54d399111e25
+    imageID: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    lastState: {}
+    name: server
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2024-12-18T10:26:51Z"
+  hostIP: 10.0.146.13
+  hostIPs:
+  - ip: 10.0.146.13
+  initContainerStatuses:
+  - containerID: containerd://bd3c726149035b6aba59bac8304f669ec348bc1392408ee004fd5a48ef54b21d
+    image: sha256:c33ee5763fe3c73319902d95bcd75814a12c5b2b4a9e726edadf0a1d2226e4f1
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: init-lifecycle
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://bd3c726149035b6aba59bac8304f669ec348bc1392408ee004fd5a48ef54b21d
+        exitCode: 0
+        finishedAt: "2024-12-18T10:26:33Z"
+        reason: Completed
+        startedAt: "2024-12-18T10:26:33Z"
+  - containerID: containerd://26bebe9682f84c3179d72c9dee97ae89c6c2942cb57b05ab6ea4d44465e8dcaf
+    image: sha256:c33ee5763fe3c73319902d95bcd75814a12c5b2b4a9e726edadf0a1d2226e4f1
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: uuid
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://26bebe9682f84c3179d72c9dee97ae89c6c2942cb57b05ab6ea4d44465e8dcaf
+        exitCode: 0
+        finishedAt: "2024-12-18T10:26:35Z"
+        reason: Completed
+        startedAt: "2024-12-18T10:26:35Z"
+  - containerID: containerd://c97d3af0ee48e4bcb604f261fb34bb1bdc006d7a2102795c485bb03d3accec15
+    image: sha256:44fa47c4e0035cd86636f6fd9e67ed936015ccc13d48955694cb54d399111e25
+    imageID: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    lastState: {}
+    name: version-check
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://c97d3af0ee48e4bcb604f261fb34bb1bdc006d7a2102795c485bb03d3accec15
+        exitCode: 0
+        finishedAt: "2024-12-18T10:26:47Z"
+        reason: Completed
+        startedAt: "2024-12-18T10:26:45Z"
+  phase: Running
+  podIP: 10.0.141.24
+  podIPs:
+  - ip: 10.0.141.24
+  qosClass: Guaranteed
+  startTime: "2024-12-18T10:26:20Z"
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-05T02:21:54Z"
+  generateName: python-deployment-5497dd74cc-
+  labels:
+    app: python
+    pod-template-hash: 5497dd74cc
+  name: python-deployment-5497dd74cc-zmjfl
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: python-deployment-5497dd74cc
+    uid: acfadfc4-fd20-48a0-98ae-e5c00934179e
+  resourceVersion: "27571"
+  uid: fc2a9f84-7ad9-4590-aedb-f48404a2058f
+spec:
+  containers:
+  - command:
+    - /bin/sh
+    - -c
+    - tail -f /dev/null
+    env:
+    - name: QUEUE_URL
+      value: https://sqs.us-west-2.amazonaws.com/618537831167/KubernetesStack31-TestEksQueueD2A233F2-pvIccvk0Zbhp
+    - name: AWS_STS_REGIONAL_ENDPOINTS
+      value: regional
+    - name: AWS_DEFAULT_REGION
+      value: us-west-2
+    - name: AWS_REGION
+      value: us-west-2
+    - name: AWS_ROLE_ARN
+      value: arn:aws:iam::618537831167:role/KubernetesStack31-ClusterPythonServiceAccountRole2A-gIkDr4kzhtQz
+    - name: AWS_WEB_IDENTITY_TOKEN_FILE
+      value: /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+    image: python:3.12.1-bullseye
+    imagePullPolicy: IfNotPresent
+    name: python
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-bbdsx
+      readOnly: true
+    - mountPath: /var/run/secrets/eks.amazonaws.com/serviceaccount
+      name: aws-iam-token
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: ip-10-0-145-209.us-west-2.compute.internal
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: python-sa
+  serviceAccountName: python-sa
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: aws-iam-token
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          audience: sts.amazonaws.com
+          expirationSeconds: 86400
+          path: token
+  - name: kube-api-access-bbdsx
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-05T02:22:12Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-05T02:21:54Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-05T02:22:12Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-05T02:22:12Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-05T02:21:54Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://1af573c25610ce4216328d8c86cb022577d5454043b543f86629cc5ee37e5749
+    image: docker.io/library/python:3.12.1-bullseye
+    imageID: docker.io/library/python@sha256:d40b6853c3e99cf23950b8d067a44fbbab171cc478bb05c2b50cfe1741003bfa
+    lastState: {}
+    name: python
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2024-12-05T02:22:12Z"
+  hostIP: 10.0.145.209
+  hostIPs:
+  - ip: 10.0.145.209
+  phase: Running
+  podIP: 10.0.157.18
+  podIPs:
+  - ip: 10.0.157.18
+  qosClass: BestEffort
+  startTime: "2024-12-05T02:21:54Z"
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-18T12:13:37Z"
+  finalizers:
+  - pod.database.arangodb.com/delay
+  - database.arangodb.com/graceful-shutdown
+  labels:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: CRDN-upfcobwh
+    deployment.arangodb.com/scheduled: "1"
+    role: coordinator
+  name: sac-crdn-upfcobwh-ae16ad
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoDeployment
+    name: sac
+    uid: c22fb4b7-de56-4736-bd16-4302643e053e
+  resourceVersion: "5644469"
+  uid: 43e9026c-632f-438c-ae06-fbe6bde54a73
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/arch
+            operator: In
+            values:
+            - amd64
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app: arangodb
+              arango_deployment: sac
+              role: coordinator
+          topologyKey: kubernetes.io/hostname
+        weight: 1
+  containers:
+  - command:
+    - /usr/sbin/arangod
+    - --cluster.agency-endpoint=tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-piomvxzf.sac-int.default.svc:8529
+    - --cluster.my-address=tcp://sac-coordinator-upfcobwh.sac-int.default.svc:8529
+    - --cluster.my-role=COORDINATOR
+    - --database.directory=/data
+    - --foxx.queues=true
+    - --log.level=INFO
+    - --log.output=+
+    - --server.authentication=true
+    - --server.endpoint=tcp://[::]:8529
+    - --server.jwt-secret-keyfile=/secrets/cluster/jwt/token
+    - --server.statistics=true
+    - --server.storage-engine=rocksdb
+    env:
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: MY_POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: MY_NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: ARANGODB_OVERRIDE_DETECTED_TOTAL_MEMORY
+      value: "536870912"
+    - name: ARANGODB_OVERRIDE_DETECTED_NUMBER_OF_CORES
+      value: "1"
+    - name: ARANGODB_OVERRIDE_SERVER_GROUP
+      value: coordinator
+    - name: ARANGODB_OVERRIDE_DEPLOYMENT_MODE
+      value: Cluster
+    - name: ARANGODB_OVERRIDE_VERSION
+      value: 3.12.3
+    - name: ARANGODB_OVERRIDE_ENTERPRISE
+      value: "false"
+    envFrom:
+    - configMapRef:
+        name: arangodb-operator-feature-config-map
+        optional: true
+    image: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    imagePullPolicy: IfNotPresent
+    lifecycle:
+      preStop:
+        exec:
+          command:
+          - /lifecycle/tools/arangodb_operator
+          - lifecycle
+          - preStop
+          - port
+    name: server
+    ports:
+    - containerPort: 8529
+      name: server
+      protocol: TCP
+    readinessProbe:
+      exec:
+        command:
+        - /lifecycle/tools/arangodb_operator
+        - lifecycle
+        - probe
+        - readiness
+        - --auth
+      failureThreshold: 10
+      initialDelaySeconds: 2
+      periodSeconds: 2
+      successThreshold: 1
+      timeoutSeconds: 2
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: "1"
+        memory: 512Mi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    startupProbe:
+      exec:
+        command:
+        - /lifecycle/tools/arangodb_operator
+        - lifecycle
+        - probe
+        - startup
+        - --auth
+      failureThreshold: 720
+      initialDelaySeconds: 1
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 2
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /secrets/cluster/jwt
+      name: cluster-jwt
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-x9djd
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: sac-coordinator-upfcobwh
+  initContainers:
+  - command:
+    - /usr/bin/arangodb_operator
+    - lifecycle
+    - copy
+    - --target
+    - /lifecycle/tools
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: init-lifecycle
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: "1"
+        memory: 512Mi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-x9djd
+      readOnly: true
+  - command:
+    - /usr/bin/arangodb_operator
+    - uuid
+    - --uuid-path
+    - /data/UUID
+    - --engine-path
+    - /data/ENGINE
+    - --uuid
+    - CRDN-upfcobwh
+    - --engine
+    - rocksdb
+    env:
+    - name: MY_POD_NAMESPACE
+      value: default
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: uuid
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: "1"
+        memory: 512Mi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-x9djd
+      readOnly: true
+  nodeName: ip-10-0-121-95.us-west-2.compute.internal
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Never
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  subdomain: sac-int
+  terminationGracePeriodSeconds: 3600
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 15
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 15
+  - effect: NoExecute
+    key: node.alpha.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 15
+  volumes:
+  - emptyDir: {}
+    name: arangod-data
+  - name: cluster-jwt
+    secret:
+      defaultMode: 420
+      secretName: sac-jwt
+  - emptyDir: {}
+    name: lifecycle
+  - name: kube-api-access-x9djd
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T12:13:38Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T12:13:40Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T12:13:43Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T12:13:43Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T12:13:37Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://3e1be9ec52063561a7de31ea0dce1354a82d9cf7e37452d1e3d082dfbfc5687e
+    image: sha256:44fa47c4e0035cd86636f6fd9e67ed936015ccc13d48955694cb54d399111e25
+    imageID: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    lastState: {}
+    name: server
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2024-12-18T12:13:40Z"
+  hostIP: 10.0.121.95
+  hostIPs:
+  - ip: 10.0.121.95
+  initContainerStatuses:
+  - containerID: containerd://b901a092ed39a905b7733aefa7723037a090b6c27fbfdb003c14d190ab6a8005
+    image: sha256:c33ee5763fe3c73319902d95bcd75814a12c5b2b4a9e726edadf0a1d2226e4f1
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: init-lifecycle
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://b901a092ed39a905b7733aefa7723037a090b6c27fbfdb003c14d190ab6a8005
+        exitCode: 0
+        finishedAt: "2024-12-18T12:13:38Z"
+        reason: Completed
+        startedAt: "2024-12-18T12:13:38Z"
+  - containerID: containerd://6022f59639754b013b88867a8f2a097c0a63eb914fc20e5ac2e98ee6a037fb3e
+    image: sha256:c33ee5763fe3c73319902d95bcd75814a12c5b2b4a9e726edadf0a1d2226e4f1
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: uuid
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://6022f59639754b013b88867a8f2a097c0a63eb914fc20e5ac2e98ee6a037fb3e
+        exitCode: 0
+        finishedAt: "2024-12-18T12:13:39Z"
+        reason: Completed
+        startedAt: "2024-12-18T12:13:39Z"
+  phase: Running
+  podIP: 10.0.117.52
+  podIPs:
+  - ip: 10.0.117.52
+  qosClass: Guaranteed
+  startTime: "2024-12-18T12:13:37Z"
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-18T12:13:35Z"
+  finalizers:
+  - pod.database.arangodb.com/delay
+  - database.arangodb.com/graceful-shutdown
+  labels:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: CRDN-vwq5ut32
+    deployment.arangodb.com/scheduled: "1"
+    role: coordinator
+  name: sac-crdn-vwq5ut32-c7b35c
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoDeployment
+    name: sac
+    uid: c22fb4b7-de56-4736-bd16-4302643e053e
+  resourceVersion: "5644437"
+  uid: fac2f9e5-f375-473c-ac4e-1cc0473f49f3
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/arch
+            operator: In
+            values:
+            - amd64
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app: arangodb
+              arango_deployment: sac
+              role: coordinator
+          topologyKey: kubernetes.io/hostname
+        weight: 1
+  containers:
+  - command:
+    - /usr/sbin/arangod
+    - --cluster.agency-endpoint=tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-piomvxzf.sac-int.default.svc:8529
+    - --cluster.my-address=tcp://sac-coordinator-vwq5ut32.sac-int.default.svc:8529
+    - --cluster.my-role=COORDINATOR
+    - --database.directory=/data
+    - --foxx.queues=true
+    - --log.level=INFO
+    - --log.output=+
+    - --server.authentication=true
+    - --server.endpoint=tcp://[::]:8529
+    - --server.jwt-secret-keyfile=/secrets/cluster/jwt/token
+    - --server.statistics=true
+    - --server.storage-engine=rocksdb
+    env:
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: MY_POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: MY_NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: ARANGODB_OVERRIDE_DETECTED_TOTAL_MEMORY
+      value: "536870912"
+    - name: ARANGODB_OVERRIDE_DETECTED_NUMBER_OF_CORES
+      value: "1"
+    - name: ARANGODB_OVERRIDE_SERVER_GROUP
+      value: coordinator
+    - name: ARANGODB_OVERRIDE_DEPLOYMENT_MODE
+      value: Cluster
+    - name: ARANGODB_OVERRIDE_VERSION
+      value: 3.12.3
+    - name: ARANGODB_OVERRIDE_ENTERPRISE
+      value: "false"
+    envFrom:
+    - configMapRef:
+        name: arangodb-operator-feature-config-map
+        optional: true
+    image: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    imagePullPolicy: IfNotPresent
+    lifecycle:
+      preStop:
+        exec:
+          command:
+          - /lifecycle/tools/arangodb_operator
+          - lifecycle
+          - preStop
+          - port
+    name: server
+    ports:
+    - containerPort: 8529
+      name: server
+      protocol: TCP
+    readinessProbe:
+      exec:
+        command:
+        - /lifecycle/tools/arangodb_operator
+        - lifecycle
+        - probe
+        - readiness
+        - --auth
+      failureThreshold: 10
+      initialDelaySeconds: 2
+      periodSeconds: 2
+      successThreshold: 1
+      timeoutSeconds: 2
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: "1"
+        memory: 512Mi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    startupProbe:
+      exec:
+        command:
+        - /lifecycle/tools/arangodb_operator
+        - lifecycle
+        - probe
+        - startup
+        - --auth
+      failureThreshold: 720
+      initialDelaySeconds: 1
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 2
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /secrets/cluster/jwt
+      name: cluster-jwt
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-hk5k2
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: sac-coordinator-vwq5ut32
+  initContainers:
+  - command:
+    - /usr/bin/arangodb_operator
+    - lifecycle
+    - copy
+    - --target
+    - /lifecycle/tools
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: init-lifecycle
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: "1"
+        memory: 512Mi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-hk5k2
+      readOnly: true
+  - command:
+    - /usr/bin/arangodb_operator
+    - uuid
+    - --uuid-path
+    - /data/UUID
+    - --engine-path
+    - /data/ENGINE
+    - --uuid
+    - CRDN-vwq5ut32
+    - --engine
+    - rocksdb
+    env:
+    - name: MY_POD_NAMESPACE
+      value: default
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: uuid
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: "1"
+        memory: 512Mi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-hk5k2
+      readOnly: true
+  nodeName: ip-10-0-121-95.us-west-2.compute.internal
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Never
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  subdomain: sac-int
+  terminationGracePeriodSeconds: 3600
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 15
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 15
+  - effect: NoExecute
+    key: node.alpha.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 15
+  volumes:
+  - emptyDir: {}
+    name: arangod-data
+  - name: cluster-jwt
+    secret:
+      defaultMode: 420
+      secretName: sac-jwt
+  - emptyDir: {}
+    name: lifecycle
+  - name: kube-api-access-hk5k2
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T12:13:36Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T12:13:38Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T12:13:41Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T12:13:41Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T12:13:36Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://567e523a3a08fd05c2e2da91c4dc469a15806acc2e2a65444c79249f9064bb31
+    image: sha256:44fa47c4e0035cd86636f6fd9e67ed936015ccc13d48955694cb54d399111e25
+    imageID: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    lastState: {}
+    name: server
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2024-12-18T12:13:38Z"
+  hostIP: 10.0.121.95
+  hostIPs:
+  - ip: 10.0.121.95
+  initContainerStatuses:
+  - containerID: containerd://4dae035dc0a98c881a7d2b0c3997dde39772343651006b18df0202618c004039
+    image: sha256:c33ee5763fe3c73319902d95bcd75814a12c5b2b4a9e726edadf0a1d2226e4f1
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: init-lifecycle
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://4dae035dc0a98c881a7d2b0c3997dde39772343651006b18df0202618c004039
+        exitCode: 0
+        finishedAt: "2024-12-18T12:13:36Z"
+        reason: Completed
+        startedAt: "2024-12-18T12:13:36Z"
+  - containerID: containerd://4b987153beb30b6dbabe2fe0fbbd5b00cf832e511a6f121e802d146b3027b151
+    image: sha256:c33ee5763fe3c73319902d95bcd75814a12c5b2b4a9e726edadf0a1d2226e4f1
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: uuid
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://4b987153beb30b6dbabe2fe0fbbd5b00cf832e511a6f121e802d146b3027b151
+        exitCode: 0
+        finishedAt: "2024-12-18T12:13:37Z"
+        reason: Completed
+        startedAt: "2024-12-18T12:13:37Z"
+  phase: Running
+  podIP: 10.0.125.239
+  podIPs:
+  - ip: 10.0.125.239
+  qosClass: Guaranteed
+  startTime: "2024-12-18T12:13:36Z"
+
+---
+
+metadata:
+  creationTimestamp: "2024-12-18T11:00:35Z"
+  finalizers:
+  - database.arangodb.com/graceful-shutdown
+  labels:
+    app: arangodb
+    arango_deployment: sac
+    deployment.arangodb.com/active: "true"
+    deployment.arangodb.com/member: PRMR-t79dxjnh
+    deployment.arangodb.com/scheduled: "1"
+    role: dbserver
+  name: sac-prmr-t79dxjnh-7f2b55
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoDeployment
+    name: sac
+    uid: c22fb4b7-de56-4736-bd16-4302643e053e
+  resourceVersion: "5620976"
+  uid: 073b4b00-e6ab-458b-889d-e2622290b5c6
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/arch
+            operator: In
+            values:
+            - amd64
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app: arangodb
+              arango_deployment: sac
+              role: dbserver
+          topologyKey: kubernetes.io/hostname
+        weight: 1
+  containers:
+  - command:
+    - /usr/sbin/arangod
+    - --cluster.agency-endpoint=tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-piomvxzf.sac-int.default.svc:8529
+    - --cluster.my-address=tcp://sac-dbserver-t79dxjnh.sac-int.default.svc:8529
+    - --cluster.my-role=PRIMARY
+    - --database.directory=/data
+    - --foxx.queues=false
+    - --log.level=INFO
+    - --log.output=+
+    - --server.authentication=true
+    - --server.early-connections=true
+    - --server.endpoint=tcp://[::]:8529
+    - --server.jwt-secret-keyfile=/secrets/cluster/jwt/token
+    - --server.statistics=true
+    - --server.storage-engine=rocksdb
+    env:
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: MY_POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: MY_NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: ARANGODB_OVERRIDE_DETECTED_TOTAL_MEMORY
+      value: "2147483648"
+    - name: ARANGODB_OVERRIDE_DETECTED_NUMBER_OF_CORES
+      value: "1"
+    - name: ARANGODB_OVERRIDE_SERVER_GROUP
+      value: dbserver
+    - name: ARANGODB_OVERRIDE_DEPLOYMENT_MODE
+      value: Cluster
+    - name: ARANGODB_OVERRIDE_VERSION
+      value: 3.12.3
+    - name: ARANGODB_OVERRIDE_ENTERPRISE
+      value: "false"
+    envFrom:
+    - configMapRef:
+        name: arangodb-operator-feature-config-map
+        optional: true
+    image: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    imagePullPolicy: IfNotPresent
+    lifecycle:
+      preStop:
+        exec:
+          command:
+          - /lifecycle/tools/arangodb_operator
+          - lifecycle
+          - preStop
+          - port
+    livenessProbe:
+      exec:
+        command:
+        - /lifecycle/tools/arangodb_operator
+        - lifecycle
+        - probe
+        - liveness
+        - --auth
+      failureThreshold: 2147483647
+      initialDelaySeconds: 900
+      periodSeconds: 60
+      successThreshold: 1
+      timeoutSeconds: 2
+    name: server
+    ports:
+    - containerPort: 8529
+      name: server
+      protocol: TCP
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2Gi
+      requests:
+        cpu: "1"
+        memory: 2Gi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    startupProbe:
+      exec:
+        command:
+        - /lifecycle/tools/arangodb_operator
+        - lifecycle
+        - probe
+        - startup
+        - --auth
+      failureThreshold: 2147483647
+      initialDelaySeconds: 1
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 2
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /secrets/cluster/jwt
+      name: cluster-jwt
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-rnmdx
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  hostname: sac-dbserver-t79dxjnh
+  initContainers:
+  - command:
+    - /usr/bin/arangodb_operator
+    - lifecycle
+    - copy
+    - --target
+    - /lifecycle/tools
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: init-lifecycle
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2Gi
+      requests:
+        cpu: "1"
+        memory: 2Gi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-rnmdx
+      readOnly: true
+  - command:
+    - /usr/bin/arangodb_operator
+    - uuid
+    - --uuid-path
+    - /data/UUID
+    - --engine-path
+    - /data/ENGINE
+    - --uuid
+    - PRMR-t79dxjnh
+    - --engine
+    - rocksdb
+    - --require
+    env:
+    - name: MY_POD_NAMESPACE
+      value: default
+    image: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    imagePullPolicy: IfNotPresent
+    name: uuid
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2Gi
+      requests:
+        cpu: "1"
+        memory: 2Gi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-rnmdx
+      readOnly: true
+  - command:
+    - /usr/sbin/arangod
+    - --cluster.agency-endpoint=tcp://sac-agent-ampr1nzg.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529
+    - --cluster.agency-endpoint=tcp://sac-agent-piomvxzf.sac-int.default.svc:8529
+    - --cluster.my-address=tcp://sac-dbserver-t79dxjnh.sac-int.default.svc:8529
+    - --cluster.my-role=PRIMARY
+    - --database.directory=/data
+    - --foxx.queues=false
+    - --log.level=INFO
+    - --log.output=+
+    - --server.authentication=true
+    - --server.early-connections=true
+    - --server.endpoint=tcp://[::]:8529
+    - --server.jwt-secret-keyfile=/secrets/cluster/jwt/token
+    - --server.statistics=true
+    - --server.storage-engine=rocksdb
+    - --database.check-version=true
+    env:
+    - name: MY_POD_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.name
+    - name: MY_POD_NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: MY_NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: ARANGODB_OVERRIDE_DETECTED_TOTAL_MEMORY
+      value: "2147483648"
+    - name: ARANGODB_OVERRIDE_DETECTED_NUMBER_OF_CORES
+      value: "1"
+    - name: ARANGODB_OVERRIDE_SERVER_GROUP
+      value: dbserver
+    - name: ARANGODB_OVERRIDE_DEPLOYMENT_MODE
+      value: Cluster
+    - name: ARANGODB_OVERRIDE_VERSION
+      value: 3.12.3
+    - name: ARANGODB_OVERRIDE_ENTERPRISE
+      value: "false"
+    envFrom:
+    - configMapRef:
+        name: arangodb-operator-feature-config-map
+        optional: true
+    image: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    imagePullPolicy: IfNotPresent
+    name: version-check
+    ports:
+    - containerPort: 8529
+      name: server
+      protocol: TCP
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2Gi
+      requests:
+        cpu: "1"
+        memory: 2Gi
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /data
+      name: arangod-data
+    - mountPath: /lifecycle/tools
+      name: lifecycle
+    - mountPath: /secrets/cluster/jwt
+      name: cluster-jwt
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-rnmdx
+      readOnly: true
+  nodeName: ip-10-0-114-234.us-west-2.compute.internal
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Never
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  subdomain: sac-int
+  terminationGracePeriodSeconds: 3600
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.alpha.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: arangod-data
+    persistentVolumeClaim:
+      claimName: sac-dbserver-t79dxjnh
+  - name: cluster-jwt
+    secret:
+      defaultMode: 420
+      secretName: sac-jwt
+  - emptyDir: {}
+    name: lifecycle
+  - name: kube-api-access-rnmdx
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T11:00:51Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T11:00:54Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T11:00:56Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T11:00:56Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-12-18T11:00:35Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://9a4dc8cfcd680c6758ddb6e8fe3a30d1e112ca5a237a04afdba970d865ba1e6d
+    image: sha256:44fa47c4e0035cd86636f6fd9e67ed936015ccc13d48955694cb54d399111e25
+    imageID: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    lastState: {}
+    name: server
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2024-12-18T11:00:54Z"
+  hostIP: 10.0.114.234
+  hostIPs:
+  - ip: 10.0.114.234
+  initContainerStatuses:
+  - containerID: containerd://a42fd62a75ea476c713046821eb5e41e2b08c1cee05004b8f7c327007effc2ef
+    image: sha256:c33ee5763fe3c73319902d95bcd75814a12c5b2b4a9e726edadf0a1d2226e4f1
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: init-lifecycle
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://a42fd62a75ea476c713046821eb5e41e2b08c1cee05004b8f7c327007effc2ef
+        exitCode: 0
+        finishedAt: "2024-12-18T11:00:51Z"
+        reason: Completed
+        startedAt: "2024-12-18T11:00:51Z"
+  - containerID: containerd://1654d44c349f3b9f5f5075ff0866ee0ba6aa6d4cfa00fb887f0f4d0d01a200e5
+    image: sha256:c33ee5763fe3c73319902d95bcd75814a12c5b2b4a9e726edadf0a1d2226e4f1
+    imageID: docker.io/arangodb/kube-arangodb@sha256:91307ff853fe8259a60104aefc91e7f47ed904c333fd402d0f361d2cbca1b862
+    lastState: {}
+    name: uuid
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://1654d44c349f3b9f5f5075ff0866ee0ba6aa6d4cfa00fb887f0f4d0d01a200e5
+        exitCode: 0
+        finishedAt: "2024-12-18T11:00:51Z"
+        reason: Completed
+        startedAt: "2024-12-18T11:00:51Z"
+  - containerID: containerd://fcacabea93ab9dd74bbf2a3dbba36e038684bf1e527a9f5a8edd2a0f18c70831
+    image: sha256:44fa47c4e0035cd86636f6fd9e67ed936015ccc13d48955694cb54d399111e25
+    imageID: docker.io/arangodb/arangodb@sha256:d1404a73c007853abc922d4d38bab364b69b1034f5057ef9e3e72d74e2eecbd6
+    lastState: {}
+    name: version-check
+    ready: true
+    restartCount: 0
+    started: false
+    state:
+      terminated:
+        containerID: containerd://fcacabea93ab9dd74bbf2a3dbba36e038684bf1e527a9f5a8edd2a0f18c70831
+        exitCode: 0
+        finishedAt: "2024-12-18T11:00:54Z"
+        reason: Completed
+        startedAt: "2024-12-18T11:00:52Z"
+  phase: Running
+  podIP: 10.0.118.161
+  podIPs:
+  - ip: 10.0.118.161
+  qosClass: Guaranteed
+  startTime: "2024-12-18T11:00:35Z"

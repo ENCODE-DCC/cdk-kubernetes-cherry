@@ -1,0 +1,21 @@
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2024-12-18T12:10:13Z"
+  creationTimestamp: "2024-12-16T23:34:06Z"
+  name: sac-coordinator-ihb1uadw
+  namespace: default
+  resourceVersion: "5643124"
+  uid: ed296a49-72f4-42dc-9c14-6e6d92bb2bb7
+subsets:
+- addresses:
+  - ip: 10.0.107.8
+    nodeName: ip-10-0-121-95.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-crdn-ihb1uadw-c7b35c
+      namespace: default
+      uid: 1fe6d5b3-b4a8-4a81-b55d-3ca0bef660c4
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP

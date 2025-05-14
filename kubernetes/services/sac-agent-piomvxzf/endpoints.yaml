@@ -1,0 +1,21 @@
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2024-12-11T21:31:29Z"
+  creationTimestamp: "2024-12-11T21:31:10Z"
+  name: sac-agent-piomvxzf
+  namespace: default
+  resourceVersion: "2835901"
+  uid: 39b44d21-cab2-48b9-8109-54d42ccdcb79
+subsets:
+- addresses:
+  - ip: 10.0.106.69
+    nodeName: ip-10-0-105-207.us-west-2.compute.internal
+    targetRef:
+      kind: Pod
+      name: sac-agnt-piomvxzf-c1478a
+      namespace: default
+      uid: 1be4d05b-1e98-4821-84a7-3729f6828279
+  ports:
+  - name: server
+    port: 8529
+    protocol: TCP

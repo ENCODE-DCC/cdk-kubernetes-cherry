@@ -1,0 +1,65 @@
+apiVersion: scheduler.arangodb.com/v1beta1
+kind: ArangoProfile
+metadata:
+  creationTimestamp: "2024-12-11T21:30:59Z"
+  generation: 1
+  name: sac-int-authz-v0
+  namespace: default
+  ownerReferences:
+  - apiVersion: database.arangodb.com/v1
+    controller: true
+    kind: ArangoDeployment
+    name: sac
+    uid: c22fb4b7-de56-4736-bd16-4302643e053e
+  resourceVersion: "2835257"
+  uid: ab2438ef-1255-4eea-b583-aecab64c3ff5
+spec:
+  selectors:
+    label:
+      matchLabels:
+        integration.profiles.arangodb.com/authz: v0
+        profiles.arangodb.com/deployment: sac
+  template:
+    container:
+      all: {}
+      containers:
+        integration:
+          env:
+          - name: INTEGRATION_AUTHORIZATION_V0_INTERNAL
+            value: "true"
+          - name: INTEGRATION_AUTHORIZATION_V0_EXTERNAL
+            value: "false"
+          - name: INTEGRATION_AUTHENTICATION_V0
+            value: "true"
+    pod: {}
+    priority: 127
+status:
+  accepted:
+    checksum: e667c77cd9857a0a6c3ed23fe1282a14241c805b1600c940bf64198c42d52079
+    template:
+      container:
+        all: {}
+        containers:
+          integration:
+            env:
+            - name: INTEGRATION_AUTHORIZATION_V0_INTERNAL
+              value: "true"
+            - name: INTEGRATION_AUTHORIZATION_V0_EXTERNAL
+              value: "false"
+            - name: INTEGRATION_AUTHENTICATION_V0
+              value: "true"
+      pod: {}
+      priority: 127
+  conditions:
+  - lastTransitionTime: "2024-12-11T21:31:00Z"
+    lastUpdateTime: "2024-12-11T21:31:00Z"
+    message: Spec is valid
+    reason: Spec is valid
+    status: "True"
+    type: SpecValid
+  - lastTransitionTime: "2024-12-11T21:31:02Z"
+    lastUpdateTime: "2024-12-11T21:31:02Z"
+    message: Ready
+    reason: Ready
+    status: "True"
+    type: Ready

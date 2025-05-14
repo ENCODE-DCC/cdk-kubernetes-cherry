@@ -1,0 +1,32 @@
+2024-12-18T12:13:38.789798923Z 2024-12-18T12:13:38.789614Z [1-1] INFO [e52b0] {general} ArangoDB 3.12.3 [linux] 64bit, using jemalloc, build refs/tags/v3.12.3 a80fc5d849b, VPack 0.2.1, RocksDB 7.2.0, ICU 64.2, V8 12.1.165, OpenSSL 3.3.2 3 Sep 2024, build-id: 5af364826ef690377f52b0836c4a08d32ce0b085
+2024-12-18T12:13:38.789921909Z 2024-12-18T12:13:38.789614Z [1-1] INFO [e52b0] {general} ArangoDB 3.12.3 [linux] 64bit, using jemalloc, build refs/tags/v3.12.3 a80fc5d849b, VPack 0.2.1, RocksDB 7.2.0, ICU 64.2, V8 12.1.165, OpenSSL 3.3.2 3 Sep 2024, build-id: 5af364826ef690377f52b0836c4a08d32ce0b085
+2024-12-18T12:13:38.789926529Z 2024-12-18T12:13:38.789621Z [1-1] INFO [11111] {general} This executable uses the GNU C library (glibc), which is licensed under the GNU Lesser General Public License (LGPL), see https://www.gnu.org/copyleft/lesser.html and https://www.gnu.org/licenses/gpl.html
+2024-12-18T12:13:38.789928444Z 2024-12-18T12:13:38.789684Z [1-1] INFO [a1c60] {syscall} file-descriptors (nofiles) hard limit is 1048576, soft limit is 1048576
+2024-12-18T12:13:38.789934172Z 2024-12-18T12:13:38.789621Z [1-1] INFO [11111] {general} This executable uses the GNU C library (glibc), which is licensed under the GNU Lesser General Public License (LGPL), see https://www.gnu.org/copyleft/lesser.html and https://www.gnu.org/licenses/gpl.html
+2024-12-18T12:13:38.789935635Z 2024-12-18T12:13:38.789684Z [1-1] INFO [a1c60] {syscall} file-descriptors (nofiles) hard limit is 1048576, soft limit is 1048576
+2024-12-18T12:13:38.814996933Z 2024-12-18T12:13:38.789886Z [1-1] INFO [75ddc] {general} detected operating system: Linux version 6.1.115-126.197.amzn2023.x86_64 (mockbuild@ip-10-0-32-224) (gcc (GCC) 11.4.1 20230605 (Red Hat 11.4.1-2), GNU ld version 2.39-6.amzn2023.0.10) #1 SMP PREEMPT_DYNAMIC Tue Nov  5 17:36:57 UTC 2024
+2024-12-18T12:13:38.815022093Z 2024-12-18T12:13:38.789908Z [1-1] INFO [25362] {memory} Available physical memory: 536870912 bytes (overriden by environment variable), available cores: 1 (overriden by environment variable)
+2024-12-18T12:13:38.815024614Z 2024-12-18T12:13:38.791478Z [1-1] INFO [3bb7d] {cluster} Starting up with role COORDINATOR
+2024-12-18T12:13:38.815003502Z 2024-12-18T12:13:38.789886Z [1-1] INFO [75ddc] {general} detected operating system: Linux version 6.1.115-126.197.amzn2023.x86_64 (mockbuild@ip-10-0-32-224) (gcc (GCC) 11.4.1 20230605 (Red Hat 11.4.1-2), GNU ld version 2.39-6.amzn2023.0.10) #1 SMP PREEMPT_DYNAMIC Tue Nov  5 17:36:57 UTC 2024
+2024-12-18T12:13:38.815027976Z 2024-12-18T12:13:38.789908Z [1-1] INFO [25362] {memory} Available physical memory: 536870912 bytes (overriden by environment variable), available cores: 1 (overriden by environment variable)
+2024-12-18T12:13:38.815028967Z 2024-12-18T12:13:38.791478Z [1-1] INFO [3bb7d] {cluster} Starting up with role COORDINATOR
+2024-12-18T12:13:38.844045903Z 2024-12-18T12:13:38.836173Z [1-1] INFO [f6e0e] {aql} memory limit per AQL query automatically set to 201326592 bytes. to modify this value, please adjust the startup option `--query.memory-limit`
+2024-12-18T12:13:38.844072443Z 2024-12-18T12:13:38.836173Z [1-1] INFO [f6e0e] {aql} memory limit per AQL query automatically set to 201326592 bytes. to modify this value, please adjust the startup option `--query.memory-limit`
+2024-12-18T12:13:38.865221724Z 2024-12-18T12:13:38.852736Z [1-1] INFO [e6460] {general} created base application directory '/var/lib/arangodb3-apps/_db'
+2024-12-18T12:13:38.865245784Z 2024-12-18T12:13:38.860193Z [1-1] INFO [d4db4] {cluster} Waiting for DBservers to show up...
+2024-12-18T12:13:38.865235622Z 2024-12-18T12:13:38.852736Z [1-1] INFO [e6460] {general} created base application directory '/var/lib/arangodb3-apps/_db'
+2024-12-18T12:13:38.865248451Z 2024-12-18T12:13:38.860350Z [1-1] INFO [22f55] {cluster} Found 3 DBservers.
+2024-12-18T12:13:38.865250628Z 2024-12-18T12:13:38.860193Z [1-1] INFO [d4db4] {cluster} Waiting for DBservers to show up...
+2024-12-18T12:13:38.865261818Z 2024-12-18T12:13:38.860350Z [1-1] INFO [22f55] {cluster} Found 3 DBservers.
+2024-12-18T12:13:38.890305196Z 2024-12-18T12:13:38.865134Z [1-1] INFO [b6826] {cluster} Cluster feature is turned on. Agency version: 3.12.3, Agency endpoints: http+tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529, server id: 'CRDN-vwq5ut32', internal endpoint / address: tcp://sac-coordinator-vwq5ut32.sac-int.default.svc:8529, advertised endpoint: -, role: COORDINATOR
+2024-12-18T12:13:38.890330483Z 2024-12-18T12:13:38.865156Z [1-1] INFO [805b2] {cluster} using heartbeat interval value '1000 ms' from agency
+2024-12-18T12:13:38.890308923Z 2024-12-18T12:13:38.865134Z [1-1] INFO [b6826] {cluster} Cluster feature is turned on. Agency version: 3.12.3, Agency endpoints: http+tcp://sac-agent-bh7j5zwi.sac-int.default.svc:8529, server id: 'CRDN-vwq5ut32', internal endpoint / address: tcp://sac-coordinator-vwq5ut32.sac-int.default.svc:8529, advertised endpoint: -, role: COORDINATOR
+2024-12-18T12:13:38.890338281Z 2024-12-18T12:13:38.865156Z [1-1] INFO [805b2] {cluster} using heartbeat interval value '1000 ms' from agency
+2024-12-18T12:13:39.065628446Z 2024-12-18T12:13:39.032634Z [1-1] INFO [6ea38] {general} using endpoint 'http+tcp://[::]:8529' for non-encrypted requests
+2024-12-18T12:13:39.065649385Z 2024-12-18T12:13:39.035516Z [1-1] INFO [99d80] {general} bootstrapped coordinator CRDN-vwq5ut32
+2024-12-18T12:13:39.065651330Z 2024-12-18T12:13:39.036275Z [1-1] INFO [cf3f4] {general} ArangoDB (version 3.12.3 [linux]) is ready for business. Have fun!
+2024-12-18T12:13:39.065663011Z 2024-12-18T12:13:39.032634Z [1-1] INFO [6ea38] {general} using endpoint 'http+tcp://[::]:8529' for non-encrypted requests
+2024-12-18T12:13:39.065679108Z 2024-12-18T12:13:39.035516Z [1-1] INFO [99d80] {general} bootstrapped coordinator CRDN-vwq5ut32
+2024-12-18T12:13:39.065680587Z 2024-12-18T12:13:39.036275Z [1-1] INFO [cf3f4] {general} ArangoDB (version 3.12.3 [linux]) is ready for business. Have fun!
+2024-12-18T12:13:40.842450894Z 2024-12-18T12:13:40.818339Z [1-12] INFO [88857] {cluster} Server CRDN-upfcobwh gone or rebooted, aborting its old jobs now.
+2024-12-18T12:13:40.842450889Z 2024-12-18T12:13:40.818339Z [1-12] INFO [88857] {cluster} Server CRDN-upfcobwh gone or rebooted, aborting its old jobs now.
