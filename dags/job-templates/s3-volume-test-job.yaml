@@ -18,5 +18,4 @@ spec:
       - name: s3-volume
         persistentVolumeClaim:
           claimName: s3-encode-blobs-dev-claim
-      serviceAccountName: airflow-logging-sa
       restartPolicy: Never
