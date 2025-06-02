@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: test-s3-volume-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: base
+        image: debian:latest
+        command: ["ls"]
+        args: ["/mnt/s3"]
+        volumeMounts:
+        - name: s3-volume
+          mountPath: /mnt/s3
+          readOnly: true
+      volumes:
+      - name: s3-volume
+        persistentVolumeClaim:
+          claimName: s3-encode-blobs-dev-claim
+      serviceAccountName: airflow-logging-sa
+      restartPolicy: Never
