@@ -1208,6 +1208,11 @@ class AirflowLoggingServiceAccount(Construct):
                         'apiGroups': [''],
                         'resources': ['pods', 'services', 'configmaps', 'secrets'],
                         'verbs': ['create', 'delete', 'deletecollection', 'get', 'list', 'patch', 'update', 'watch']
+                    },
+                    {
+                        'apiGroups': ['batch'],
+                        'resources': ['jobs'],
+                        'verbs': ['create', 'delete', 'deletecollection', 'get', 'list', 'patch', 'update', 'watch']
                     }
                 ]
             }
