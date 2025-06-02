@@ -25,7 +25,7 @@ with DAG(
         task_id='kubernetes-test-job',
         namespace='data-stack-dev',
         image='debian:latest',
-        command=['bash', '-c', 'echo "Hello, World!"'],
+        cmds=['bash', '-c', 'echo "Hello, World!"'],
         name='test-kubernetes-job',
         wait_until_job_complete=True,
     )
