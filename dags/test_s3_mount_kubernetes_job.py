@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 
 from airflow import DAG
 from airflow.providers.cncf.kubernetes.operators.job import KubernetesJobOperator
+from kubernetes.client import models as k8s
 
 default_args = {
     'owner': 'me',
@@ -19,6 +20,19 @@ with DAG(
     catchup=False,
 ) as dag:
 
+    volume = k8s.V1Volume(
+        name='s3-volume',
+        persistent_volume_claim=k8s.V1PersistentVolumeClaimVolumeSource(
+            claim_name='s3-encode-blobs-dev-claim'
+        )
+    )
+
+    volume_mount = k8s.V1VolumeMount(
+        name='s3-volume',
+        mount_path='/mnt/s3',
+        read_only=True
+    )
+
     kubernetes_job = KubernetesJobOperator(
         task_id='kubernetes-s3-test-job',
         namespace='data-stack-dev',
@@ -27,19 +41,6 @@ with DAG(
         name='test-s3-volume-job',
         wait_until_job_complete=True,
         service_account_name='airflow-logging-sa',
-        volumes=[
-            {
-                'name': 's3-volume',
-                'persistentVolumeClaim': {
-                    'claimName': 's3-encode-blobs-dev-claim'
-                }
-            }
-        ],
-        volume_mounts=[
-            {
-                'name': 's3-volume',
-                'mountPath': '/mnt/s3',
-                'readOnly': True
-            }
-        ]
+        volumes=[volume],
+        volume_mounts=[volume_mount]
     )
