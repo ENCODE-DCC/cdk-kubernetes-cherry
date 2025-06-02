@@ -33,14 +33,26 @@ with DAG(
         read_only=True
     )
 
+    container = k8s.V1Container(
+        name='base',
+        image='debian:latest',
+        command=['ls'],
+        args=['/mnt/s3'],
+        volume_mounts=[volume_mount]
+    )
+
+    pod_template = k8s.V1PodTemplateSpec(
+        spec=k8s.V1PodSpec(
+            containers=[container],
+            volumes=[volume],
+            service_account_name='airflow-logging-sa'
+        )
+    )
+
     kubernetes_job = KubernetesJobOperator(
         task_id='kubernetes-s3-test-job',
         namespace='data-stack-dev',
-        image='debian:latest',
-        cmds=['sleep', '300'],
         name='test-s3-volume-job',
         wait_until_job_complete=True,
-        service_account_name='airflow-logging-sa',
-        volumes=[volume],
-        volume_mounts=[volume_mount]
+        pod_template=pod_template
     )
