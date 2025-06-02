@@ -3926,7 +3926,7 @@
       "Outputs.KubernetesStack3awscdkawseksKubectlProviderframeworkonEvent602A4D98Arn"
      ]
     },
-    "Manifest": "[{\"apiVersion\":\"rbac.authorization.k8s.io/v1\",\"kind\":\"Role\",\"metadata\":{\"name\":\"spark-operator-role\",\"namespace\":\"data-stack-dev\",\"labels\":{\"aws.cdk.eks/prune-c8beb0311fc31a5683dc69db446caf56e6fa73584c\":\"\"}},\"rules\":[{\"apiGroups\":[\"sparkoperator.k8s.io\"],\"resources\":[\"sparkapplications\",\"sparkapplications/status\",\"sparkapplications/finalizers\"],\"verbs\":[\"create\",\"delete\",\"deletecollection\",\"get\",\"list\",\"patch\",\"update\",\"watch\"]},{\"apiGroups\":[\"\"],\"resources\":[\"pods\",\"services\",\"configmaps\",\"secrets\"],\"verbs\":[\"create\",\"delete\",\"deletecollection\",\"get\",\"list\",\"patch\",\"update\",\"watch\"]}]}]",
+    "Manifest": "[{\"apiVersion\":\"rbac.authorization.k8s.io/v1\",\"kind\":\"Role\",\"metadata\":{\"name\":\"spark-operator-role\",\"namespace\":\"data-stack-dev\",\"labels\":{\"aws.cdk.eks/prune-c8beb0311fc31a5683dc69db446caf56e6fa73584c\":\"\"}},\"rules\":[{\"apiGroups\":[\"sparkoperator.k8s.io\"],\"resources\":[\"sparkapplications\",\"sparkapplications/status\",\"sparkapplications/finalizers\"],\"verbs\":[\"create\",\"delete\",\"deletecollection\",\"get\",\"list\",\"patch\",\"update\",\"watch\"]},{\"apiGroups\":[\"\"],\"resources\":[\"pods\",\"services\",\"configmaps\",\"secrets\"],\"verbs\":[\"create\",\"delete\",\"deletecollection\",\"get\",\"list\",\"patch\",\"update\",\"watch\"]},{\"apiGroups\":[\"batch\"],\"resources\":[\"jobs\"],\"verbs\":[\"create\",\"delete\",\"deletecollection\",\"get\",\"list\",\"patch\",\"update\",\"watch\"]}]}]",
     "ClusterName": {
      "Ref": "Cluster9EE0221C"
     },

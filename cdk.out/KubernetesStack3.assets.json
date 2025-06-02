@@ -155,7 +155,7 @@
         }
       }
     },
-    "9df33266b739edfc12e6048cb9d393a559e63b7f033e527ad37ae579bb8469d6": {
+    "22aeff01a236f23f423a8a0849739e606644a0fc81c0a00d381da43a276bb8be": {
       "source": {
         "path": "KubernetesStack3.template.json",
         "packaging": "file"
@@ -163,7 +163,7 @@
       "destinations": {
         "618537831167-us-west-2": {
           "bucketName": "cdk-hnb659fds-assets-618537831167-us-west-2",
-          "objectKey": "9df33266b739edfc12e6048cb9d393a559e63b7f033e527ad37ae579bb8469d6.json",
+          "objectKey": "22aeff01a236f23f423a8a0849739e606644a0fc81c0a00d381da43a276bb8be.json",
           "region": "us-west-2",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::618537831167:role/cdk-hnb659fds-file-publishing-role-618537831167-us-west-2"
         }
