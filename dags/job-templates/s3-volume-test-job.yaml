@@ -6,7 +6,7 @@ spec:
   template:
     spec:
       containers:
-      - name: base
+      - name: test-mount
         image: debian:latest
         command: ["ls"]
         args: ["/mnt/s3"]

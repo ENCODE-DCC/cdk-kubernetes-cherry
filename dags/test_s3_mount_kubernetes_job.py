@@ -22,6 +22,6 @@ with DAG(
     kubernetes_job = KubernetesJobOperator(
         task_id='kubernetes-s3-test-job',
         namespace='data-stack-dev',
-        job_template_file='k8s/job-templates/s3-volume-test-job.yaml',
+        job_template_file='job-templates/s3-volume-test-job.yaml',
         wait_until_job_complete=True
     )
