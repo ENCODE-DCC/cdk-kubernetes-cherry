@@ -37,7 +37,7 @@ with DAG(
         task_id='kubernetes-s3-test-job',
         namespace='data-stack-dev',
         image='debian:latest',
-        cmds=['ls', '/mnt/s3'],
+        cmds=['sleep', '300'],
         name='test-s3-volume-job',
         wait_until_job_complete=True,
         service_account_name='airflow-logging-sa',
