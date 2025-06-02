@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+import os
 
 from airflow import DAG
 from airflow.providers.cncf.kubernetes.operators.job import KubernetesJobOperator
@@ -19,9 +20,13 @@ with DAG(
     catchup=False,
 ) as dag:
 
+    # Get the directory where this DAG file is located
+    dag_folder = os.path.dirname(os.path.abspath(__file__))
+    job_template_path = os.path.join(dag_folder, 'job-templates', 's3-volume-test-job.yaml')
+
     kubernetes_job = KubernetesJobOperator(
         task_id='kubernetes-s3-test-job',
         namespace='data-stack-dev',
-        job_template_file='job-templates/s3-volume-test-job.yaml',
+        job_template_file=job_template_path,
         wait_until_job_complete=True
     )
