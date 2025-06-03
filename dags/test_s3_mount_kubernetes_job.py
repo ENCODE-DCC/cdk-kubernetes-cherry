@@ -30,3 +30,5 @@ with DAG(
         job_template_file=job_template_path,
         wait_until_job_complete=True
     )
+
+    kubernetes_job.dry_run()
