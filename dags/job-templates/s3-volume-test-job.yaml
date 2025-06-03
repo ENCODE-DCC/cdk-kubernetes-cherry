@@ -9,8 +9,6 @@ spec:
       containers:
       - name: test-mount
         image: debian:latest
-        command: ["ls"]
-        args: ["/mnt/s3"]
         volumeMounts:
         - name: s3-volume
           mountPath: /mnt/s3
