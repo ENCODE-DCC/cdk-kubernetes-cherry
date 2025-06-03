@@ -27,8 +27,9 @@ with DAG(
     kubernetes_job = KubernetesJobOperator(
         task_id='kubernetes-s3-test-job',
         namespace='data-stack-dev',
-        cmds=['sleep'],
-        arguments=['600'],
+        cmds=['ls', '/mnt/s3'],
+        container_logs=True,
+        logging_interval=3,
         job_template_file=job_template_path,
         wait_until_job_complete=True
     )
