@@ -31,4 +31,6 @@ with DAG(
         wait_until_job_complete=True
     )
     print(f'Job template path: {job_template_path}')
+    with open(job_template_path, 'r') as file:
+        print(file.read())
     kubernetes_job.dry_run()
